@@ -278,3 +278,5 @@ TSWLatexianTemp*
 
 # Finally manyally added, ignore PDF(Temporary, until I find a decent solution to storing all PDFs)
 *.pdf
+
+# Ignore Viktor Soukup, he succs
