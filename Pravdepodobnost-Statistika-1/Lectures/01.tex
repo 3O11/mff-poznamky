@@ -11,5 +11,176 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{První přednáška}
 
+Modely náhody $\rightarrow$ Pravděpodobnost $\rightarrow$ Pozorovaná data 
+$\rightarrow$ Modely náhody\\
+Model náhody napr. kostka 1,\dots,6,\\
+Pozorovaná data : 1,5,4,3,3,\\
+otázka na pravděpodobnost : jaká je pravděpodobnost\dots
+hodně pozorovaných dat $\rightarrow$ statistika na model náhody.
 
+\begin{example}
+    
+    Příklad (Schwartz-Zippel algoritmus):
+    
+    Dány dva polynomy $f(x),g(x)$ stupně $d$. Chcem zjistit, zda jsou stejné, 
+    a to co nejrychleji.
+
+    Problém: $g(x)$ je součin několik polynomů stupně $\leq \frac{d}{4}$, 
+    dostávame víc než lineární čas.\\
+    
+
+    Řešení:
+
+    Algoritmus: zvolíme náhodně $x \in \{1,2\dots,100d\}$, ověříme, 
+    zda $f(x_1) = g(x_1)$. Když $f \neq g$, tak $x_1$ je kořen polynomu $f-g$.
+    \dots takových $x_1$ je  $\leq d$.\\
+    \[P(f(x_1)=g(x_1) : f\neq g) \leq \frac{1}{100}\]
+    Pokud jsme spokojeni s 1\%, končíme, když ne, volíme 
+    $x_2,x_3... \in \{1,2,\dots,100d\}$, pak 
+    \[P(Pro x_1,x_2,x_3\dots  f(x_i)=g(x_i) : f\neq g) \leq 
+    \left(\frac{1}{3}\right)^3 = 10^{-6}\]
+    ... aproximační algoritmy
+\end{example}
+\noindent 
+Některé jevy neumíme/nechceme popsat kauzálně
+\begin{enumerate}
+    \item hod kostkou
+    \item tři hody kostkou, nekonečně mnoho hodů kostkou
+    \item hod šipkou na terč
+    \item počet emailů za den
+    \item dobu běhu programu (v reálnem počítači)...
+\end{enumerate}
+Důvody:
+\begin{enumerate}
+    \item fyzikální vlastnost přírody?
+    \item komplikovaný proces (počasí, medicína, molekuly plynu...)
+    \item neznáme vlivy (působení dalších lidí, programů...)
+    \item randomizované algoritmy (test prvočíselnosti, quicksort)
+    \item náhodné grafy (Ramsayovy čísla)
+\end{enumerate}
+\noindent
+Pro popis pomocí teorie pravděpodobnosti napřed vybereme množinu elementárních jevů
+(sample space)$\Omega$
+\[\Omega = \{1,2\dots,6\} = [6] \implies \text{hod kostkou}\]
+\[\Omega = [6]^3 \implies \text{hod třemi kostkami}\]
+
+\begin{definition}
+    Prostor jevů\\
+    $\mathbb{F} \subseteq \mathbb{P}(\Omega)$
+
+    Často $\mathcal{F} = \mathcal{P}(\Omega)$, to je možné vždy, když je $\Omega$ spočetná.
+    Např. pro $\Omega = \mathbb{R}$ to už nejde.
+
+
+    $\mathbb{F} \subseteq \mathbb{P}(\Omega)$ je prostor jevů (též $\sigma$-algebra), Pokud
+    \begin{enumerate}
+        \item $\emptyset \in \mathcal{F} \implies \Omega \backslash A \in \mathcal{F}, a$
+        \item \textbf{TODOOT}
+    \end{enumerate}
+\end{definition}
+\begin{definition}
+    P:$\mathcal{F} \rightarrow [0,1]$ se nazývá pravděpodobnost (probability), pokud:
+    \begin{enumerate}
+        \item $P(\emptyset) = 0, P(\Omega) = 1$, a
+        \item $P(\bigcup^\infty_{i=1}A_i) = \sum^\infty_{i=1}P(A_i)$, pro libovolnou posloupnost po dvou \textit{disjunktních} jevů \textbf{TODOOT}
+    \end{enumerate}
+    Šance (odds) jevu A je $O(A) = \frac{P(A)}{P(A^c)}$. Např. šance na výhru je 1 ku 2 znamená, že
+    pravděpodobnost výhry je $\frac{1}{3}$; šance, že na kostce padne šestka je 1 ku 5.
+\end{definition}
+\begin{example}
+    
+"A je jistý jev" znamená $P(A) = 1.$ Také se říká, že A nastáva skoro jistě (almost surely), zkráceně s.j. (a.s.).
+
+    "A je nemožný jev" znamená P(A) = 0.
+    \[P(A) = 0 \implies^? A = \emptyset\]
+    \[\leftarrow \text{axiom}\]
+    \[\rightarrow \text{platí často, ne vždy}\]
+
+
+    Např. $A = {\text{střed kruhu (házení šipek na terč})} \implies P(A) = 0$
+    B spočetná (konečná, velká jako $\natural$) množina:
+    \[P(B) = 0+0+0+\dots=0\]
+    $B_i$ je $i$-tý bod,
+    $B = \bigcup B_i$
+\end{example}
+
+\begin{theorem}
+    V pravděpodobnostním prostoru $(\Omega, \mathcal{F}, P)$ platí pro A,B $\in \mathcal{F}$:
+    \begin{enumerate}
+        \item $P(A) + P(A^c) = 1$
+        \item $A \subseteq B \implies P(A) \leq P(B)$
+        \item $P(A\cup B) = P(A) + P(B) - P(A\cap B)$
+        \item $P(A_1\cup A_2\cup \dots) \leq \sum_i P(A_i)$ (subaditiva, Booleova nerovnost)
+         (nevyžadujeme disjunktnost, pak by platila rovnost)
+    \end{enumerate}
+
+    Dk:
+    \begin{enumerate}
+        \item $\Omega = A\cup A^c$; $A,A^c$ disj.,\\
+        $1 = P(\Omega) = P(A) + P(A^c)$
+        \item $P(B) = P(A) + P(B\backslash A) \geq P(A)$
+        \item cvičení \textbf{TODOOT}
+        \item trik zdisjunktnení: z $A_1,A_2...$ uděláme disjunktní množiny
+         \[B_1 = A_1, B_2 = A_2 \backslash A_1, B_3 = A_3 \backslash A_1 \cup A_2 \dots\]
+         \[B_i \subseteq A_i \implies P(B_i) \leq P(A_i)\]
+         \[B_i \cap B_j = \emptyset : j < i \dots B_i \cap B_j \subseteq B_i \cap A_j = \emptyset\]
+         \[\bigcup^\infty_{i=1}B_i = \bigcup^\infty_{i=1}A_i\]
+         \[\subseteq ok\]
+         \[\text{opačná inklúziua \textbf{TODOOT}}\]
+    \end{enumerate}
+    \[P(\bigcup A_i = P(\bigcup B_i) = \sum P(B_i) \leq \sum P(A_i)).\]
+\end{theorem}
+
+\begin{example}
+    Pravděpodobnostní prostory
+    \begin{enumerate}
+        \item Konečný s uniformní pravděpodobností\\
+        $\Omega$ je libovolná konečná množina, $\mathcal{F} = \mathcal{P}(\Omega)$,\\
+        $P(A) = \frac{|A|}{|\Omega|}$.
+        \item Diskrétní\\
+        $\Omega = \{\omega_1,\omega_2\dots\}$ je libovolná spočetná množina. Jsou dány $p_1,p_2\dots \in [0,1]$ se součtem 1.\\
+        $P(A) = \sum_{i:\omega_i \in A} p_i$ (cinknutá loterie, nějaké možnosti mají jiné procenta)
+        \item Spojitý\\
+        $\Omega \subseteq \mathbb{R}^d$ pro vhodné $d$ ($\Omega$ např. uzavřená nebo otevřená)\\
+        $\mathcal{F}$ vhodná (obsahuje např. všechny otevřené množiny)\\
+        $f:\Omega \rightarrow [0,1]$ je funkcne taková, že $\int_{\Omega} f(x)dx = 1$.\\
+        $P(A) = \int_{A}f(x)dx$
+
+        Speciální případ: $f(x) = 1/V_d(\Omega)$\\
+        $P(A) = \frac{V_d(A)}{V_d(\Omega)}$, kde $V_d(A) = \int_A 1$ je d-rozměrný objem A.
+        
+        \item Bernoulliho krychle - nekonečné opakování\\
+        $\Omega = S^{\natural}$, kde S je diskrétní s pravdepodobností Q,\\
+        $\mathcal{F}$ vhodná (obsahuje např. všechny množiny tvaru\\
+        $A = A_1 \times \dots \times A_k \times S \times S \times \dots $)\\
+        $P(A) = Q(A_1) \dots Q(A_k)$\\
+    \end{enumerate}
+\end{example}
+\begin{example}
+    Nepříklady:
+    \begin{enumerate}
+        \item Náhodné přirozené číslo: můžeme si vybrat mnoha způsoby, Ale všechna přirozená čísla nemají stejnou pravděpodobnost.\\
+        není možné, aby měly všechny stejnou nenulovou pravděpodobnost, protože pokud $P(0) = P(1) = P(2)\dots = P$ tak $P(\mathbb{N}) = p + p + p\dots = \infty$.
+        \item Náhodné reálne číslo
+        \item Betranův paradox
+    \end{enumerate}
+\end{example}
+
+\begin{definition}
+    Podmíněná pravděpodobnost
+
+    Pokud $A,B \in \mathcal{F} a P(B) > 0$, pak definujeme podmíněnou pravděpodobnost A při B (probability of A given B) jako
+    \[P(A|B) = \frac{P(A\cap B)}{P(B)}.\]
+    $Q(A):= P(A|B).$ Pak $(\Omega, \mathcal{F},Q)$ je pravděpodobností prostor.
+\end{definition}
+
+\begin{definition}
+    Zřetězené podmíňování
+
+    $P(A\cap B) = P(B)P(A|B)$
+\end{definition}
+\begin{theorem}
+    Pokud $A_1,\dots A_n \in \mathcal{F}$ a $P(A_1, \cap \dots \cap A_n)> 0$, tak
+    \[P(A_1\cap A_2 \cap \dots \cap A_n) = P(A_1)P(A_2|A_1) ... \text{TODOOT}\]
+\end{theorem}
 \end{document}
