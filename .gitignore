@@ -276,7 +276,21 @@ TSWLatexianTemp*
 *.lpz
 
 
-# Finally manyally added, ignore PDF(Temporary, until I find a decent solution to storing all PDFs)
-*.pdf
+# Finally manually added, ignore PDF(Temporary, until I find a decent solution to storing all PDFs)
+# *.pdf
+Automaty-Gramatiky/main.pdf
 
-# Ignore Viktor Soukup, he succs
+Fotorealisticka-Grafika/main.pdf
+
+Geometrie-pro-Pocitacovou-Grafiku/main.pdf
+
+Matematicka-Analyza-3/main.pdf
+
+Numericka-Matematika/main.pdf
+
+# Pravdepodobnost-Statistika-1/main.pdf
+Pravdepodobnost-Statistika-1/Lectures/*.pdf
+
+Realtime-Grafika-na-GPU/main.pdf
+
+Zaklady-Vyvoje-Pocitacovych-Her/main.pdf
