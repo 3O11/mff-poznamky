@@ -66,21 +66,22 @@ Pro popis pomocí teorie pravděpodobnosti napřed vybereme množinu elementárn
 \[\Omega = [6]^3 \implies \text{hod třemi kostkami}\]
 
 \begin{definition}[Prostor jevů]
-    $\mathbb{F} \subseteq \mathbb{P}(\Omega)$
+    $\mathcal{F} \subseteq \mathcal{P}(\Omega)$
 
-    Často $\mathcal{F} = \mathcal{P}(\Omega)$, to je možné vždy, když je $\Omega$ spočetná.
-    Např. pro $\Omega = \mathbb{R}$ to už nejde.
-
-
-    $\mathbb{F} \subseteq \mathbb{P}(\Omega)$ je prostor jevů (též $\sigma$-algebra), Pokud
+    $\mathbb{F} \subseteq \mathbb{P}(\Omega)$ je prostor jevů (též $\sigma$-algebra), pokud
     \begin{enumerate}
-        \item $\emptyset \in \mathcal{F} \implies \Omega \backslash A \in \mathcal{F}, a$
-        \item \textbf{TODOOT}
+        \item $\emptyset \in \mathcal{F}$ a $\Omega \in \mathcal{F}$
+        \item $A \in \mathcal{F} \implies \Omega \backslash A \in \mathcal{F}$
+        \item $A_1,A_2,... \in \mathcal{F} \implies \bigcup_{i=1}^{\infty}A_i \in \mathcal{F}$
     \end{enumerate}
 \end{definition}
 
+\noindent
+Často $\mathcal{F} = \mathcal{P}(\Omega)$, to je možné vždy, když je $\Omega$ spočetná,
+např. pro $\Omega = \mathbb{R}$ to již nejde.
+
 \begin{definition}[Pravděpodobnost]
-    P:$\mathcal{F} \rightarrow [0,1]$ se nazývá pravděpodobnost (probability), pokud:
+    $P:\mathcal{F} \rightarrow [0,1]$ se nazývá pravděpodobnost (probability), pokud:
     \begin{enumerate}
         \item $P(\emptyset) = 0, P(\Omega) = 1$, a
         \item $P(\bigcup^\infty_{i=1}A_i) = \sum^\infty_{i=1}P(A_i)$, pro libovolnou posloupnost po dvou \textit{disjunktních} jevů \textbf{TODOOT}
@@ -179,7 +180,7 @@ Pro popis pomocí teorie pravděpodobnosti napřed vybereme množinu elementárn
 
 \begin{definition}[Podmíněná pravděpodobnost]
 
-    Pokud $A,B \in \mathcal{F} a P(B) > 0$, pak definujeme podmíněnou pravděpodobnost A při B (probability of A given B) jako
+    Pokud $A,B \in \mathcal{F}$ a $P(B) > 0$, pak definujeme podmíněnou pravděpodobnost A při B (probability of A given B) jako
     \[P(A|B) = \frac{P(A\cap B)}{P(B)}.\]
     $Q(A):= P(A|B).$ Pak $(\Omega, \mathcal{F},Q)$ je pravděpodobností prostor.
 \end{definition}
