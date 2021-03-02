@@ -278,7 +278,8 @@ TSWLatexianTemp*
 
 # Finally manually added, ignore PDF(Temporary, until I find a decent solution to storing all PDFs)
 # *.pdf
-Automaty-Gramatiky/main.pdf
+# Automaty-Gramatiky/main.pdf
+Automaty-Gramatiky/Lectures/*.pdf
 
 Fotorealisticka-Grafika/main.pdf
 
