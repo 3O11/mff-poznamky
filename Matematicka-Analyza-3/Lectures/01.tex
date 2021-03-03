@@ -5,67 +5,164 @@
 \section{První přednáška}
 
 \begin{definition}[Metrický prostor]
-    Metrický prostor
+    Metrický prosto je dvojice $(M,d)$ množiny $M\neq \emptyset$ a
+    zobrazení $d: M \times M \to \mathbb{R}$ zvaného metrika či vzdálenost, které
+    $\forall x,y,z \in M$ splňuje:
+    \begin{enumerate}
+        \item
+        $d(x,y) = 0 \Leftrightarrow x=y$
+        \item
+        $d(x,y) = d(y,x)$
+        \item
+        $d(x,y)\leq d(x,z) + d(z,y)$
+    \end{enumerate}
+
+    \noindent
+    Z této definice plyne i nezápornost.
 \end{definition}
 
 \begin{definition}[Podprostor]
+    Každá podmnožina $X \subset M$ určuje nový metrický prostor $(x,d')$, tak zvaný
+    podprostor metrického prostoru $(M,d)$: pro $x,y \in X$ klademe
+    $d'(x,y) := d(x,y)$. Obě metriky označíme stejným symbolem a máme $(X,d)$.
 \end{definition}
 
 \begin{definition}[Izometrie $f$]
+    Izometrie $f$ dvou metrických prostorů $(M,d)$ a $(N,e)$ je bijekce
+    $f:M\to N$, jež zachovává vzdálenosti:
+    \[ \forall x,y \in M: d(x,y) = e(f(x), f(y)) \]
+    Pokud existuje, prostory $(M,d)$ a $(N,e)$ jsou \underline{izometrické}.
 \end{definition}
 
 \begin{example}[Euklidovský prostor $(\mathbb{R}^n, e_n)$]
+    Jedním z nejdůležitějších příkladů metrických prostorů je ($n$-rozměrný)
+    Euklidovský prostor $(\mathbb{R}^n, e_n), n \in \mathbb{N}$ s metrikou
+    $e_n$ danou pro
+    $\overline{x} = (x_1, ..., x_n), \overline{y} = (y_1, ... y_n) \in \mathbb{R}^n$
+    formulí \[ e_n(\overline{x}, \overline{y}) := \sqrt{\sum^n_{i=1}(x_i-y_i)^2}. \]
+    Geometricky je $e_n$ délka úsečky určené body $\overline{x}$ a $\overline{y}$.
+    Euklidovským prostorem pak rozumíme obecněji každý podprostor $(x,e_n)$, když
+    $X \subset \mathbb{R}^n$.
 \end{example}
 
-\begin{lemma}[$(\mathbb{R}^n, e_n)$ je Metrický prostor]
+\begin{lemma}[$(\mathbb{R}^n, e_n)$ je MP.]
+    $(\mathbb{R}^n, e_n)$ je Metrický prostor.
 \end{lemma}
 \begin{proof}
+    TODO
 \end{proof}
 
 \begin{example}[Sférická metrika]
+    Jako \[ S := \{ (x_1,x_2,x_3) \in \mathbb{R}^3 | x_1^2 + x_2^2 + x_3^2 = 1 \} \]
+    označíme jednotkovou sféru (s poloměrem 1) v Euklidovském prostoru $\mathbb{R}^3$.
+    Funkci $s: S \times S \to [0,\pi]$ definujeme pro $\overline{x}, \overline{y} \in S$ jako
+    \[ s(\overline{x}, \overline{y}) =
+    \begin{cases} 0 \hspace{2mm} ... \hspace{2mm} \overline{x} = \overline{y}\\ 
+        \varphi \hspace{2mm} ... \hspace{2mm} \overline{x} \neq \overline{y}
+    \end{cases} \]
+    kde $\varphi$ je úhel sevřený dvěma polopřímkami vycházejícími z počátku $\overline{0} := (0,0,0)$
+    a body $\overline{x}$ a $\overline{y}$. Tento úhel je vlastně délka kratšího z oblouků mezi body
+    $\overline{x}$ a $\overline{y}$ na jednotkové kružnici vytknuté na $S$ rovinou určenou počátkem
+    a body $\overline{x}$ a $\overline{y}$. Funkci nazveme sférickou metrikou.
 \end{example}
 
 \begin{lemma}[$S$ je Metrický Prostor]
+    $(S,s)$ je metrický prostor.
 \end{lemma}
 \begin{proof}
+    TODO
 \end{proof}
 
 \begin{definition}[(Horní) hemisféra $H$]
+    (Horní) hemisféra $H$ je množina
+    \[ H := \{ (x_1, x_2, x_3) \in S | x_3 \geq 0 \} \subset S. \]
 \end{definition}
 
 \begin{theorem}[$H$ není plochá]
+    Metrický prostor $(H,s)$ není izometrický žádnému Euklidovskému prostoru
+    $(X,e_n)$ s $X\subset \mathbb{R}^n$
 \end{theorem}
 \begin{proof}
+    TODO
 \end{proof}
 
 \begin{definition}[Ultrametrika]
+    Metrika $d$ v metrickém prostoru $(M,d)$ je ultrametrika nebo také nearchimédovská metrika, pokud
+    splňuje silnou trojúhélníkovou nerovnost
+    \[ \forall x,y,z \in M: d(x,y) \leq \max(d(x,z), d(z,y)). \]
+    Protože $\max(d(x,z),d(z,y)) \leq d(x,z) + d(z,y)$, je každá ultrametrika metrika.
 \end{definition}
 
+\begin{remark}
+    V ultrametrických prostorech, krátce UMP, neplatí intuice založená na Euklidovských prostorech.
+\end{remark}
+
 \begin{lemma}[trojúhelníky v UMP]
+    V ultrametrickém prostoru $(M,d)$ je každý trojúhélník rovnoramenný (má dvě stejně dlouhé strany).
 \end{lemma}
 \begin{proof}
+    TODO
 \end{proof}
 
 \begin{definition}[Koule]
+    (Otevřená) koule se středem $a \in M$ a poloměrem $r>0$ b metrickém prostoru $(M,d)$
+    je podmnožina
+    \[ B(a,r) := \{ x \in M | d(x,a) < r \} \subset M. \]
+    Vždy platí, že $B(a,r) \neq \emptyset$, protože $a \in B(a,r)$.
 \end{definition}
 
 \begin{example}[$p$-adické metriky]
+    Nechť $p \in \{ 2,3,5,7,11,\dots \}$ je prvočíslo a nechť $n \in \mathbb{Z}$
+    je nenulové celé číslo. Definujeme $p$-adický řád čísla $n$:
+    \[ \textrm{ord}_p(n) := \max(\{ m \in \mathbb{N}_0 : p^m | n \})\text{\footnotemark} \]
+    \footnotetext{Zde $\cdot | \cdot$ značí relaci dělitelnosti na $\mathbb{Z}$, kde $a,b\in \mathbb{Z}$
+    je $a|b \Leftrightarrow \exists c \in \mathbb{Z}: b = ac$.}
+    Pro každé $p$ definujeme $\textrm{ord}_p(0) := +\infty$.
+
+    Funkci $\textrm{ord}_p(\cdot)$ rozšíříme na zlomky.
+    Pro nenulové $\alpha = \frac{a}{b} \in \mathbb{Q}$ definujeme
+    \[ \text{ord}_p(\alpha) := \text{ord}_p(a) - \text{ord}_p(a) \]
+    a jinak znovu definujeme $\text{ord}_p(0) = \text{ord}_p(\frac{0}{b}) := +\infty$.
 \end{example}
 
 \begin{lemma}[Aditivita $\textrm{ord}_p(\cdot)$]
+    Platí, že \[ \forall \alpha ,\beta \in \mathbb{Q}:
+    \text{ord}_p(\alpha \beta) = \text{ord}_p(\alpha) + \text{ord}_p(\beta), \]
+    kde $(+\infty) + (+\infty) = (+\infty) + n = n + (+\infty) := +\infty$ pro každé $n \in \mathbb{Z}$.
 \end{lemma}
 \begin{proof}
+    TODO
 \end{proof}
 
 \begin{definition}[$p$-adické normy]
+    Fixujeme reálnou konstantu $c \in (0,1)$ a definujeme funkci\\
+    $| \cdot |_p: \mathbb{Q} \to [0, +\infty)$, tzv. $p$-adickou normu, jako
+    \[ \left| \frac{a}{b} \right|_p := c^{\text{ord}_p(\frac{a}{b})}, \]
+    speciálně $|0|_p = c^{+\infty := 0}$
 \end{definition}
 
 \begin{definition}[Normované tělěso $F$]
+    Normované těleso $F = (F, 0_F, 1_F, +_F, \cdot _F, |\cdot|_F)$, psáno zkráceně
+    $(F, |\cdot|_F)$, je těleso $F$ vybavené normou $|\cdot|_F: F \to [0, +\infty)$, jež
+    splňuje tři následující požadavky:
+    \begin{enumerate}
+        \item $ \forall x \in F: |x|_F = 0 \Leftrightarrow x = 0_F $
+        \item $ \forall x,y \in F: |x\cdot _F y|_F = |x|_F \cdot |y|_F $
+        \item $ \forall x,y \in F: |x +_F y|_F \leq |x|_F + |y|_F $
+    \end{enumerate}
 \end{definition}
 
+\begin{example}
+    Základní příklady normovaných těles jsou např. $\mathbb{Q}, \mathbb{R}$ nebo $\mathbb{C}$, kde
+    je normou obvyklá absolutní hodnota $|\cdot|$
+\end{example}
+
 \begin{lemma}[o $|\cdot|_p$]
+    Pro každé prvočíslo $p$ a každé $c \in (0,1)$ je $(\mathbb{Q}, |\cdot|_p)$ normované těleso.
+    Příslušný metrický prostor $(\mathbb{Q}, d)$, je ultrametrický prostor.
 \end{lemma}
 \begin{proof}
+    TODO
 \end{proof}
 
 \vspace{3mm}
