@@ -1,0 +1,96 @@
+\documentclass[../main.tex]{subfiles}
+
+%{definition}{Definice}
+%{example}{Příklad}
+%{intuition}{Intuice}
+%{remark}{Poznámka}
+%{consequence}{Důsledek}
+%{observation}{Pozorování}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{První přednáška}
+
+Využití:
+\begin{enumerate}
+    \item počítačová grafika, animace
+    \item počítačový design
+    \item robotika, mechanika, CNC stroje
+    \item zpracování obrazu, umělé vidění...
+\end{enumerate}
+
+\subsection{Shodná zobrazení}
+
+Existuje šest shodností v rovině:
+\begin{enumerate}
+    \item osová souměrnost
+    \item otočení
+    \item středová souměrnost
+    \item posunutí
+    \item posunuté zrcadlení
+    \item identita
+\end{enumerate}
+
+\begin{definition}
+    osová souměrnost\\
+    Nechť je daná přímka $o$, kterou nazýváme osa souměrnosti. Potom pro 
+    obraz $M'$ libovolného bodu M této přímky $o$ platí $M' = M$. Ke každému
+    $X$, který neleží na přímce $o$ sestrojíme obraz $X'$ následujícím způsobem:\\
+
+    Bodem $X$ vedeme kolmici $k$ na přímku $o$ a její patu označíme $X_0$. Na 
+    polopřímce opačné k polopřímce	 $X_0 X$ sestrojíme bod $X'$ tak, že $|X'X_0|=|XX_0|$.
+    Takto definované zobrazení nazýváme osová souměrnost s osou $o$.
+    \begin{example}
+        Je daná přímka $p$ a body $A,B$ v téže polorovině s hraniční přímkou $p$.\\
+        Najděte všechny body $X\in p$ takové, aby součet $|AX|+|BX|$ byl minimální.\\
+        Řešení: jeden z bodů promítneme pomocí souměrnosti na druhou stranu a spojíme s druhým.\\
+        Pak bod $X$ bude průsečník $|AB'|$ a $p$.
+        \\\textbf{zo slidov 4. slide}
+    \end{example}
+\end{definition}
+
+\begin{remark}
+
+    \begin{enumerate}
+        \item Shodné zobrazení, jehož všechny samodružné body vyplní přímku $o$, je souměrnost
+        podle osy $o$ (alternativní definice).
+        \item Jestliže existují na přímce dva různé samodružné body, pak každý bod této přímky
+        je samodružný.
+        \item Má-li shodnost alespoň tři nekolineární samodružné body, je to identita.
+        \item Má-li shodnost dva různé samodružné body a není identitou, pak je osovou souměrností.
+        \item Samodružné přímky osové souměrnosti jsou přímky kolmé na osu souměrnosti.
+    \end{enumerate}
+\end{remark}
+
+\begin{example}
+    Napište analytické vyjádření osové souměrnosti s osami $x$ a $y$.\\
+    Řešení: Vezmeme na ose $x$ bod $M=M'$. Víme, že všechny body na $x$ budou samodružné.
+    Jiné body, které neleží na přímce (osi) $x$ bude mít nějaké souřadnice $B = [x,y]$.
+    Potom $B' = [x,-y] = [x',y'] \forall x,y$. Víme, že $x' = y$ a $y' = -y$. To je analytické vyjádření
+    osové souměrnosti podle osi $x$. Podobně obráceně pro $y$. 
+\end{example}
+
+\begin{example}
+    Obecný tvar přímky: Napište analytické vyjádření osové souměrnosti podle osy \\
+    $o:ax+by+c=0$ (Potažmo konkrétně 3x+4y-7=0).\\
+    Řešení:(\textbf{screenshot z prednášky, okolo 50. minuty záznamu})
+\end{example}
+
+\begin{definition}
+    Otočení\\
+    Otočení (rotace) je zobrazení určené středem S a orientovaným úhlem velikosti $\phi$, které bodu
+    S přirazuje týž bod S a libovolnému bodu $X \neq S$ přiřazuje bod $X'$ tak, že $|X'S| = |XS|$ a orientovaný
+    úhel $XSX'$ má velikost $\phi$. Bod S nazýváme střed otáčení a $\phi$ je úhel otáčení.
+\end{definition}
+\begin{remark}
+
+    \begin{enumerate}
+        \item Shodnost, která není ani identitou ani osovou souměrností, má nejvýše jeden samodružný bod.
+        \item Shodnost s právě jedním samodružným bodem je rotace (alternativní definice).
+        \item Složením dvou osových souměrností s růžnoběžnými osami vznikne otočení, jehož středem je průsečník těchto os.
+        \item Otočení se středem S a úhlem $\alpha$ převádí přímku $p$ v přímku $p'$ různoběžnou s $p$. Přitom
+        dva vrcholové úhly, které $p$ a $p'$ svírají, mají velikost $\alpha$.
+        \item Složením posunusí, rotace $R(O,\alpha)$ a posunutím dostaneme rotaci o libovolném středu.
+    \end{enumerate}
+\end{remark}
+\end{document}
