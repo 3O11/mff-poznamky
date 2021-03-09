@@ -1,0 +1,220 @@
+\documentclass[../main.tex]{subfiles}
+
+%{definition}{Definice}
+%{example}{Příklad}
+%{intuition}{Intuice}
+%{remark}{Poznámka}
+%{consequence}{Důsledek}
+%{observation}{Pozorování}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Druhá přednáška}
+
+\begin{definition}
+    Kongruence
+
+    Mějme konečnou abecedu $\Sigma$ a relaci ekvivalnece $\sim$ na $\Sigma^*$ 
+    (reflexivní, symetrická, tranzitivní). Potom:
+    \begin{enumerate}
+        \item $\sim$ je pravá kongruence, jestliže ($\forall u,v,w \in \Sigma^*$)
+        $u\sim v \implies uw \sim vw$.
+        \item je konečného indexu, jestliže rozklad $\Sigma^*/\sim$ má konečný počet
+        tříd.
+        \item Třídu kongruence $\sim$ obsahujíci slovo $u$ značíme $[u]_\sim$, resp. $[u]$.
+    \end{enumerate}
+\end{definition}
+\begin{theorem}
+    Myhill-Nerodova Věta
+
+    Nechť L je jazyk nad konečnou abecedou $\Sigma$. Potom následujíci tvrzení jsou ekvivalentní:
+    \begin{enumerate}
+        \item L je rozpoznatelný konečným automatem,
+        \item $\exists$ pravá kongruence $\sim$ konečného indexu nad $\Sigma^*$ tak,
+        že L je sjednocením jistých tříd rozkladu $\Sigma^*/\sim$.
+    \end{enumerate}
+
+    \begin{proof}
+        1. $\implies$ 2.; t.j. automat $\implies$ pravá kongruence konečného indexu
+        \begin{enumerate}
+            \item definujeme $u \sim v \equiv \delta^*(q_0,u) = \delta^*(q_0,v)$.
+            \item je to ekvivalnece (reflexivní, symetrická, tranzitivní)
+            \item je to pravá kongruence (z definice $\delta^*$)
+            \item má konečný index (konečně mnoho stavů)
+            \[L = \{w|\delta^* (q_0,w)\in F\} = \bigcup_{q\in F} \{w|\delta^*(q_0,w) = q\}
+             = \bigcup_{q\in F}[w|\delta^*(q_0,w) = q]_{\sim}.\]
+        \end{enumerate}
+        2. $\implies$ 1.; t.j. pravá kongruence konečného indexu $\implies$ automat
+        \begin{enumerate}
+            \item abeceda automatu nazveme $\Sigma$
+            \item za stavy $Q$ volíme třídy rozkladu $\Sigma^*/\sim$
+            \item počáteční stav $q_0 \equiv [\lambda]_\sim$
+            \item koncové stavy $F=\{c_1,\dots,c_n\}$, kde $L=\bigcup_{i=[1,n]}c_i$
+            \item přechodová funkce $\delta([u],x) = [ux]$ (je korektní z def. pravé kongruence).
+            \item $L(A) = L$
+        \end{enumerate}
+        \[w\in L \Leftrightarrow w\in \bigcup_{i=[1,n]}c_i \Leftrightarrow w\in c_1 \vee \dots w \in
+        c_n \Leftrightarrow [w] = c_1 \vee \dots [w] = c_n \Leftrightarrow [w]\in F \Leftrightarrow w \in L(A)\]
+    \end{proof}
+\end{theorem}
+\begin{example}
+    Sestrojte automat přijímajíci jazyk \\
+    $L = \{w|w \in {a,b}^* \& |w|_a = 3k + 2\}$, t. j. obsahuje $3k+2$ symbolů a.
+    \begin{enumerate}
+        \item $|u|_x$ značí počet symblů $x$ ve slově $u$
+        \item definujeme $u \sim v \equiv (|u|_a mod 3 = |v|_a mod 3)$
+        \item třídy ekvivalence $0,1,2$
+        \item $L$ odpovídá třídě $2$
+        \item a - přechody do následujíci třídy
+        \item b - přechody zachovávajíci třídu
+    \end{enumerate}
+    \textbf{28. slide, doplniť obrázok}
+\end{example}
+
+\begin{example}
+    Ne-regulární jazyk, který lze pumpovat
+
+    Jazyk $L=\{u|u = a^+b^ic^i\vee u = b^ic^j\}$ není regulární (Myhill-Nerodova věta), ale 
+    vždy lze pumpovat první písmeno.
+    \begin{enumerate}
+        \item Předpokládejme, že $L$ je regulární
+        \item $\implies$ pak $\exists$ pravá kongruence $\sim_L$ konečného indexu $m, L$ je sjednocení
+        některých tříd $\Sigma^*/\sim_L$
+        \item vezmeme množinu slov $S = \{ab,abb,abbb,\dots,ab^{m+1}\}$
+        \item existují dvě slova $i \neq j$, která padnou do stejné třídy\\
+        \begin{tabular}{c c c}
+            $i \neq j$ & $ab^i \sim ab^j$ & \\
+            přidáme $c^i$ & $ab^ic^i \sim ab^jc^i$ & $\sim$ je kongruence \\
+            spor & $ab^ic^i \in L \& ab^jc^i \notin L$ & s$'L$ je sjednocení některých tříd $\Sigma^*/\sim_L$. 
+        \end{tabular}
+    \end{enumerate}
+\end{example}
+
+\begin{definition}
+    Dosažitelný stav
+
+    Mějme DFA $A = (Q,\Sigma,\delta,q_0,F)$ a $q\in Q$. Řekneme, že stav je dosažitelný,
+    jestliže $\exists w \in \Sigma^* : \delta^*(q_0,w) = q$.
+\end{definition}
+\begin{example}
+    Algoritmus na hledání dosažitelných stavů : DFS (důkaz asi není nutný)
+\end{example}
+\begin{definition}
+    Automatový homomorfismus
+
+    Nechť $A_1,A_2$ jsou DFA. Řekneme, že zobrazení $h: Q_1 \rightarrow Q_2, Q_1$ na $Q_2$ je 
+    (automatovým) homomorfismem, jestliže:\\
+    \begin{center}
+        \begin{tabular}{l l}
+            $h(q_{0_1})=q_{0_2}$ & 'stejné' počáteční stavy \\
+            $h(\delta_1(q,x)) = \delta_2(h(q),x)$ & 'stejné' přechodové funkce \\
+            $q \in F_1 \Leftrightarrow h(q) \in F_2$ & 'stejné' koncové stavy. \\
+        \end{tabular}
+    \end{center}
+    Homomorfismus prostý a na nazývame isomorfismus.
+\end{definition}
+\begin{definition}
+    Ekvivalence automatů
+
+    Dva konečné automaty $A,B$ nad stejnou abecedou $\Sigma$ jsou ekvivalentní, jestliže
+    rozpoznávají stejný jazyk, t. j. $L(A) = L(B)$.
+\end{definition}
+\begin{theorem}
+    Věta o ekvivalenci automatů
+
+    Existuje-li homomorfismus konečných automatů $A_1$ do $A_2$, pak jsou $A_1$ a $A_2$
+    ekvivalentní.
+
+    \begin{proof}
+        \begin{enumerate}
+            \item Pro libovolné slovo $w\in \Sigma^*$ konečnou iterací
+            \[h(\delta^*_1(q,w)) = \delta^*_2(h(q),w)\]
+            \item dále
+            \[w\in L(A_1) \Leftrightarrow \delta^*_1(q_{0_1},w)\in F_1\]
+            \[\Leftrightarrow h(\delta^*_1(q_{0_1},w)) \in F_2\]
+            \[\Leftrightarrow \delta^*_2(h(q_{0_1,w}))\in F_2\]
+            \[\Leftrightarrow \delta^*_2(q_{0_2},w)\in F_2\]
+            \[\Leftrightarrow w\in L(A_2)\]
+        \end{enumerate}
+    \end{proof}
+\end{theorem}
+
+\begin{definition}
+    Ekvivalence stavů
+
+    Říkáme, že stavy $p,q \in Q$ konečného automatu $A$ jsou ekvivalentní, pokud:
+    \begin{enumerate}
+        \item Pro všechna vstupní slova $w: \delta^*(p,w) \in F \Leftrightarrow \delta^*(q,w)\in F$.
+    \end{enumerate}
+    Pokud dva stavy nejsou ekvivalentní, říkáme že jsou rozlišitelné.
+\end{definition}
+\begin{example}
+        \textbf{Ten example je na slide 36, najlepšie s tým obrázkom}
+\end{example}
+
+\begin{definition}
+    Algoritmus hledání rozpoznatelných stavů v DFA
+
+    Následujíci algoritmus nalezne rozlišitelné stavy:
+    \begin{enumerate}
+        \item Základ: Pokud $p\in F$ (přijímajíci) a $q \notin F$, pak je dvojice $\{p,q\}$ rozlišitelná.
+        \item Indukce: Nechť $p,q\in Q, a \in \Sigma$ a o dvojici $r,s : r = \delta(p,a), s= \delta(q,a)$ víme,
+        že jsou rozlišitelné. Pak i $\{p,q\}$ jsou rozlišitelné.
+        \item opakuj dokud $\exists$ nová trojice $p,q\in Q, a\in \Sigma$.
+    \end{enumerate}
+    \textbf{Doplniť obrázky zo slidov, 37/38}
+\end{definition}
+
+\begin{theorem}
+    Pokd dva stavy nejsou odlišeny předchodzím algoritmem, pak jsou tyto stavy ekvivalentní.
+    \begin{proof}
+        Korektnost algoritmu
+        \begin{enumerate}
+            \item Uvažujme špatné páry stavů, které jsou rozlišitelné a algoritmus je nerozlišil.
+            \item Vezměme z nich pár $p,q$ rozlišitelný nejkratším slovem $w = a_1\dots a_n.$
+            \item Stavy $r = \delta(p,a_1), s= \delta(q,a_1)$ jsou rozlišitelné kratším slovem 
+            $a_2\dots a_n$, takže pár není mezi špatnými.
+            \item Tedy jsou 'vyškrtnuté' algoritmem.
+            \item Tedy v příštim kroku algoritmus rozliší i $p,q$.
+        \end{enumerate}
+    \end{proof}
+\end{theorem}
+
+Čas výpočtu je poylnomiální vzhledem k počtu stavů.
+
+\begin{enumerate}
+    \item V jednom kole uvažujeme všechny páry, t.j. $O(n^2)$.
+    \item Kol je maximálně $O(n^2)$, protože pokud nepřidáme křížek, končíme.
+    \item Dohromady $O(n^4)$.
+\end{enumerate}
+Algoritmus lze zrychlit na $O(n^2)$ pamatováním stavů, které závisí na páru $\{r,s\}$ a sledovaním těchto seznamů 'zpátky'.
+
+\begin{definition}
+    redukovaný DFA, redukt
+
+    Deterministický konečný automat je redukovaný, pokud
+    \begin{enumerate}
+        \item nemá dosažitelné stavy,
+        \item žádne dva stavy nejsou ekvivalentní.
+    \end{enumerate}
+    Konečný automat B je reduktem automatu A, jestliže:
+    \begin{enumerate}
+        \item B je redukovaný,
+        \item A a B jsou ekvivalentní
+    \end{enumerate}
+    \textbf{ADD PICS PLS}
+\end{definition}
+\begin{theorem}
+    Algoritmus na nalezení reduktu DFA A
+
+    \begin{enumerate}
+        \item Ze vstupního DFA A eliminujeme stavy nedosažitelné z počátečního stavu.
+        \item Najdeme rozklad zbylých stavů na třídy ekvivalence.
+        \item Konstruujeme DFA B na třídách ekvivalence jakožto stavech.\\
+        Přechodová funkce B $\gamma$, mějme $S\in Q_B$. Pro libovolné $q\in S$ označíme $T$ třídu ekvivalence
+        $\delta(q,a)$ a definujeme $\gamma(S,a) = T.$ Tato třída musí být stejná pro všechna $q\in S$.
+        \item Počáteční stav B je třída obsahujíci počáteční stav A.
+        \item Množina přijímajícich stavů B jsou bloky odpovídajíci přijímacím stavům A.
+    \end{enumerate}
+\end{theorem}
+\end{document}
