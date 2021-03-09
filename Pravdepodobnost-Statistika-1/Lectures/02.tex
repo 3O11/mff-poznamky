@@ -11,51 +11,51 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Druhá přednáška}
 
-\begin{remark}
-    Opakování\\
-    \begin{enumerate}
-        \item definice pravděpodobnostního prostoru ($\Omega,\mathcal{F},P)$: dva axiomy,
-        \item \textbf{naivní} pravděpodobnostní prostor: $\Omega$ konečná, $\mathcal{F} = \mathcal{P}(\Omega)$\\
-        $P(A):=|A|/|\Omega|$
-        \item \textbf{diskrétní} pravděpodobnostní prostor: $\Omega = {\omega_1,\omega_2,...}$,\\
-        $\mathcal{F} = \mathcal{P}(\Omega),\sum_i p_i = 1$\\
-        $P(A) := \sum_{i:\omega_i \in A} p_i$
-        \item \textbf{geometrický} pravděpodobnostní prostor:\\
-        $\omega \subseteq \mathbb{R}^d$ s konečným objemem,\\
-        $P(A) := V_d(A)/V_d(\Omega)$
-        \item pravděpodobnostní prostor \textbf{spojitý s hustotou}:\\
-        $\Omega \subseteq \mathbb{R}^d$ s funkcí $f$, kde $\int_\Omega f = 1$,\\
-        $P(A) := \int_A f$
-    \end{enumerate}
+\subsection{Opakování}
 
-    V pravděpodobnostním prostoru $(\Omega, \mathcal{F},P)$ platí pro $A,B \in \mathcal{F}$
-    \begin{enumerate}
-        \item $P(A^c) = 1 - P(A)$ ... $(A^c = \Omega \backslash A)$
-        \item $A \subseteq B \implies P(A) \leq P(B)$
-        \item $P(A\cup B) = P(A) + P(B) - P(A \cap B)$ ... PIE
-        \item $P(A_1 \cup A_2 \cup \dots) \leq \sum_i P(A_i)$ (subaditivita, Booleova nerovnost)
-        \item Definujeme podmíněnou pravděpodobnost (pro $P(B) > 0$).
-        \[P(A|B) = \frac{P(A\cap B)}{P(B)}.\]
-        \item $Q(A) = P(A|B)$ splňuje axiomy pro pravděpodobnost.
-        \[P(\emptyset | B) = 0\]
-        \[P(\Omega | B) = \frac{P(B)}{P(B)} = 1\]
-        \[P(A_1 \circ A_2 | B) = \frac{P((A_1\circ A_2)\cup B)}{P(B)} = \frac{P((A_1\cap B) \cup (A_2 \cap B))}{P(B)} = \frac{P(A_1\cap B)}{P(B) + \frac{P(A_2 \cap B)}{P(B)}}
-         = P(A_1 | B) + P(A_2 | B)\]
-    \end{enumerate}
-\end{remark}
+\begin{enumerate}
+    \item definice pravděpodobnostního prostoru ($\Omega,\mathcal{F},P)$: dva axiomy,
+    \item \textbf{naivní} pravděpodobnostní prostor: $\Omega$ konečná, $\mathcal{F} = \mathcal{P}(\Omega)$\\
+    $P(A):=|A|/|\Omega|$
+    \item \textbf{diskrétní} pravděpodobnostní prostor: $\Omega = {\omega_1,\omega_2,...}$,\\
+    $\mathcal{F} = \mathcal{P}(\Omega),\sum_i p_i = 1$\\
+    $P(A) := \sum_{i:\omega_i \in A} p_i$
+    \item \textbf{geometrický} pravděpodobnostní prostor:\\
+    $\omega \subseteq \mathbb{R}^d$ s konečným objemem,\\
+    $P(A) := V_d(A)/V_d(\Omega)$
+    \item pravděpodobnostní prostor \textbf{spojitý s hustotou}:\\
+    $\Omega \subseteq \mathbb{R}^d$ s funkcí $f$, kde $\int_\Omega f = 1$,\\
+    $P(A) := \int_A f$
+\end{enumerate}
 
-\begin{definition}
-    Zřetězené podmíňování\\
+V pravděpodobnostním prostoru $(\Omega, \mathcal{F},P)$ platí pro $A,B \in \mathcal{F}$
+\begin{enumerate}
+    \item $P(A^c) = 1 - P(A)$ ... $(A^c = \Omega \backslash A)$
+    \item $A \subseteq B \implies P(A) \leq P(B)$
+    \item $P(A\cup B) = P(A) + P(B) - P(A \cap B)$ ... PIE
+    \item $P(A_1 \cup A_2 \cup \dots) \leq \sum_i P(A_i)$ (subaditivita, Booleova nerovnost)
+    \item Definujeme podmíněnou pravděpodobnost (pro $P(B) > 0$).
+    \[P(A|B) = \frac{P(A\cap B)}{P(B)}.\]
+    \item $Q(A) = P(A|B)$ splňuje axiomy pro pravděpodobnost.
+    \[P(\emptyset | B) = 0\]
+    \[P(\Omega | B) = \frac{P(B)}{P(B)} = 1\]
+    \[P(A_1 \circ A_2 | B) = \frac{P((A_1\circ A_2)\cup B)}{P(B)} = \frac{P((A_1\cap B) \cup (A_2 \cap B))}{P(B)} = \frac{P(A_1\cap B)}{P(B) + \frac{P(A_2 \cap B)}{P(B)}}
+     = P(A_1 | B) + P(A_2 | B)\]
+\end{enumerate}
+
+
+\begin{definition}[Zřetězené podmíňování]
     \[P(A\cup B) = P(B)P(A|B)\]
 \end{definition}
 \begin{theorem}
     Pokud $A_1,\dots,A_n \in \mathcal{F}$ a $P(A_1\cap \dots \cap A_n) > 0$, tak
     \[P(A_1\cap A_2 \cap \dots \cap A_n) = \]
     \[P(A_1)P(A_2|A_1)P(A_3)|A_1\cap A_2) \dots P(A_n | \bigcap^{n-1}_{i=1} A_i)\]
-    \begin{proof}
-        indukcí    
-    \end{proof}
 \end{theorem}
+\begin{proof}
+    indukcí    
+\end{proof}
+
 
 \begin{example}
     Příklad: vytáhneme 3 karty z balíčku 52 karet. Jaká je P(žádne srdce)?
