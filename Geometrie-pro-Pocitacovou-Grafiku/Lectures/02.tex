@@ -1,0 +1,126 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+    \section{Druhá přednáška}
+
+    \begin{example}
+        Odvoďte analytické vyjádření otočení se středem v počátku souřadnicové soustavy
+        o úhel $\alpha$. Potom ukažte, že toto zobrazení má jeden bod <fuk>.
+    \end{example}
+
+    \begin{definition}[Středová souměrnost]
+        Středová souměrnost se středem v $S$ je shodné zobrazení, které
+        bodu $S$ přiřazuje týž bod $S$ a libovolnému bodu $X \neq S$ přiřazuje
+        bod $X'$ tak, že bod $S$ je středem úsečky $XX'$.
+    \end{definition}
+
+    \begin{remark}[Vlastnosti středové souměrnosti] {\color{white} x}
+        \begin{enumerate}
+            \item Středovou souměrnost lze chápat jako speciální případ rotace.
+            \item Lze ji rozložit na dvě osové souměrnosti, jejichž osy jsou navzájem kolmé
+            a procházejí středem souměrnosti $S$, který je jejich průsečíkem.
+            \item Je jednoznačně určena svým středem.
+            \item Má jediný samodružný bod a všechny směry jsou samodružné.
+            \item Obrazem každé přímky je přímka s ní rovnoběžná. Přímka, která prochází
+            středem souměrnosti je samodružná.
+        \end{enumerate}
+    \end{remark}
+
+    \begin{example}
+        Je daná úsečka (těžnice) $|AS_{BC}| = 5 cm$. Sestrojte všechny trojúhelníky $ABC$,
+        s danou těžnicí $t_a$, $c = 4 cm, b = 7 cm$.
+
+        TODO reseni
+    \end{example}
+
+    \begin{example}
+        Odvoďte analytické vyjádření středové souměrnosti v rovině.
+
+        TODO reseni
+    \end{example}
+
+    \begin{definition}[Posunutí]
+        Orientovanou úsečkou $AB$ je dán vektor $\vec{v} = \vec{AB}$. Posunutí(translace)
+        je zobrazení, které každému bodu roviny $X$ přiřazuje bod $X'$ tak,
+        že $XX' = \vec{v}$, to znamená $X' = X + \vec{v}$.
+    \end{definition}
+
+    \begin{remark}[Vlastnosti posunutí] {\color{white} x}
+        \begin{enumerate}
+            \item Lze definovat též jako shodnost složenou ze dvou osových souměrností
+            s různými rovnoběžnými osami. Směr posunutí je kolmý na směr těchto os a jeho velikost je
+            rovna dvojnásobku těchto vzdáleností.
+            \item Posunutí nemá žádný samodružný bod.
+        \end{enumerate}
+    \end{remark}
+
+    \begin{example}
+        Odvoďte analytické vyjádření posunutí.
+
+        TODO reseni
+    \end{example}
+
+    \begin{definition}[Grupa shodností v eukleidovském prostoru]
+        Zobrazení $f: \mathbb{R}^n \to \mathbb{R}^n$ se nazývá shodné, jestliže pro každé dva body
+        $X,Y \in \mathbb{R}^n$ platí $|f(X)f(Y)| = |XY|$
+
+        \begin{itemize}
+            \item Každé shodné zobrazení je prosté a afinní.
+            \item Úsečka se zobrazí na úsečku, bod na bod atd.
+        \end{itemize}
+    \end{definition}
+
+    \begin{theorem}
+        Složení dvou shodných zobrazení je shodnost, shodnosti jsou prostá zobrazení a inverzní
+        zobrazení ke shodnosti je opět shodnost.
+    \end{theorem}
+    \begin{proof}
+        TODO
+    \end{proof}
+
+    \begin{theorem}
+        Shodná zobrazení $f: \mathbb{R}^n \to \mathbb{R}^n$ jsou právě zobrazení tvaru:
+        $ f(X) = AX + p $, kde $p \in \mathbb{R}^n$ je libovolný vektor a $A$ je matice
+        $n \times n$ splňující $A^TA = I_n$.
+    \end{theorem}
+    \begin{proof}
+        TODO
+    \end{proof}
+
+    \begin{theorem}
+        Ke každé shodnosti existuje inverzní zobrazení.
+    \end{theorem}
+    \begin{proof}
+        TODO
+    \end{proof}
+
+    \begin{definition}[Přímé, nepřímé zobrazení]
+        Zobrazení $f$ je přímé, pokud $\det (A) = 1$ a nepřímé, pokud $\det (A) = -1$
+    \end{definition}
+
+    \begin{consequence}[Důsledky k předcházejícím větám] {\color{white} x}
+        \begin{itemize}
+            \item Všechny shodnosti v $\mathbb{R}^n$ tvoří grupu $E(n)$.
+            Její dimenze je $n(n+1)/2$.
+            \item Lineární zobrazení vektorového prostoru $\mathbb{R}^n$ do sebe, dané
+            maticí $A$ se nazývá asociované lineární zobrazení $f$.
+            \item Bodům, které se zobrazí na sebe sama říkáme samodružné body $f(X) = X$. 
+            Směrům říkáme samodružné směry.
+            \item Reálná vlastní čísla metice $A$ mohou být pouze $\pm 1$.
+            \item Přímé shodnosti tvoří podgrupu.
+            \item Shodná zobrazení, kde $A = E$ tvoří podgrupu posunutí.
+            \item Shodná zobrazení, kde $p = 0$ tvoří podgrupu isometrií.
+        \end{itemize}
+    \end{consequence}
+
+    \begin{theorem}
+        Každá přímá shodnost v $\mathbb{R}^2$ je buď posunutí, nebo otočení. Každá nepřímá shodnost
+        je buď osová souměrnost, nebo posunutá osová souměrnost. (směr posunutí je rovnoběžný s osou)
+    \end{theorem}
+    \begin{proof}
+        TODO
+    \end{proof}
+
+
+
+\end{document}
