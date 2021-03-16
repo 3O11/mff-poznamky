@@ -1,0 +1,130 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\section{Druhá přednáška}
+
+\begin{definition}[Triviální norma]
+    Triviální norma na libovolném tělěse $F$ je funkce $|| \cdot ||$ s $|| 0_F || = 0$ a
+    $||x|| = 1$ pro $x \neq 0_F$.
+\end{definition}
+
+\begin{definition}[Kanonická $p$-adická norma]
+    Pro $\alpha \in \mathbb{Q}$ a prvočíslo $p$ je kanonická $p$-adická norma $|| \cdot ||_p$
+    definovaná jako
+    \[ || \alpha ||_p := p^{-\text{ord}_p(\alpha)} \]
+    to jest v obecné $p$-adické normě $| \cdot |_p$ klademe $c := \frac{1}{p}$.
+\end{definition}
+
+\begin{theorem}[A. Ostrowski]
+    Nechť $|| \cdot ||$ je norma na tělese racionálních čísel $\mathbb{Q}$. Pak nastává právě jedna ze
+    tří následujícich možností:
+    \begin{enumerate}
+        \item Je to triviální norma.
+        \item Existuje reálné $c \in (0,1]$ takové, že $|| x || = |X|^c$.
+        \item Existuje reálné $c \in (0,1)$ a prvočíslo $p$ takové, že
+        $|| x || = |x|_p = c^{\text{ord}_p(x)}$
+    \end{enumerate}
+    Modifikovaná absolutní hodnota a $p$-adické normy jsou tedy jediné netriviální
+    normy na tělese racionálních čísel.
+\end{theorem}
+\begin{proof}
+    TODO
+\end{proof}
+
+\begin{remark}[Konvence]
+    $\varepsilon > 0$ a $\delta > 0$ jsou reálná čísla a $n,n_0 \in \mathbb{N}$. Limitu píšeme jako
+    $\lim a_n = a$ nebo $\lim_{n \to \infty} a_n = a$.
+\end{remark}
+
+\begin{definition}[Limita]
+    Nechť je $(M,d)$ metrický prostor, $(a_n) \subset M$ je posloupnost bodů v něm a $a \in M$ je bod.
+    $(a_n)$ má limitu v $(M,d)$, pokud
+    \[ \forall \varepsilon \exists n_0: n \geq n_0 \Rightarrow d(a_n, a) < \varepsilon \].
+\end{definition}
+
+\begin{definition}[Konvergence, Divergence]
+    Pokud má $(a_n)$ limitu, řekneme, že je konvergentní. Pokud limitu nemá, je divergentní.
+\end{definition}
+
+\begin{definition}[Kompaktní metrický prostor]
+    Buď $(M,d)$ metrický prostor a $X \subset M$. Řekneme, že $X$ je kompaktní, pokud
+    \[ \forall (a_n) \subset X  \exists (a_{m_n})  \exists a \in X: \lim_{n \to \infty } a_{m_n} = a. \]
+    Jinak řečeno, každá posloupnost bodů množiny $X$ má konvergentní podposloupnost s limitou v $X$.
+    Metrický prostor $(M,d)$ je kompaktní, pokud $M$ je kompaktní.
+\end{definition}
+
+\begin{definition}[Spojité zobrazení mezi Metrickými prostory]
+    Buďte $(M,d)$ a $(N,e)$ metrické prostory a buď $f: M \to N$ zobrazení mezi nimi. $f$ je spojité v
+    $a \in M$, pokud
+    \[ \forall \varepsilon \exists \delta \forall x \in M: d(x,a) < \delta \Rightarrow e(f(x), f(a)) < \varepsilon \]
+    Zobrazení $f$ je spojité, pokud je spojité v každém bodě $a \in M$.
+\end{definition}
+
+\begin{theorem}[Princip maxima]
+    Nechť $(M,d)$ je metrický prostor, \[ f: M \to \mathbb{R} \] je funkce z $M$ do reálné osy a
+    $X \subset M$ je neprázdná kompaktní množina. Pak
+    \[ \exists a,b \in X \forall x \in X: f(a) \leq f(x) \leq f(b) \]
+    Funkce $f$ tedy na $X$ nabývá svou nejmenší hodnotu $f(a)$ a největší hodnotu $f(b)$.
+\end{theorem}
+\begin{proof}
+    TODO
+\end{proof}
+
+\begin{definition}[Součin metrických prostorů]
+    Pro metrické prostory $(M,d)$ a $(N,e)$ definujeme jejich součin $(M \times N, d \times e)$ tak,
+    že $M \times N$ je kartézský součin množin $M$ a $N$ a metrika $d \times e$ je na něm dána jako
+    \[ (d \times e)((a_1, a_2), (b_1, b_2)) := \sqrt{d(a_1, b_1)^2 + e(a_2, b_2)^2} \]
+\end{definition}
+
+\subsection{Charakterizace kompaktních množin v Euklidovckých metrických prostorech}
+
+\begin{definition}[Otevřená množina]
+    Množina $X \in M$ v metrickém prostoru $(M,d)$ je otevřená, pokud
+    \[ \forall a \in X \exists r > 0: B(a,r) \subset X. \]
+\end{definition}
+
+\begin{definition}[Uzavřená množina]
+    \vspace{3mm}
+    \noindent
+    Množina $X$ je uzavřená, pokud $M \backslash X$ je otevřená.
+\end{definition}
+
+\begin{definition}[Omezená množina]
+    \vspace{3mm}
+    \noindent
+    Množina $X$ je omezená, pokud
+    \[ \exists a \in M  \exists r > 0 : X \subset B(a,r) \]
+\end{definition}
+
+\begin{definition}[Diametr]
+    Diametr(průměr) množiny $X$ je s $V := \{ d(a,b) | a,b \in X \} \subset [0, +\infty)$
+    definovaný jako
+    \[ \text{diam}(X) := \begin{cases}
+        \sup (V) &\dots \hspace{2mm} \text{množina} \hspace{0.5mm} V \text{je shora omezená}\\
+        +\infty &\dots \hspace{2mm} \text{množina} \hspace{0.5mm} V \text{není shora omezená}
+    \end{cases} \]
+\end{definition}
+
+\begin{theorem}[Kompaktní $\Rightarrow$ uzavřená a omezená, součin]
+    Platí následující:
+    \begin{enumerate}
+        \item Když $X \subset M$ je kompaktní množina v metrickém prostoru $(M,d)$, pak $X$
+        je uzavřená a omezená. Opačná implikace obecně neplatí.
+        \item Jsou-li $(M,d)$ a $(N,e)$ dva kompaktní metrické prostory, pak i jejich součin
+        $(M \times N, d \times e)$ je kompaktní metrický prostor.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    TODO
+\end{proof}
+
+\begin{theorem}[Kompaktní množina v $\mathbb{R}^n$]
+    V každém Euklidovském metrickém prostoru $(\mathbb{R}^n, e_n)$ je množina $X \subset \mathbb{R}^n$
+    kompaktní, právě když je omezená a uzavřená.
+\end{theorem}
+\begin{proof}
+    TODO
+\end{proof}
+
+\end{document}
