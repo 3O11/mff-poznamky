@@ -11,8 +11,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Třetí přednáška}
 
-\begin{definition}
-    Distribuční funkce\\
+\begin{definition}[Distribuční funkce]
     Distribuční funkce (cumulative distribution function, CDF) n.v. X
     je funkce
     \[F_X(x) := P(X\leq x) = P(\{\omega \in \Omega : X(\omega) \leq x\}).\]
@@ -23,8 +22,9 @@
         \item $F_X$ je zprava spojitá
     \end{enumerate}
 \end{definition}
+
 \begin{example}
-    $X = {0 s pravděpodobností \frac{1}{2}, 1 s pstí. \frac{1}{2}}$
+    $X = \{0$ s pravděpodobností $\frac{1}{2}, 1$ s psravděpodobností $\frac{1}{2}\}$
 \end{example}
 \begin{proof}
     $F_X$ je neklesajíci funkce\\
@@ -43,8 +43,7 @@
 \end{proof}\\
 druhá limita obdobně
 
-\begin{definition}
-    Bernoulliho/alternativní rozdělení:
+\begin{definition}[Bernoulliho/alternativní rozdělení]
 
     \begin{enumerate}
         \item $X = $ počet orlů při jednom hodu nespravedlivou mincí.
@@ -79,8 +78,7 @@ druhá limita obdobně
     \[(p + (1-p))^n = 1^n = 1\]
 \end{definition}
 
-\begin{definition}
-    Hypergeometrické rozdělení\\
+\begin{definition}[Hypergeometrické rozdělení]
 
     \begin{enumerate}
         \item $X = $ počet vytažených červených míčku při $n$ tazích, v osudí je 
@@ -91,8 +89,7 @@ druhá limita obdobně
     \end{enumerate}
 \end{definition}
 
-\begin{definition}
-    Poissonovo rozdělení (poasón)\\
+\begin{definition}[Poissonovo rozdělení (poasón)]
 
     \begin{enumerate}
         \item Značíme $X \sim Pois(\lambda)$.
@@ -110,16 +107,14 @@ druhá limita obdobně
     \[ = \frac{\lambda^k}{k!}e^{-\lambda}\]
 \end{definition}
 
-\begin{remark}
-    Poissonovo paradigma\\
+\begin{remark}[Poissonovo paradigma]
 
     $A_1,\dots A_n$ jsou (skoro-)nezávislé jevy s $P(A_i) = p_i$,
     $\lambda = \sum_j p_j$. Nechť $n$ je velké, každé z $p_i$ malé. Pak přibližně platí
     \[\sum^n_{i=1}I_{A_i} \sim Pois(\lambda)\]
 \end{remark}
 
-\begin{definition}
-    Geometrické rozdělení\\
+\begin{definition}[Geometrické rozdělení]
 
     \begin{enumerate}
         \item $X =$ kolikátým hodem mincí padl první orel.
@@ -134,8 +129,7 @@ druhá limita obdobně
         \[= \frac{(1-p)^{0}p}{1- (1-p)} = \frac{p}{p} = 1\]
     \end{proof}
 \end{definition}
-\begin{definition}
-    Střední hodnota
+\begin{definition}[Střední hodnota]
     
     Pokud $X$ je diskrétní n.v., tak její střední hodnota (expectation) je označovaná $\mathbb{E}(X)$ a definovaná
     \[\mathbb{E}(X) = \sum_{x\in Im(X)}x \times P(X=x),\]
@@ -149,8 +143,7 @@ druhá limita obdobně
         \[\sum_{x\in Im(X(\omega))} \sum_{\omega \in \Omega} X(\omega) P({\omega}) = \sum_{x\in Im(X)}(x\times P({\omega \in \Omega : X(\omega) = x}))\]
     \end{proof}
 \end{definition}
-\begin{definition}
-    Rozptyl
+\begin{definition}[Rozptyl]
 
     Rozptyl(variace) n.v. $X$ nazveme číslo $\mathbb{E}((X-\mathbb{E}X)^2)$.\\
     Značíme jej $var(X)$
@@ -159,21 +152,21 @@ druhá limita obdobně
     \[var(X) = \mathbb{E}(X^2) - \mathbb{E}(X)^2\]
     \end{theorem}
 \end{definition}
-\begin{definition}
-    LOTUS (Law of The Unconscious Statistist)
+\begin{definition}[LOTUS (Law of The Unconscious Statistist)]
 
     Pro reálnou funkci $g$ a diskrtétni n.v. $X$ je $Y = g(X)$ také diskrétní n.v.
-    \begin{theorem}
-        (LOTUS)\\
-        Pokud $X$ je diskrétní n.v. a $g$ reálná funkce, tak 
-        \[\mathbb{E}(g(X)) = \sum_{x\in Im(X)}g(x)P(X=x)\]
-        pokud součet má smysl.
-    \end{theorem}
-    \begin{proof}\\
-        $Y = g(X)$
-        \[\mathbb{E}Y = \sum_{y\in Y} y\times P(Y=y) \text{... definice}\]
-        \[= \sum_{y \in Y} \sum_{x\in Im(X)}g(x) P(X=x)\]
-        \[= \sum_{x\in Im(X)} g(x) P(X=x)\]
-    \end{proof}
 \end{definition}
+
+\begin{theorem}[LOTUS]
+    Pokud $X$ je diskrétní n.v. a $g$ reálná funkce, tak 
+    \[\mathbb{E}(g(X)) = \sum_{x\in Im(X)}g(x)P(X=x)\]
+    pokud součet má smysl.
+\end{theorem}
+\begin{proof}\\
+    $Y = g(X)$
+    \[\mathbb{E}Y = \sum_{y\in Y} y\times P(Y=y) \text{... definice}\]
+    \[= \sum_{y \in Y} \sum_{x\in Im(X)}g(x) P(X=x)\]
+    \[= \sum_{x\in Im(X)} g(x) P(X=x)\]
+\end{proof}
+
 \end{document}
