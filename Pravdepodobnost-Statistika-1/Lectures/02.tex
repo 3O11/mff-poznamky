@@ -47,6 +47,7 @@ V pravděpodobnostním prostoru $(\Omega, \mathcal{F},P)$ platí pro $A,B \in \m
 \begin{definition}[Zřetězené podmíňování]
     \[P(A\cup B) = P(B)P(A|B)\]
 \end{definition}
+
 \begin{theorem}
     Pokud $A_1,\dots,A_n \in \mathcal{F}$ a $P(A_1\cap \dots \cap A_n) > 0$, tak
     \[P(A_1\cap A_2 \cap \dots \cap A_n) = \]
@@ -72,6 +73,7 @@ V pravděpodobnostním prostoru $(\Omega, \mathcal{F},P)$ platí pro $A,B \in \m
         \item $\bigcup_i B_i = \Omega$.
     \end{enumerate}
 \end{definition}
+
 \begin{theorem}
     Věta o úplné pravd. = Rozbor všech možností
     \\ Pokud $B_1,B_2,...$ je rozklad $\Omega$ a $A \in \mathcal{F},$ tak
@@ -82,20 +84,24 @@ V pravděpodobnostním prostoru $(\Omega, \mathcal{F},P)$ platí pro $A,B \in \m
     (sjednocení disjunktních množin)
     \[P(A) = \sum_i P(A\cap B_i) = \sum_i P(B_i)P(A|B_i)\]
 \end{theorem}
+
 \begin{example}
     Máme tři mince: P+O, P+P, O+O. Jaká je pravděpodobnost, že padne orel?
 
+    \noindent
     Označíme $M_1, M_2, M_3$ pro P+O, P+P, O+O.
     
     \[P(O) = P(M_1)P(O|M_1) + P(M_2)P(O|M_2) + P(M_3)P(O|M_3)\]
     \[ = \frac{1}{3}\times \frac{1}{2} + \frac{1}{3}\times 0 + \frac{1}{3}\times 1 = \frac{1}{2}\]
 
-    Rychlejší je vypsat si strom a pak posčítat výsledné jevy\\
+    \noindent
+    Rychlejší je vypsat si strom a pak posčítat výsledné jevy
 \end{example}
-\begin{example}
-    Gambler's ruin - zbankrotování hazardního hráče.\\
+
+\begin{example}[Gambler's ruin - zbankrotování hazardního hráče.]
     Máme $a$ korun, náš protihráč $b$ korun. Hrajeme opakovaně spravedlivou hru o 1kč,\\
     dokud někdo nepřijde o všechny peníze. Jaká je pravděpodobnost, že vyhrajeme?
+\end{example}
 \begin{proof}
     \[P_a = P(\text{z této pozice vyhrajeme})\]
     \[P_0 = 0, P_n = 1 \dots (a+b = n)\]
@@ -108,19 +114,18 @@ V pravděpodobnostním prostoru $(\Omega, \mathcal{F},P)$ platí pro $A,B \in \m
     \[1 = P_n = P_0 + n*\Delta \implies \Delta = \frac{1}{n}\]
     \[P_a = \frac{a}{a+b} = \frac{a}{n}\]
 \end{proof}
-\end{example}
 
-\begin{definition}
-    Bayesova Věta\\
+\begin{theorem}[Bayesova Věta]
     Pokud $B_1,B_2,\dots $ je rozklad $\Omega, A \in \mathcal{F}, P(A) > 0$ a $P(B_j) > 0$, tak
     \[P(B_j)| A) = \frac{P(B_j)P(A|B_j)}{P(A)} = \frac{P(B_j)P(A|B_j)}{\sum_i P(B_i)P(A|B_i)}.\]
     (sčítance s $P(B_i) = 0$ považujeme za $0$).
-    
-    \begin{proof}
-        \[P(B_j | A)P(A) = P(B_j)P(A|B_j)\]
-        \[P(A\cap B_j) = P(B_j \cap A)\]
-    \end{proof}
-\end{definition}
+\end{theorem}
+\begin{proof}
+    \[P(B_j | A)P(A) = P(B_j)P(A|B_j)\]
+    \[P(A\cap B_j) = P(B_j \cap A)\]
+\end{proof}
+
+
 \begin{example}
     $N=$ nemocný, $T=$ testovaný, specif. $P(N|T)$, sens. $P(T|N)$.
     \[P(N|T) = \frac{P(N)P(T|N)}{P(N)P(T|N)+ P(N^c)P(T|N^c)} = \frac{p*0.8}{p*0.8 + (1-p)*0.01}\]
@@ -139,6 +144,7 @@ V pravděpodobnostním prostoru $(\Omega, \mathcal{F},P)$ platí pro $A,B \in \m
     \[P(\bigcap_{i\in J} A_i) = \prod_{i\in J} P(A_i).\]
     Pokud podmínka platí jen pro dvouprvkové množiny $J$, nazýváme jevy $\{A_i\}$ po dvou nezávislé (pairwise independenet).
 \end{definition}
+
 \begin{definition}
     Nechť pro množiny z prostoru jevů platí
     \[A_1 \subseteq A_2 \subseteq A_3 \subseteq \dots\]
@@ -153,9 +159,8 @@ V pravděpodobnostním prostoru $(\Omega, \mathcal{F},P)$ platí pro $A,B \in \m
     $A_n \subset {P,O}^\mathbb{N}, A_n = $ mezi prvními $n$ hody padl aspoň jednou orel.
     \[P(A) = P(\geq 1 orel v \infty hodech) = lim_{n\rightarrow \infty} \dots = 1\]
 \end{definition}
-\begin{definition}
-    Náhodná veličina\\
-    
+
+\begin{definition}[Náhodná veličina]
     Mějme pravděpodobnostní prostor $(\Omega, \mathcal{F}, P).$ Funkci $X : \Omega \rightarrow \mathbb{R}$
     nazveme diskrétní náhodná veličina, pokud $I_m(X)$ je spočetná množina a pokud pro všechna reálna $x$ platí
     \[\{x \in \Omega : X(\omega) = x\} \in \mathcal{F}.\]
