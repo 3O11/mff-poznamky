@@ -1,0 +1,216 @@
+\documentclass[../main.tex]{subfiles}
+
+%{definition}{Definice}
+%{example}{Příklad}
+%{intuition}{Intuice}
+%{remark}{Poznámka}
+%{consequence}{Důsledek}
+%{observation}{Pozorování}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Čtvrtá přednáška}
+
+\begin{theorem}
+    Věta\\
+
+    Nechť $X,Y$ jsou diskrétní n.v. a $a,b \in \mathbb{R}$.
+    \begin{enumerate}
+        \item Pokud $P(X\geq 0) = 1$ a $\mathbb{E}(X) = 0$, tak $P(X=0)=1$.
+        \item Pokud $\mathbb{E}(X) \geq 0$ tak $P(X\geq 0) > 0.$
+        \item $\mathbb{E}(a X + b) = a \mathbb{E}(X) + b$.
+        \item $\mathbb{E}(X+Y) = \mathbb{E}(X) + \mathbb{E}(Y)$
+    \end{enumerate}
+
+    \begin{proof}
+        1.\\
+        \[\mathbb{E}(X) = \sum_{x \in X} x  P(X = x) = 0  P(X = 0) + \sum_{x > \& x \in X} x  P(X = 0) = 
+        \sum_{x<0 \& x\in X} x P(X=x) = 0\]
+        \[\implies \forall x > 0 : P(x = x) = 0 \implies P(X = 0) = 1\]
+
+        2.\\
+        \[\mathbb{E}(X) = \sum x P(X\geq x) = 0\]
+        \[\text{kdyby ne: } P(x\geq 0) = 0, \text{všechny členy v sumě by byly záporné...spor}\]
+
+        3.\\
+        \[\mathbb{E}(a X+b) = \sum_{x\in X} (a x + b)P(X=x) = a\sum xP(X=x) + b\sum P(X=x)\]
+
+        4.\\
+        \[\mathbb{E}(X+Y) = \sum_{\omega}(X(\omega)+Y(\omega))P({\omega}) = \sum X(\omega)P({\omega})
+        + \sum Y(\omega)P({\omega}) = \mathbb{E}(X) + \mathbb{E}(Y)\]
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    Nechť $X$ je diskrétní n.v. nabývajíci jen hodnot z $\mathbb{N} = {0,1,2,s}$. Pak platí
+    \[\mathbb{E}(X) = \sum^\infty_{n = 0} P(X>n).\]
+    \begin{proof}
+        \[\mathbb{E}(X) = \sum^\infty_{k=0} kP(X=k) = \sum^\infty_{k=0} \sum^{k-1}_{n=0} P(X=k)\]
+        \[= \sum_{n=0}^\infty \sum_{k=n+1}^\infty P(X=k) = \sum \sum P({\omega \in \Omega : X(\omega) = k})\]
+        \[= \sum P({\omega \in \Omega : X(\omega) > n}) = \sum^\infty_{n=0} P(X>n)\]
+    \end{proof}
+\end{theorem}
+
+\begin{definition}
+    Rozptyl\\
+
+    Rozptyl (\textit{variance}) n.v. $X$ nazveme číslo $\mathbb{E}((X-\mathbb{E}(X))^2)$.\\
+    Značíme jej $var(X)$. \dots (kvadratické měření odchylky)
+    \begin{enumerate}
+        \item Směrodatná odchylka (standard deviation) $\sigma_X = \sqrt{var(X)}$
+        \begin{remark}
+            "stejné jednotky jako X"
+        \end{remark}
+        \item Měří, jak je daleko "typicky" $X$ od $\mathbb{E}(X)$. Mohli bychom to měrit i jinak 
+        (např. $\mathbb{E}(|X-\mathbb{E}(X)|)$, ale rozptyl je výhodnější).
+    \end{enumerate}
+\end{definition}
+\begin{theorem}
+    Věta\\
+    \[var(X) = \mathbb{E}(X^2) - \mathbb{E}(X)^2\]
+    \begin{proof}
+        \[\mu = \mathbb{E}(X)\]
+        \[var(X) = \mathbb{E}((X - \mu)^2) = \mathbb{E}(X^2-2\mu + \mu^2) = \mathbb{E}(X^2) - 2\mu \mathbb{E}(X) + \mu^2\]
+        \[ = \]
+    \end{proof}
+\end{theorem}
+
+\begin{definition}
+    Podmíněná střední hodnota\\
+
+    Pokud $X$ je diskrétní n.v. a $P(B) > 0$, tak podmíněná střední hodnota 
+    $X$ za předpokladu $B$ (conditional expectation of $X$ given by $B$)
+\end{definition}
+\begin{theorem}
+    Věta o úplné střed. hodnotě\\
+
+    Pokud $B_1,B_2,\dots$ je rozklad $\Omega$ a $X$ je d.n.v., tak
+    \[\mathbb{E}(X) = \sum_i \mathbb{E}(X | B_i) P(B_i)\]
+    kdykoliv má součet smysl. (Sčítance s $P(B_i) = 0$ považujeme za 0.)
+    \begin{proof}
+        \[\mathbb{E}(X) = \sum_i P(B_i)\mathbb{E}(X | B_i)\]
+        \[= \sum_i P(B_i) \sum_x xP(X=x | B_i)\]
+        \[= \sum_x x (\sum_i P(B_i)P())\]
+    \end{proof}
+
+    Rozbor všech možností
+    $X \sim Geom(p)$\\
+    $B_1 = S \dots$ první pokus úspěšný\\
+    $B_2 = B^C_1 = F \dots$ první pokus neúspěšný\\
+    \[\mathbb{E}(X) = P(S)\mathbb{E}(X|S) + P(F)\mathbb{E}(X|F)\]
+    \[= p1 + (1-p)(\mathbb{E}(X+1))\]
+    \[p\mathbb{E}(X) = p + (1-p) = 1\]
+    \[\mathbb{E}(X) = \frac{1}{p}\]
+\end{theorem}
+\begin{theorem}
+    Parametry rozdělení - Bernoulliho\\
+
+    Pro $X\sim Bern(p)$ je 
+    \begin{enumerate}
+        \item $\mathbb{E}(X) = p$
+        \item $var(X) = p(1-p)$
+    \end{enumerate}
+    \begin{proof}
+        $\mathbb{E}(X) = 0P(X=0)+1P(X=1) = P(X=1) = p$\\
+        $var(X) = \mathbb{E}(X-p)^2 = (0-p)^2P(X=0) + (1-p)^2P(X=1) = p(1-p)(p+(1-p)) = p(1-p)$
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    Parametry rozdělení - binomické\\
+
+    Pro $X\sim Bin(n,p)$ je
+    \begin{enumerate}
+        \item $\mathbb{E}(X) = np$
+        \item $var(X) = np(1-p)$
+    \end{enumerate}
+    \begin{enumerate}
+        \item První postup: $X = \sum^n_{i=1}X_i$, kde $X_i = [\text{i-tý hod uspěl}]$
+        \[\mathbb{E}(X_i) = P(X_i = 1) = p\]
+        \item Druhý postup:
+        \[\mathbb{E}(X) = \sum^n_{k=0} kP(X=k) = \sum^n_{k=0}\binom{n}{k}p^k(1-p)^{n-k}\]
+        \[\sum_{k=1}^n pn \binom{n-1}{k-1}p^{k-1}(1-p)^{(n-1) - (k-1)}\]
+        \[ = pn (p + (1-p))^{n-1} = np\]
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}
+    Parametry rozdělení - hypergeometrické\\
+
+    Pro $X\sim Hyper(N,K,n)$ je
+    \begin{enumerate}
+        \item $\mathbb{E}(X) = n\frac{K}{N}$
+        \item $var(X) = n\frac{K}{N}(1-\frac{K}{N})\frac{N-n}{N-1}$
+    \end{enumerate}
+    \begin{enumerate}
+        \item První postup: $X = \sum^n_{i=1}X_i$, kde $X_i = [\text{i-tý míček červený}]$
+        \[\mathbb{E}(X_i) = P(X_i = 1) = \frac{K}{N}\]
+        \item Druhý postup:
+        \[\mathbb{E}(X) = \sum^K_{j=1} Y_j\text{, kde } Y_j = [\text{byl vytažen (z n tahů) míček s číslem j}]\]
+        \[\mathbb{E}(Y_j) = P(Y_j = 1) = \frac{n}{N} \]
+        \[= \frac{\binom{N-1}{n-1}}{\binom{N}{n}} = \frac{n}{N}\]
+    \end{enumerate}
+    \textbf{SKONTROLOVAŤ, STRATIL SOM SA :Sadge:}
+\end{theorem}
+
+\begin{theorem}
+    Parametry rozdělení - geometrické\\
+
+    Pro $X\sim Geom(p)$ je
+    \begin{enumerate}
+        \item $\mathbb{E}(X) = n\frac{1}{p}$
+        \item $var(X) = \frac{1-p}{p^2}$
+    \end{enumerate}
+\end{theorem}
+
+\begin{theorem}
+    Parametry rozdělení - hypergeometrické\\
+
+    Pro $X\sim Hyper(N,K,n)$ je
+    \begin{enumerate}
+        \item $\mathbb{E}(X) = \lambda$
+        \item $var(X) = \lambda$
+    \end{enumerate}
+    \[P(X=k) = \frac{\lambda^k}{k!}e^{-\lambda}\]
+    \[\mathbb{E}(X) = \sum k \frac{\lambda^k}{k!}e^{-\lambda} = 1\]
+    \[\lambda \sum \frac{\lambda^{k-1}}{(k-1)!}e^{-\lambda} = \lambda\]    
+\end{theorem}
+
+\begin{definition}
+    Základní popis náhodných vektorů
+    \begin{enumerate}
+        \item $X,Y$ - \textbf{nestihol som, lebo preskočil slide za 2 sekundy :) boli tam asi 4 odrážky}
+    \end{enumerate}
+\end{definition}
+\begin{definition}
+    Nejaká definícia, nesithol som, lebo som rantoval
+\end{definition}
+\begin{definition}
+    Marginální rozdělení
+    \begin{enumerate}
+        \item Máme-li dáno $p_{X,Y},$ jak zjistit rozdělení jednotlivých složek, t.j. $p_X$ a $p_Y$ ?
+    \end{enumerate}
+    \begin{proof}
+        Nechť $X,Y$ jsou diskrétní n.v. Pak:
+        \[p_X(x) = P(X=x) = \sum_{Y\in Im(Y)} P(X = x \& Y=y) = \sum_{Y\in Im(Y)} p_{X,Y}(x,y)\]
+        \[p_Y(y) = P(Y=y) = \sum_{X\in Im(X)} P(X = x \& Y=y) = \sum_{Y\in Im(Y)} p_{X,Y}(x,y)\]
+    \end{proof}
+\end{definition}
+\begin{definition}
+    Nezávislost náhodných veličin\\
+
+    Diskrétní n.v. $X,Y$ jsou nezávislé (independent) pokud pro každé $x,y \in \mathbb{R}$ jsou jevy 
+    $\{X=x\}$ a $\{Y=y\}$ nezávislé. To nastane právě když
+    \[P(X=x,Y=y) = P(X=x)P(Y=y).\]
+\end{definition}
+\begin{theorem}
+    Součin nezávislých n.v.\\
+
+    Pro nezávislé diskrétní n.v. $X,Y$ platí
+    \[\mathbb{XY} = \mathbb{E}(X)\mathbb{E}(Y)\]
+    \begin{proof}
+        \[\mathbb{E}(XY) = \sum_{x\in Im(X), y \in Im(Y)} P(X=x, Y=y)\]
+        \[= \sum_x x P(X=x) \sum_y yP(Y=y) = \mathbb{E}(X)\mathbb{E}(Y)\]
+    \end{proof}
+\end{theorem}
+\end{document}
