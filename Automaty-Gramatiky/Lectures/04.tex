@@ -1,0 +1,209 @@
+\documentclass[../main.tex]{subfiles}
+
+%{definition}{Definice}
+%{example}{Příklad}
+%{intuition}{Intuice}
+%{remark}{Poznámka}
+%{consequence}{Důsledek}
+%{observation}{Pozorování}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Čtvrtá přednáška}
+
+\begin{theorem}
+    Lemma($L^*,L^+$)\\
+
+    Je-li L regulární jazyk, je regulární i $L^*, L^+$.
+    \begin{enumerate}
+        \item Ida: Opakovaný výpočet automatu $A = (Q, \Sigma, \delta, q_0, F)$
+        \item realizace: nedeterministické rozhodnutí, zda pokračovat nebo restart
+        \item speciální stav pro příjem $\lambda \in L^0$ (pro $L^+$ vynecháme či $\notin F$).
+    \end{enumerate}
+    \begin{proof}
+        Vezmeme DFA $A = (Q, \Sigma, \delta, q_0, F)$ tak, že $L = L(A)$.
+        Definujeme NFA automat $B = (Q\cup {q_B}, \Sigma, \delta_B, {q_B}, F\cup {q_B}),$ kde:\\
+        $\delta_B(q_B,\lambda) = {q_0}$ nový stav $q_B$ pro příjem $\lambda$ přejdeme do $q_0$\\
+        $\delta_B(q_B,x) = \emptyset$ pro $x\in \Sigma$\\
+        $\delta_B(q,x) = {\delta(q,x)}$ pokud $q \in Q \& \delta(q,x) \notin F$ uvnitř A\\
+        $ = {\delta(q,x),q_0}$ pokud $q \in Q \& \delta(q,x) \in F$ možný restart\\
+        Pak $L(B) = L(A)^* (q_B \in F_B), L(B) = L(A^+)(q_B\notin F_B)$.
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    Lemma($L^R$)\\
+
+    Je-li L regulární jazyk, je regulární i $L^R$.
+    \begin{enumerate}
+        \item Zřejmě $(L^R)^R = L$ a tedy stačí ukázat jeden směr.
+        \item idea: obrátíme šipky ve stavovém diagramu; nedeterministický FA
+    \end{enumerate}
+    \begin{proof}
+        \textbf{TO DOOT, 67. slide}
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    Lemma ($M \backslash L a L/M$)\\
+
+    Jsou-li $L,M$ regulární jazyky, je regulární i $M\backslash L$ a $M/L$.
+    \begin{enumerate}
+        \item idea: $A_L$ budeme startovat ve stavech, do kterých se lze dostat slovem $M$.
+    \end{enumerate}
+    \begin{proof}
+        \begin{enumerate}
+            \item $v \in M \backslash L$
+            \item $\Leftrightarrow (\exists u \in M) uv \in L$
+            \item $\Leftrightarrow (\exists u \in M, \exists q \in Q) \delta(q_0,u) \& \delta(q,v) \in F$
+            \item $\Leftrightarrow \exists q \in S_0 \& \delta(q,v) \in F$
+            \item $\Leftrightarrow v \in L(B)$
+        \end{enumerate}
+        Vezmeme DFA $A = (Q,\Sigma,\delta,q_0,F)$ tak, že $L = L(A)$.\\
+        \textbf{TO DOOT, nestihol som}
+    \end{proof}
+\end{theorem}
+
+
+\begin{definition}
+    Regulární výrazy\\
+
+    Regulární výrazy (RV) jsou:
+    \begin{enumerate}
+        \item algebraický popis jazyků
+        \item deklarativním způsobem, jak vyjádřit slova, která chceme přijímat.
+        \item Schopné definovat všechny a pouze regulární jazyky.
+        \item Můžeme je brát jako programovací jazyk, uživatelsky přívětivý popis konečného automatu
+        \item Syntaktická analýza potřebuje silnější nástroj, bezkontextové gramatiky, budou následovat
+    \end{enumerate}
+
+    Regulární výrazy $\alpha, \beta \in RegE(\Sigma)$ nad konečnou neprázdnou abecedou 
+    $\Sigma = \{x_1,x_2,\dots ,x_n\}$ a jejich hodnota $L(\alpha)$ jsou definovány induktivně:
+    
+    \textbf{TO DOOT, je tam tabuľka na ktorú pri tejto rýchlosti nemám čas prepísať správne, slide 70.}
+\end{definition}
+\begin{definition}
+    Priorita\\
+
+    Nejvyšší prioritu má iterace *, nižší konkatenace(zřetězení), nejnižší sjednocení +.
+\end{definition}
+
+\begin{theorem}
+    Kleeneho věta (varianta)\\
+
+    Každý jazyk reprezentovaný konečným automatem lze zapsat jako regulární výraz.\\
+    Každý jazyk popsaný regulárním výrazem můžeme zapsat jako $\lambda -NFA$ (a tedy i DFA).
+
+    \begin{proof}
+        Převod RegE výrazu na $\lambda -NFA$ automat.\\
+
+        Důkaz indukcí dle struktury R. Základ:\\
+
+        V každém kroku zkonstruujeme $\lambda - NFA E$ rozpoznávající stejný jazyk $L(R) = L(E)$ se třemi dalšími vlastnostmi:
+        \begin{enumerate}
+            \item Právě jeden přijímající stav,
+            \item Žádné hrany do počátečního stavu,
+            \item Žádné hrany z koncového stavu.
+        \end{enumerate}
+        \textbf{Asi je nutné doplniť obrázok, keďže aj na prednáške to bolo popísané obrázkom (slide 72)}
+    \end{proof}
+\end{theorem}
+
+\begin{definition}
+    Regulární výraz z DFA\\
+
+    Mějme DFA $A Q_A = \{1,\dots,n\}$ o $n$ stavech.\\
+    Nechť $R^(k)_{ij}$ je regulární výraz, $L(R^(k)_{ij}) = \{w : \delta^*_{\leq k}(i,w) = j\}$ množina slov
+    převádějících stav $i$ do stavu $j$ a $A$ cestou, která neobsahuje stav s vyšším indexem než $k$.\\
+    Budeme rekurivně konstruovat $R^(k)_{ij}$ pro $k = 0,\dots, n$.\\
+    $k = 0, i\neq j : R^(0)_{ij} = \mathbf{a_1} + \mathbf{a_2} + \dots + \mathbf{a_m}$, kde $a_1, \dots, a_m$ jsou
+    symboly označující hrany $i$ do $j$ (nebo $R^(0)_{ij} = \emptyset$ nebo $R^(0)_{ij} = \mathbf{a}$ pro $m = 0,1$).\\
+    $k = 0, i = j: $ smyčky, $R^(0)_{ij} = \lambda + \mathbf{a_1} + \mathbf{a_2} +\dots + \mathbf{a_m}$, kde 
+    $a_1, a_2,\dots a_m$ jsou symboly na smyčkách v $i$.
+\end{definition}
+\begin{proof}
+    \textbf{TODOOT, celý slide je závislý na obrázku ... 75slide}
+\end{proof}
+
+\begin{remark}
+    Shrnutí převodu mezi reprezentacemi regulárních jazyků\\
+
+    \textbf{TODOO, takisto obrázok}
+
+    Převod NFA na DFA
+    \begin{enumerate}
+        \item $\lambda$ uzávěr v $O(n^3)$ - prohledává $n$ stavů násobeno $n^2$ hran pro $\lambda$ přechody.
+        \item Podmnožinová konstrukce, DFA s až $2^n$ stavy. Pro každý stav, $O(n^3)$ času na výpočet přechodové funkce.
+    \end{enumerate}
+
+    Převod DFA na NFA
+    \begin{enumerate}
+        \item Přidat množinové závorky k přechodové funkci a přechody pro $\lambda$ u $\lambda$-NFA.
+    \end{enumerate}
+
+    Převod automatu DFA na RegE regulární výraz
+    \begin{enumerate}
+        \item $O(n^3 4^n)$
+    \end{enumerate}
+    
+    RegE výraz na automat
+    \begin{enumerate}
+        \item V čase $O(n)$ vytvoříme $\lambda$-NFA.
+    \end{enumerate}
+\end{remark}
+
+\begin{definition}
+    Substituce jazyků\\
+
+    Mějme konečnou abecedu $\Sigma$. Pro každé $x \in \Sigma$ budiž $\sigma(x)$ jazyk v nějaké abecedě $Y_X$. Dále položíme:
+    \begin{enumerate}
+        \item $\sigma(\lambda) = {\lambda}$
+        \item $\sigma(u.v) = \sigma(u).\sigma(v)$ 
+    \end{enumerate}
+
+    Zobrazení $\sigma : \Sigma \rightarrow P(Y^*)$, kde $Y = \bigcup_{x\in \Sigma} Y_X$ se nazývá substituce.\\
+    $\sigma(L) = \bigcup_{w\in L} \sigma(w)$\\
+    nevypouštějíci substituce je substituce, kde žádné $\sigma(x)$ neobsahuje $\lambda$.
+\end{definition}
+
+\begin{definition}
+    Homomorfizmus (jazyků), inverzní homomorfizmus\\
+
+    homomorfizmus $h$ je speciální případ subsittuce, kde obraz je vždy jen jednoslovný jazyk
+    (vynecháváme u něj závorky), t.j. $(\forall x \in \Sigma) h(x) = w_x.$\\
+    Pokud $\forall x : w_x \neq \lambda$, jde o nevypouštějíci homomorfizmus.\\
+    Inverzní homomorfizmus $h^{-1}(L) = \{w : h(w) \in L\}$.
+\end{definition}
+
+\begin{theorem}
+    uzavřenost na homomorfizmus\\
+
+    Je-li jazyk $L i \forall x \in \Sigma$ jazyk $\sigma(x),h(x)$ regulární, pak je regulární i $\sigma(L), h(L)$.
+    \begin{proof}
+        Strukturální indukcí 'probubláváním' algebraickým popisem jazyka o základních, sjednocení, zřetězení a iterace. Tvrzení:
+        $\sigma(L(E)) = L(\underline{\sigma}(E)).$ $\sigma({\lambda}) = \lambda$, $\sigma(\emptyset) = \emptyset$,
+        $\sigma({x}) = \underline{\sigma}(x)$, $\sigma(L(\alpha + \beta)) = L(\underline{\sigma}(\alpha) + \underline{\sigma}(\beta))$ atd.\\
+
+        \textbf{TODOOT, 84 slide}
+    \end{proof}
+\end{theorem}
+
+\begin{definition}
+    Inverzní homomorfizmus\\
+
+    Nechť $h$ je homomorfizmus abecedy $\Sigma$ do slov nad abecedou $T$. Pak $h^{-1}(L)$, 'h inverze L' je množina řetězců
+    \[h^{-1}(L) = \{w : w \in \Sigma^*; h(w) \in L\}.\]
+\end{definition}
+\begin{theorem}
+    Je-li $h$ homomorfizmus abecedy $\Sigma$ do abecedy $T$ a $L$ je regulární jazyk abecedy $T$, pak $h^{-1}(L)$ je také regulární jazyk.
+    \begin{proof}
+        Mějme DFA $A = (Q,T,\delta,q_0,F)$ pro $L$.\\
+        Konstruujeme $DFA$ pro $h^{-1}(L)$.
+        \begin{enumerate}
+            \item Definujeme $B(Q,\Sigma, \gamma, q_0, F)$ kde $\gamma(qq,a) = \delta^*(q,h(a)) (\delta^*$ operace na řetězcích).
+            \item Indukcí dle $|w|$, $\gamma^*(q_0,w) = \delta^*(q_0,h(w))$.
+            \item Proto $B$ přijíma právě řetězce $w\in h^{-1}(L)$.
+        \end{enumerate}
+    \end{proof}
+\end{theorem}
+\end{document}
