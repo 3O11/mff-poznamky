@@ -11,6 +11,93 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Pátá přednáška}
 
+\begin{definition}
+    Coupling
+    \begin{enumerate}
+        \item $X = \sum^n_{i=1} X_i$ kde $X_1,\dots , X_n$ jsou n.n.v. $\dots \sim Bern(p)$
+        \item $Y = \sum^n_{i=1} Y_i$ kde $Y_1,\dots , Y_n$ jsou n.n.v. $\dots \sim Bern(q) \dots o < q$
+        \item vztah $X,Y$ není určen, můžou být jakékoliv.
+        \item Zařídíme, že nebudou nezávislé, dokonce bude vždy $X \leq Y$.
+        \item Stačí definovat:
+        \[\text{pokud } X_i = 1 \text{ tak } Y_i = 1\]
+        \[\text{pokud } X_i = 0 \text{ tak } Y_i \text{ buď } 1 \text{ nebo }0\]
+        \[\implies Y_1,\dots,Y_n \text{ jsou n.n.v } \implies Y \sim Bin(n,q)\]
+        \[\implies X \leq Y \text{ vždy } (Y \leq k \implies X\leq k) \implies P(X\leq k) \geq P(Y\leq k)\]
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+    Funkce náhodného vektoru\\
+
+    Nechť $X,Y$ jsou n.v. na $(\Omega,\mathcal{F},P)$, nechť $g:\mathbb{R}^2 \rightarrow \mathbb{R}$ je funkce.
+    \begin{enumerate}
+        \item Pak $Z = g(X,Y)$ je n.v. na $(\Omega,\mathcal{F},P)$
+        \item platí pro ni
+        \[\mathbb{E}(g(X,Y)) = \sum_{x\in Im(X)} \sum_{y\in Im(Y)} g(x,y)P(X=x,Y=y)\]
+    \end{enumerate}
+
+    Věta (linearita střední hodnoty)\\
+
+    Pro $X,Y$ n.v. a $a,b \in \mathbb{R}$ platí
+    \[\mathbb{E}(aX+bY) = a\mathbb{E}(X)+b\mathbb{E}(Y)\]
+    \begin{proof}
+        \[g(x,y) = ax+by\]
+        \[\mathbb{E}(aX+bY) = \mathbb{E}(g(X,Y)) = \sum_{x,y} g(x,y) P(X=x,Y=y) = \sum_{x,y} axP(X=x,Y=y)\]
+        \[+ \sum_{x,y}byP(X=x,Y=y) = \sum_{x}axP(X=x) + \sum_y byP(Y=y)\]
+    \end{proof}
+\end{theorem}
 
 
+\begin{theorem}
+    Konvoluce\\
+
+    Pokud $X,Y$ jsou diskrétní náhodné veličiny, tak pro $Z = X+Y$ platí
+    \[P(Z=z) = \sum_{x\in Im(X)} P(X=x,Y=z-x).\]
+
+    Pokud $X,Y$ jsou návíc nezávislé, tak 
+    \[P(Z=z) = \sum_{x\in Im(X)} P(X=x)P(Y=z-x).\]
+    \begin{proof}
+        \[P_z = \sum_x P_X(x)P_Y(z-x) \dots \text{ konvoluce}\]
+        \[P(Z=z) = \sum_k P(X=k \& Y=z-k)\]
+        \[ = \sum_{k=0}^m P(X=k)P(Y=z-k)\]
+        \[ = \sum \binom{m}{k}P^k (1-p)^{m-k} \binom{n}{z-k}p^{z-k}(1-p)^{n-(z-k)}\]
+        \[ = \sum^m_{k=0} p^z(1-p)^{m+n-z}\binom{m}{k}\binom{n}{z-k}\]
+        \[ = p^z(1-p)^{m+n-z} \sum \binom{m}{k} \binom{n}{z-k}\]
+        \[ = Bin(m+n,p)\]
+    \end{proof}
+\end{theorem}
+
+\begin{definition}
+    Podmíněné rozdělení\\
+
+    $X,Y$ - diskrétní náhodné veličiny na $(\Omega, \mathcal{F}, P)$, $A \in \mathcal{F}$
+    \begin{enumerate}
+        \item $p_{X|A}(x) := P(X=x|A)$ ... příklad: $X$ je výsledek hodu kostkou, $A$ = padlo sudé číslo
+        \item $p_{X|Y}(x|y) := P(X=x|Y=y)$ ... příklad: $X,Z$ jsou výsledky dvou nezávislých hodů kostkou, $Y = X+Z$.
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Obecná náhodná veličina\\
+
+    Náhodná veličina (random variable) na $(\Omega,\mathcal{F},P)$ je zobrazení $X: \Omega \rightarrow \mathbb{R}$, které
+    pro každé $x \in \mathbb{R}$ splňuje
+    \[{\omega \in \Omega : X(\omega) \leq x} \in \mathcal{F}\]
+    \dots
+    \[F_X(x) = P(X\leq x)\]
+\end{definition}
+
+\begin{definition}
+    Spojitá náhodná veličina\\
+
+    N.v $X$ se nazývá spojitá (continuous), pokud existuje nezáporná reálna funkce $f_X$ tak, že 
+    \[F_X(x) = P(X\leq x) = \int^x_{-\infty} f_X(t)dt\]
+
+    Někdy se též používá pojem absolutně spojitá veličina.\\
+
+    Funkce $f_X$ se nazývá hustota (probability density function) náhodné veličiny X.
+
+    Podmínka na hustotu: 
+    \[\int^\infty_{-\infty} f_X(t) =  1 \dots \lim_{x\rightarrow \infty} F_X(x) =1\]
+\end{definition}
 \end{document}
