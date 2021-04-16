@@ -11,9 +11,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Třetí přednáška}
 
-\begin{definition}
-    Algoritmus na testování ekvivalnece regulárních jazyků\\
-
+\begin{definition}[Algoritmus na testování ekvivalnece regulárních jazyků]
     Ekvivalenci regulárních jazyků L,M testujeme následovně:
     \begin{enumerate}
         \item Najdeme $DFA A_L, A_M$ rozpoznávajíci $L(A_L) = L, L(A_M) = M$, $Q_L \cap Q_M = \emptyset$.
@@ -21,15 +19,12 @@
          zvolíme jeden z počátečních stavů.
         \item Jazyky jsou ekvivalentní právě když počáteční stavy původních DFA jsou ekvivalentní. 
     \end{enumerate}
-\end{definition}
-
-Nedeterministické konečné automaty (NFA)\\
-
+\end{definition}[Nedeterministické konečné automaty (NFA)]
     Nedeterministický automat může být ve více stavech paralelně. Má schopnost 'uhodnout' něco o vstupu.
 
     \textbf{ pridať obrázok zo slidov (61. slide)}
 
-\begin{definition}
+\begin{definition}[NFA]
     Nedeterministický konečný automat (NFA) $A = (Q, \Sigma, \delta, S_0, F)$ sestává z:
     \begin{enumerate}
         \item konečné množiny stavů, zpravidla značíme $Q$,
@@ -40,9 +35,7 @@ Nedeterministické konečné automaty (NFA)\\
     \end{enumerate}
 \end{definition}
 
-\begin{definition}
-    Rozšířená přechodová funkce\\
-
+\begin{definition}[Rozšířená přechodová funkce]
     Pro přechodovou funkci $\delta$ NFA je rozšířená přechodová funkce $\delta^*$
 
     $\delta^* : Q \times \Sigma^* \rightarrow \mathcal{P}(Q)$ definovaná indukcí:
@@ -53,9 +46,7 @@ Nedeterministické konečné automaty (NFA)\\
     t. j. množina stavů, do kterých se mohu dostat posloupností 'správně označených'
 \end{definition}
 
-\begin{definition}
-    Jazyk přijímaný nedeterministickým konečným automatem\\
-
+\begin{definition}[Jazyk přijímaný nedeterministickým konečným automatem]
     Mějme NFA $A = (Q,\Sigma, \delta, S_0, F)$, Pak
     \[L(A) = \{w : (\exists q_0 \in S_0) \delta^*(q_0,w \cap F \neq \emptyset)\}\]
     je jazyk přijímaný automatem A.
@@ -63,9 +54,7 @@ Nedeterministické konečné automaty (NFA)\\
     Tedy $L(A)$ je množina slov $w \in \Sigma^*$ takových, že $\delta^*(q_0,w)$ obsahuje alespoň jeden přijímajíci stav.
 \end{definition}
 
-\begin{definition}
-    Algortismus : Podmnožinová konstrukce\\
-
+\begin{algorithm}[Podmnožinová konstrukce]
     Podmnožinová konstrukce začíná s NFA $N = (Q_N,\Sigma, \delta_N, S_0, F_N)$. Cílem je popis deterministického
     DFA $D = (Q_D,\Sigma, \delta_D, S_0, F_D)$, pro který $L(N) = L(D)$.
     \begin{enumerate}
@@ -78,11 +67,9 @@ Nedeterministické konečné automaty (NFA)\\
         \item Pro každé $S \subseteq Q_N$ a každý vstupní symbol $a \in \Sigma$,
         \[\delta_D(S,a) = \bigcup_{p\in S} \delta_N(p,a).\]
     \end{enumerate}
-\end{definition}
+\end{algorithm}
 
-\begin{theorem}
-    Převod NFA na DFA\\
-
+\begin{theorem}[Převod NFA na DFA]
     Pro DFA $D = (Q_D,\Sigma, \delta_D, S_0, F_D)$ vytvořený podmnožinovou konstrukcí z NFA $N = (Q_N,\Sigma, \delta_N,q_0,F_N)$ platí $L(N) = L(D)$.
 \end{theorem}
 \begin{proof}
@@ -90,15 +77,14 @@ Nedeterministické konečné automaty (NFA)\\
 \end{proof}
 
 Můžeme přidat ještě tzv. $\lambda$-přechod.
-\begin{definition}
+
+\begin{definition}[$\lambda$-přechod]
     Dovolíme přechody na $\lambda$, prázdné slovo, t.j. bez přečtení vstupního symbolu.
     
     \textbf{doplniť obrázok, 68. slide}
 \end{definition}
 
-\begin{definition}
-    $\lambda$-uzávěr
-
+\begin{definition}[$\lambda$-uzávěr]
     Pro $q\in Q$ definujeme $\lambda$-uzávěr $\lambda CLOSE(q)$ rekurzivně:
     \begin{enumerate}
         \item Stav $q$ je $\lambda CLOSE(q)$.
@@ -108,9 +94,7 @@ Můžeme přidat ještě tzv. $\lambda$-přechod.
     Pro $S \subseteq Q$ definujeme $\lambda CLOSE(S) = \bigcup_{q\in S} \lambda CLOSE(q)$. 
 \end{definition}
 
-\begin{definition}
-    Rozšířená přechodová funkce a jazyk přijímaný $\lambda$-NFA\\
-
+\begin{definition}[Rozšířená přechodová funkce a jazyk přijímaný $\lambda$-NFA]
     Nechť $E = (Q,\Sigma,\delta,S_0,F)$ je $\lambda$-NFA. Rozšířenou přechodovou funkci $\delta^*$ definujeme následovně:
     \begin{enumerate}
         \item $\delta^*(q,\lambda) = \lambda CLOSE(q)$.
@@ -119,12 +103,9 @@ Můžeme přidat ještě tzv. $\lambda$-přechod.
     \end{enumerate}
 \end{definition}
 
-\begin{theorem}
-    Eliminace $\lambda$-přechodů\\
-
+\begin{theorem}[Eliminace $\lambda$-přechodů]
     Jazyk $L$ je rozpoznatelný $\lambda$-NFA právě když je $L$ regulární.
 \end{theorem}
-
 \begin{proof}
     Pro libovolný $\lambda$NFA $E = (Q_E,\Sigma, \delta_E, S_0, F_E)$ zkonstruujeme DFA $D = (Q_D,\Sigma, \delta_D, q_D, F_D)$
     přijímajíci stejný jazyk jako $E$.
@@ -136,9 +117,7 @@ Můžeme přidat ještě tzv. $\lambda$-přechod.
     \end{enumerate}
 \end{proof}
 
-\begin{definition}
-    Množinové operace nad jazyky\\
-
+\begin{definition}[Množinové operace nad jazyky]
     Mějme dva jazyky $L,M$. Definujeme následujíci operace:
     \begin{enumerate}
         \item binární sjednocení $L\cup M = \{w: w\in L \lor w \in M\}$
@@ -156,8 +135,8 @@ Můžeme přidat ještě tzv. $\lambda$-přechod.
         \end{remark}
     \end{enumerate}
 \end{definition}
-\begin{theorem}
-    de Morganova pravidla:
+
+\begin{theorem}[de Morganova pravidla]
     \begin{enumerate}
         \item $L\cap M = \overline{\overline{L}\cup \overline{M}}$
         \item $L\cup M = \overline{\overline{L}\cap \overline{M}}$
@@ -165,9 +144,7 @@ Můžeme přidat ještě tzv. $\lambda$-přechod.
     \end{enumerate}
 \end{theorem}
 
-\begin{theorem}
-    Uzavřenost na množinové operace\\
-
+\begin{theorem}[Uzavřenost na množinové operace]
     Mějme regulární jazyky $L,M$. Pak jsou následujíci jazyky také regulární:
     \begin{enumerate}
         \item sjednocení $L\cup M$
@@ -181,7 +158,7 @@ Můžeme přidat ještě tzv. $\lambda$-přechod.
         \item Pokud $\delta$ není pro některé dvojice $q,a$ definovaná, přidáme nový nepřijímajíci stav $q_n$ a do něj
         přechod pro vše dříve nedefinované plus $\forall a \in \Sigma \cup {\lambda}: \delta(q_n,x) = q_n$.
         \item Pak stačí prohodit koncové a nekoncové stavy přijímajíciho deterministického FA $F = Q_A - F_A$.
-        \item pro rozdíl doplníme funkci \delta na totální.
+        \item pro rozdíl doplníme funkci $\delta$ na totální.
         \item Zkonstruujeme součinový automat,
         \[Q = (Q_1 \times Q_2, \Sigma, \delta((p_1,p_2),x) = (\delta_1(p_1,x),\delta_2,x)), (q_{0_1},q_{0_2},F) \]
         \item průnik: $F = F_1 \times F_2$
@@ -191,8 +168,8 @@ Můžeme přidat ještě tzv. $\lambda$-přechod.
 \end{proof}
 
 
-\begin{definition}
-    Řetězcové operace nad jazyky
+\begin{definition}[Řetězcové operace nad jazyky]
+    {\color{white} x}
 
     \begin{enumerate}
         \item zřetězení jazyků ... $L.M = \{uv : u \in L \& v \in M\}$, $L.x = L.{x}$ a $x.L = {x}.L$ pro $x \in \Sigma$
@@ -214,20 +191,24 @@ Můžeme přidat ještě tzv. $\lambda$-přechod.
     Jsou-li L,M regulární jazyky, je regulární i $L.M$.
 \end{theorem}
 \begin{proof}
-    Vezmeme DFA $A_1 = (Q_1,\Sigma, \delta_1, q_1, F_1)$, pak $A_2 = (Q_2,\Sigma, \delta_2,q_2,F_2)$ tak, že $L = L(A_1)$ a $M = L(A_2).$
+    Vezmeme DFA $A_1 = (Q_1,\Sigma, \delta_1, q_1, F_1)$,
+    pak $A_2 = (Q_2,\Sigma, \delta_2,q_2,F_2)$ tak, že $L = L(A_1)$ a $M = L(A_2)$.
     \\ Definujeme Nedeterministický automat $B = (Q\cup {q_0},\Sigma, \delta, q_0,F_2)$ kde:
 
     \begin{tabular}{l r}
-        $Q = Q_1 \cup Q_2$ && předpokládáme různá jména stavů, jinak přejmenujeme, končíme až po přečtení slova z $L_2$ \\        
+        $Q = Q_1 \cup Q_2$ & předpokládáme různá jména stavů, jinak přejmenujeme, končíme až po přečtení slova z $L_2$ \\        
     \end{tabular}
-    \begin{tabular}{c c c c}
-        $\delta(q_0,\lambda)$ && $={q_1,q_2}$ && pro $q_1 \in F_1$ && $t.j. \lambda \in L(A_1)$ \\
-        $\delta(q_0,\lambda)$ && $={q_1}$ && pro $q_1 \notin F_1$ && $t.j. \lambda \notin L(A_1)$ \\
-        $\delta(q_0,x)$ && $=\emptyset$ && pro $x \in \Sigma$ && \space \\
-        $\delta(q,x)$ && $={\delta_1(q,x)}$ && pro $q \in Q_1 \& \delta_1(q,x) \notin F_1$ && počítáme v A_1\\
-        \space && $={\delta_1(q,x),q_2}$ && pro $q \in Q_1 \& \delta_1(q,x) \in F_1$ && nedet. přechod z A_1\\
-        \space && $={\delta_2(q,x)}$ && pro $q \in Q_2$  && počítáme v A_2\\
+    \begin{tabular}{c|c|c|c}
+        $\delta(q_0,\lambda)$ & $={q_1,q_2}$ & pro $q_1 \in F_1$ & $t.j. \lambda \in L(A_1)$ \\
+        $\delta(q_0,\lambda)$ & $={q_1}$ & pro $q_1 \notin F_1$ & $t.j. \lambda \notin L(A_1)$ \\
+        $\delta(q_0,x)$ & $=\emptyset$ & pro $x \in \Sigma$ & \space \\
+        $\delta(q,x)$ & $={\delta_1(q,x)}$ & pro $q \in Q_1 \& \delta_1(q,x) \notin F_1$ & počítáme v $A_1$\\
+        \space & $={\delta_1(q,x),q_2}$ & pro $q \in Q_1 \& \delta_1(q,x) \in F_1$ & nedet. přechod z $A_1$\\
+        \space & $={\delta_2(q,x)}$ & pro $q \in Q_2$  & počítáme v $A_2$\\
     \end{tabular}
+
     Pak $L(B) = L(A_1).L(A_2)$.
+
+    I have zero idea how this should be formatted properly, pls fix later. - 3O11
 \end{proof}
 \end{document}
