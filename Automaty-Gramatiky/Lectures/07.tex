@@ -11,7 +11,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Sedmá přednáška}
 
-    Zásobníkový automat\\
+    \subsection{Zásobníkový automat}
 
     Zásobníkové automaty jsou rozšířením $\lambda -NFA$ nedeterministických konečných
     automatů s $\lambda$ přechody.
@@ -25,9 +25,7 @@
 
     Deterministické zásobníkové automaty přijímají jen vlastní podmnožinu bezkontextových jazyků.
 
-    \begin{definition}
-        Zásobníkový automat\\
-
+    \begin{definition}[Zásobníkový automat]
         (PDA) je $P = (Q, \Sigma, \Gamma, \delta, q_0, Z_0, F)$, kde 
         \begin{enumerate}
             \item $Q$ konečná množina stavů,
@@ -74,9 +72,7 @@
         \textbf{TO DO, (slide 143, example 7.2)}
     \end{example}
 
-    \begin{definition}
-        Přechodový diagram pro zásobníkový automat\\
-
+    \begin{definition}[Přechodový diagram pro zásobníkový automat]
         Přechodový diagram pro zásobníkový automat obsahuje:
         \begin{enumerate}
             \item Uzly, které odpovídají stavům $PDA$.
@@ -87,8 +83,8 @@
         \end{enumerate}
     \end{definition}
 
-    \begin{definition}
-        Notace zásobníkových automatů\\
+    \begin{definition}[Notace zásobníkových automatů]
+        {\color{white} x}
 
         \begin{tabular}{l l}
             $a,b,c,*,+,1,(,)$ & symboly vstupní abecedy\\
@@ -99,9 +95,7 @@
         \end{tabular}
     \end{definition}
 
-    \begin{definition}
-        Situace zásobníkového automatu\\
-
+    \begin{definition}[Situace zásobníkového automatu]
         Situaci zásobníkového automatu reprezentujeme trojicí $(q,w,\gamma)$, kde
         \begin{enumerate}
             \item $q$ je stav,
@@ -111,9 +105,7 @@
         Situaci značíme zkratkou $(ID)$ z anglického $instantaneous description$.
     \end{definition}
 
-    \begin{definition}
-        $\vdash, \vdash^*$ posloupnosti situací\\
-        
+    \begin{definition}[$\vdash, \vdash^*$ posloupnosti situací]
         Mějme PDA $P = (Q,\Sigma, \Gamma, \delta, q_0, Z_0, F)$. Definujeme $\vdash_P$ nebo $\vdash$ následovně:
         \begin{enumerate}
             \item Nechť $\delta(p,a,X) \ni (q,\alpha), p, q \in Q, a \in (\Sigma \cup {\lambda}), X \in \Gamma, \alpha \in \Gamma^*$.
@@ -127,9 +119,7 @@
         \end{enumerate}
     \end{definition}
 
-    \begin{definition}
-        Jazyk přijímaný koncovým stavem, prázdným zásobníkem\\
-
+    \begin{definition}[Jazyk přijímaný koncovým stavem, prázdným zásobníkem]
         Mějme zásobníkový automat $P = (Q,\Sigma, \Gamma, \delta, q_0, Z_0, F)$. Pak $L(P)$ je:
         \[L(P) = \{w : (q_0, w, Z_0) \vdash^*_P (q, \lambda, \alpha) \text{ pro nějaké $q\in F$ a libovolný řetězec } \alpha \in \Gamma^*; w \in \Sigma^*\}\]
 
@@ -142,37 +132,30 @@
     \end{example}
 
     \begin{example}
-        $P' \equiv P$ z předchozího příkladu, jen změníme instrukci, aby umazala poslední symbol\\
+        $P' \equiv P$ z předchozího příkladu, jen změníme instrukci, aby umazala poslední symbol
 
         $\delta(q_1, \lambda, Z_0) = {(q_2,Z_0)}$ nahradíme\\
         $\delta(q_1, \lambda, Z_0) = {(q_2,\lambda)}$\\
         nyní $L(P') = N(P') = L_{wwr}$.        
     \end{example}
 
-    \begin{example}
-        If-else přijímané prázdným zásobníkem\\
-
+    \begin{example}[If-else přijímané prázdným zásobníkem]
         \textbf{TO DO, 7.5, 149 slide}
     \end{example}
 
-    \begin{example}
-        Přijímaní koncovým stavem\\
-
+    \begin{example}[Přijímaní koncovým stavem]
         \textbf{TO DO, 7.6, 149 slide}
     \end{example}
 
-    \begin{theorem}
-        Nečtený vstup a dno zásobníku $P$ neovlivní výpočet\\
-
+    \begin{theorem}[Nečtený vstup a dno zásobníku $P$ neovlivní výpočet]
         Mějme $PDA P = (Q,\Sigma, \Gamma, \delta, q_0, Z_0, F)$ a $(p,x,\alpha)\vdash^*_P (q,y,\beta)$.
         Potom pro libovolné slovo $w \in \Sigma^*$ a $\gamma \in \Gamma^*$ platí : $(q,xw,\alpha \gamma)\vdash^*_P (q,yw, \beta \gamma)$.
         Speciálně pro $\gamma = \lambda$ a/nebo $w = \lambda$.
-
-        \begin{proof}
-            Indukcí podle počtu situací mezi $(p, xw, \alpha \gamma)$ a $(q, yw, \beta \gamma)$. Každý krok
-            $(p,x,\alpha) \vdash^*_P (q,y,\beta)$ je určen bez $w$ a/nebo $\gamma$. Proto je možný i se symboly na konci vstupu / dně zásobníku.
-        \end{proof}
     \end{theorem}
+    \begin{proof}
+        Indukcí podle počtu situací mezi $(p, xw, \alpha \gamma)$ a $(q, yw, \beta \gamma)$. Každý krok
+        $(p,x,\alpha) \vdash^*_P (q,y,\beta)$ je určen bez $w$ a/nebo $\gamma$. Proto je možný i se symboly na konci vstupu / dně zásobníku.
+    \end{proof}
 
     \begin{remark}
         \[\text{Pro } PDA P = (Q,\Sigma,\Gamma, \delta, q_0, Z_0, F), (p, xw, \alpha) \vdash^*_P (q, yw, \beta) : (p,x,\alpha)\vdash^*_P (q,y,\beta).\]
@@ -181,10 +164,8 @@
         $L = {0^i1^i0^j1^j}$, situace $(p, 0^{i-j}1^i0^j1^j, 0^jZ_0)\vdash^* (q,1^j, 0^j Z_0)$, mezitím vyčistíme zásobník k $Z_0$
     \end{remark}
 
-    \begin{theorem}
-        Od přijímajíciho stavu k prázdneému zásobníku\\
-
-        Mějme $L = L(P_F)$ pro nějaký PDA.\\
+    \begin{theorem}[Od přijímajíciho stavu k prázdneému zásobníku]
+        Mějme $L = L(P_F)$ pro nějaký PDA.
 
         $P_F = (Q,\Sigma, \Gamma, \delta_F, q_0, Z_0, F)$. Pak existuje $PDA P_N$ takový, že $L = L(P_N)$.
 
@@ -200,9 +181,7 @@
         \end{proof}
     \end{theorem}
 
-    \begin{theorem}
-        Od prázdného zásobníku ke koncovému stavu\\
-
+    \begin{theorem}[Od prázdného zásobníku ke koncovému stavu]
         Pokud $L = N(P_N)$ pro nějaký PDA $P_N = (Q,\Sigma, \Gamma, \delta_N, q_0, Z_0),$ pak existuje PDA $P_F : L = L(P_F)$.
         
         \begin{proof}
@@ -224,59 +203,52 @@
         \end{proof}
     \end{theorem}
 
-    \begin{theorem}
-        $L(CFG), L(PDA), N(PDA)$\\
-
+    \begin{theorem}[$L(CFG), L(PDA), N(PDA)$]
         Následující tvrzení jsou ekvivalentní:
         \begin{enumerate}
             \item Jazyk $L$ je bezkontextový, t.j. generovaný $CFG$,
             \item Jazyk $L$ je přijímaný nějakým zásobníkovým automatem koncovým stavem.
             \item Jazyk $L$ je přijímaný nějakým zásobníkovým automatem prázdným zásobníkem.
         \end{enumerate}
-
-        \begin{proof}
-            \textbf{TO DO, doplniť graf z 153 (theorem 7.1)}    
-        \end{proof}
     \end{theorem}
+    \begin{proof}
+        \textbf{TO DO, doplniť graf z 153 (theorem 7.1)}    
+    \end{proof}
 
-    \begin{theorem}
-        Algoritmus: Konstrukce $PDA$ z $CFG G$\\
-
+    \begin{algorithm}[Konstrukce $PDA$ z $CFG G$]
         Mějme $CFG$ gramatiku $G = (V,T,P,S)$. Konstruujeme $PDA P = ({q}, T,V\cup T, \delta, q,S)$.
         \begin{enumerate}
             \item Pro neterminály $A \in V, \delta(q,\lambda, A) = {(q,\beta) : A \rightarrow \beta \text{ je pravidlo }G}$.
             \item Pro každý terminál $a \in T, \delta(q,a,a) = {(q,\lambda)}$.
         \end{enumerate}
-    \end{theorem}
-    \begin{example}
-        Konverze gramatiky\\
+    \end{algorithm}
 
+    \begin{example}[Konverze gramatiky]
         \textbf{TODO, strana 154, example 7.7}
     \end{example}
 
-    \begin{theorem}
-        Přijímání prázdným zásobníkem ze CFG\\
-
-        Pro PDA P konstruovaný z CFG G algoritmem výše je N(P) = L(G).\\
-        \begin{proof}
-            \begin{enumerate}
-                \item Levá derivace: $E \Rightarrow E * E \Rightarrow I * E \Rightarrow a*E \Rightarrow a*I \Rightarrow a*b$
-                \item Posloupnost situací: $(q,a*b,E)\vdash (q,a*b,E*E)\vdash (q,a*b,I*E)\vdash (q,a*b,a*E)\vdash (q,*b,*E)\vdash(q,b,E)\vdash(q,b,I)\vdash(q,b,b)\vdash(q,\lambda,\lambda)$.
-            \end{enumerate}    
-
-            Pozorování:
-            \begin{enumerate}
-                \item Kroky derivace simuluje $PDA \lambda$ přepisy zásobníku
-                \item odmazávaný vstup u $PDA$ v derivaci zůstává až do konce
-                \item až $PDA$ vymaže terminály, pokračuje v přepisech.
-            \end{enumerate}
-
-
-            $w\in N(P) \Leftarrow w\in L(G)$\\
-
-            Nechť $w\in L(G)$, $w$ má levou derivaci $S = \gamma_1, \Rightarrow_{Im} \gamma_2 \Rightarrow \dots \Rightarrow \gamma_n = w.$
-
-            Indukcí podle $i$ dokážeme $(q,w,S)\vdash^*_P (q,v_i,\alpha_i) : \gamma_i = u_i \alpha_i$ je levá sentenciální forma a $u_iv_i = w$.
-        \end{proof}
+    \begin{theorem}[Přijímání prázdným zásobníkem ze CFG]
+        Pro PDA P konstruovaný z CFG G algoritmem výše je N(P) = L(G).
     \end{theorem}
+    \begin{proof}
+        \begin{enumerate}
+            \item Levá derivace: $E \Rightarrow E * E \Rightarrow I * E \Rightarrow a*E \Rightarrow a*I \Rightarrow a*b$
+            \item Posloupnost situací: $(q,a*b,E)\vdash (q,a*b,E*E)\vdash (q,a*b,I*E)\vdash (q,a*b,a*E)\vdash (q,*b,*E)\vdash(q,b,E)\vdash(q,b,I)\vdash(q,b,b)\vdash(q,\lambda,\lambda)$.
+        \end{enumerate}    
+
+        Pozorování:
+        \begin{enumerate}
+            \item Kroky derivace simuluje $PDA \lambda$ přepisy zásobníku
+            \item odmazávaný vstup u $PDA$ v derivaci zůstává až do konce
+            \item až $PDA$ vymaže terminály, pokračuje v přepisech.
+        \end{enumerate}
+
+
+        $w\in N(P) \Leftarrow w\in L(G)$
+
+        Nechť $w\in L(G)$, $w$ má levou derivaci $S = \gamma_1, \Rightarrow_{Im} \gamma_2 \Rightarrow \dots \Rightarrow \gamma_n = w.$
+
+        Indukcí podle $i$ dokážeme $(q,w,S)\vdash^*_P (q,v_i,\alpha_i) : \gamma_i = u_i \alpha_i$ je levá sentenciální forma a $u_iv_i = w$.
+    \end{proof}
+
 \end{document}
