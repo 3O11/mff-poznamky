@@ -58,8 +58,9 @@
 \end{proof}
 
 \begin{example}
-    Sestrojte automat přijímající jazyk \\
-    $L = \{w|w \in {a,b}^* \& |w|_a = 3k + 2\}$, t. j. obsahuje $3k+2$ symbolů a.
+    Sestrojte automat přijímající jazyk
+    \[L = \{w|w \in {a,b}^* \& |w|_a = 3k + 2\},\]
+    t. j. obsahuje $3k+2$ symbolů a.
     \begin{enumerate}
         \item $|u|_x$ značí počet symblů $x$ ve slově $u$
         \item definujeme $u \sim v \equiv (|u|_a mod 3 = |v|_a mod 3)$
@@ -94,14 +95,13 @@
     Mějme DFA $A = (Q,\Sigma,\delta,q_0,F)$ a $q\in Q$. Řekneme, že stav je dosažitelný,
     jestliže $\exists w \in \Sigma^* : \delta^*(q_0,w) = q$.
 \end{definition}
-
 \begin{example}
     Algoritmus na hledání dosažitelných stavů : DFS (důkaz asi není nutný)
 \end{example}
 
 \begin{definition}[Automatový homomorfismus]
     Nechť $A_1,A_2$ jsou DFA. Řekneme, že zobrazení $h: Q_1 \rightarrow Q_2, Q_1$ na $Q_2$ je 
-    (automatovým) homomorfismem, jestliže:\\
+    (automatovým) homomorfismem, jestliže:
     \begin{center}
         \begin{tabular}{l l}
             $h(q_{0_1})=q_{0_2}$ & 'stejné' počáteční stavy \\
@@ -113,7 +113,6 @@
 \end{definition}
 
 \begin{definition}[Ekvivalence automatů]
-
     Dva konečné automaty $A,B$ nad stejnou abecedou $\Sigma$ jsou ekvivalentní, jestliže
     rozpoznávají stejný jazyk, t. j. $L(A) = L(B)$.
 \end{definition}
@@ -169,20 +168,22 @@
         \item Vezměme z nich pár $p,q$ rozlišitelný nejkratším slovem $w = a_1\dots a_n.$
         \item Stavy $r = \delta(p,a_1), s= \delta(q,a_1)$ jsou rozlišitelné kratším slovem 
         $a_2\dots a_n$, takže pár není mezi špatnými.
-        \item Tedy jsou 'vyškrtnuté' algoritmem.
+        \item Tedy jsou \uv{vyškrtnuté} algoritmem.
         \item Tedy v příštim kroku algoritmus rozliší i $p,q$.
     \end{enumerate}
 \end{proof}
 
-\noindent
-Čas výpočtu je poylnomiální vzhledem k počtu stavů.
+\begin{remark}
+    Čas výpočtu je poylnomiální vzhledem k počtu stavů.
 
-\begin{enumerate}
-    \item V jednom kole uvažujeme všechny páry, t.j. $O(n^2)$.
-    \item Kol je maximálně $O(n^2)$, protože pokud nepřidáme křížek, končíme.
-    \item Dohromady $O(n^4)$.
-\end{enumerate}
-Algoritmus lze zrychlit na $O(n^2)$ pamatováním stavů, které závisí na páru $\{r,s\}$ a sledovaním těchto seznamů 'zpátky'.
+    \begin{enumerate}
+        \item V jednom kole uvažujeme všechny páry, t.j. $O(n^2)$.
+        \item Kol je maximálně $O(n^2)$, protože pokud nepřidáme křížek, končíme.
+        \item Dohromady $O(n^4)$.
+    \end{enumerate}
+    Algoritmus lze zrychlit na $O(n^2)$ pamatováním stavů,
+    které závisí na páru $\{r,s\}$ a sledovaním těchto seznamů \uv{zpátky}.
+\end{remark}
 
 \begin{definition}[Redukovaný DFA]
     Deterministický konečný automat je redukovaný, pokud
@@ -202,7 +203,8 @@ Algoritmus lze zrychlit na $O(n^2)$ pamatováním stavů, které závisí na pá
 \end{definition}
 
 \begin{theorem}[Algoritmus na nalezení reduktu DFA A]
-    $ $\\
+    {\color{white} x}
+
     \begin{enumerate}
         \item Ze vstupního DFA A eliminujeme stavy nedosažitelné z počátečního stavu.
         \item Najdeme rozklad zbylých stavů na třídy ekvivalence.
