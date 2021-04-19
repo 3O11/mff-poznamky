@@ -1,0 +1,159 @@
+\documentclass[../main.tex]{subfiles}
+
+%{definition}{Definice}
+%{example}{Příklad}
+%{intuition}{Intuice}
+%{remark}{Poznámka}
+%{consequence}{Důsledek}
+%{observation}{Pozorování}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Sedmá přednáška}
+
+
+\begin{definition}
+    Cauchyho rozdělení\\
+
+    Cauchyho rozdělení: hustota $f(x) = \frac{1}{\pi (1+x^2)}$\\
+    nemá střední hodnotu!
+
+    \textbf{pridať obrázok}
+    \begin{remark}
+        \[\int^\infty_{-\infty} f = \frac{1}{\pi} \int^\infty_{-\infty} \frac{1}{1+x^2} = \frac{1}{\pi}\left[arctg(x)\right]^\infty_{-\infty} = 1\]
+        \[\mathbb{E}X = \int^\infty_{-\infty} x f(x) = \int^\infty_0 \frac{2x}{2\pi (1+x^2)} + \int^0_{-\infty}\frac{x}{\pi (1+x^2)}\]
+        \[\left[\frac{1}{2\pi}log(1+x^2)\right]^\infty_0 + \left[\frac{1}{x\pi} log(1+x^2)\right]\]
+        \[\infty - 0 + 0- \infty = \infty - \infty ?!\]
+    \end{remark}
+    
+\end{definition}
+
+\begin{definition}
+    Gamma rozdělení\\
+
+    $Gamma(w,\lambda)$, gamma rozdělení s parametry $w > 0$ a $\lambda > 0$ má hustotu
+    \[f(x) = 0 \text{ pro } x \leq 0 \& \frac{1}{\Gamma(w)}\lambda^w x^{w-1} e^{-\lambda x} \text{ pro } x\geq 0\]
+    kde $\Gamma(w) = (w-1)! = \int^\infty_0 x^{w-1}e^{-x}dx$
+
+    Pro $w = 1$ dostáváme znovu exponenciální rozdělení ... $\frac{1}{0!}\lambda^1 e^{-\lambda x}$\\
+    Pokud $X_1,\dots ,X_n$ jsou n.n.v s rozdělením $Exp(\lambda)$, tak $X_1 + \dots + X_n \sim Gamma(n, \lambda)$.  
+\end{definition}
+\begin{theorem}
+    Nechť $X$ je n.v. s distribční funkcí $F_X = F$, nechť $F$ je spojitá a rostoucí. Pak $F(X) \sim U(0,1)$.\\
+    
+    \begin{proof}
+        \[F_Y(y) = P(F(X) \leq y) = 0 \text{ pro } y < 0 \& 1 \text{ pro } y \geq 1\]
+        \[\text{pro } y \in (0,1) P(X \leq x) \implies \text{ stejné jevy } \dots = F(x) = y\]
+    \end{proof}
+\end{theorem}
+
+\begin{theorem}
+    Nechť $F$ je funkce \textit{"typu distribuční funkce"} : neklesajíci zprava spojitá funkce s $lim_{x\rightarrow -\infty} F(x) = 0$ a $\lim_{x \rightarrow \infty} F(x) = 1$.
+
+    Nechť $Q$ je odpovídající kvantilová funkce. Nechť $U \sim U(0,1), X = Q(U)$. Pak $X$ má distribuční funkci $F$.
+
+    \begin{proof}
+        \[F_X(x) = P(Q(U) \leq x)\]
+        \begin{remark}
+            \[Q(p) = inf\{x: F(X) \geq p\} \implies Q(p) \leq x \Leftrightarrow F(x) \geq p\]
+        \end{remark}
+        \[F_X(x) = P(U \leq F(x)) = F(x)\]
+    \end{proof}
+\end{theorem}
+
+\begin{example}
+    \[F(x) = 1-e^{-\lambda x} \dots Exp(\lambda)\]
+    \[Q(p) = \frac{log(1-p)}{-\lambda} > 0\]
+    \[U \sim U(0,1) \dots \frac{log(1-U)}{-\lambda} \sim Exp(\lambda)\]
+\end{example}
+
+\begin{definition}
+    Sdružená distribuční funkce (Joint cdf)\\
+
+    Pro n.v. $X,Y$ na pravděpodobnostním prostoru $(\Omega,\mathcal{F},P)$ definujeme
+    jejich sdruženou distribuční funkci (joint cdf) $F_{X,Y} : \mathbb{R}^2 \rightarrow [0,1]$ předpisem
+    \[F_{X,Y}(x,y) = P(\{\omega \in \Omega : X(\omega) \leq x \& Y(\omega) \leq y\}).\]
+    \begin{enumerate}
+        \item Formální podmínka: potřebujeme $\{X\leq x \& Y \leq Y\} \in \mathcal{F}$, jinak $(X,Y)$ není náhodný vektor.
+        \item Mohli bychom definovat i pro více než dvě n.v. \dots $F_{X_1,\dots ,X_n(x_1,\dots ,x_n)} = P(X_1 \leq x_1 \& \dots X_n \leq x_n)$.
+        \item Můžeme odsud odvodit pravděpodobnost obdélníku:
+        \[P(X \in (a,b] \& Y \in (c,d]) = F(b,d) - F(b,c) - F(a,d) + F(a,c)\]
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Sdružená hustota (Joint pdf)\\
+
+    Často můžeme sdruženou distribuční funkci psát jako integrál pomocí nezáporné funkce $f_{X,Y}$
+    \[F_{X,Y}(x,y) = \int^x_{-\infty}\int^y_{-\infty} f_{X,Y}(s,t)dsdt.\]
+    Pak nazýváme n.v. $X,Y$ sdruženě spojité. Funkce $f_{X,Y}$ je jejich sdružená hustota.
+
+    Jako u jednorozměrného případu může být $f_{X,Y} > 1$.
+
+    Stejně jako u jednorozměrného případu můžeme pak pomocí hustoty vyjádřit i další pravděpodobnosti,
+    pro \textit{"rozumnou množinu A"}.
+    \[P((X,Y)\in A) = \int_A f_{X,Y}(x,y)dxdy\]
+    \[\int_{\mathbb{R}^2} f_{X,Y} = 1\]
+\end{definition}
+
+\begin{remark}
+    \[f_{X,Y}(x,y) = \frac{\partial^2}{\partial x \partial y} F_{X,Y}(x,y)\]
+    \[f_{X,Y}(x) \doteq \frac{P(x\leq X \leq x + \Delta_x \& y\leq Y \leq y + \Delta_y)}{\Delta_x \Delta_y}\]
+    \[P((X,Y)\in A) = \int_A f = \int^{x+\Delta_x}_x \int^{y+\Delta_y}_y f_{X,Y}(s,t)dsdt = f_{x,s}(x,s)\Delta_x \Delta_y\]
+\end{remark}
+
+\begin{definition}
+    LOTUS\\
+
+    Analogicky jako v diskrétním případu platí pro střední hodnotu funkce dvou n.v.
+    \[\mathbb{E}(g(X,Y)) = \int^\infty_{-\infty} \int^\infty_{-\infty} g(x,y)f_{X,Y}(x,y)dxdy.\]
+    A tak jako v diskrétním případu odsud odvodíme
+    \[\mathbb{E}(aX+bY+c) = a\mathbb{E}(X) + b\mathbb{E}(Y) + c\]
+    \[\mathbb{E}(g(X,Y)) = \int \int g(x,y)f_{X,Y}(x,y) = \int \int ax f(x,y) + \int \int by f(x,y) + c \int^\infty_{-\infty}f(x,y)=\]
+    \[a \int x \int f_{X,Y}(x,y)dydx + b \int y \int f(x,y)dydx + 1 =\]
+    \[a \int xf_X(x) + b \int yf_Y(y) + 1 = \]
+    \[ a\mathbb{E}(X) + b\mathbb{E}(Y) + 1\]
+\end{definition}
+
+\begin{definition}
+    Nezávislost spojitých náhodných veličin\\
+
+    Libovolné náhodné veličiny nazveme nezávislé (independent), pokud jevy $\{X\leq x\}$ a $\{Y\leq y\}$ jsou nezávislé pro libovolná $x,y \in \mathbb{R}$. Ekvivalentně:
+    \[P(X\leq x, Y\leq y) = P(X\leq x)P(Y\leq y),\]
+    \[F_{X,Y}(x,y) = F_X(x)F_Y(y)\]
+\end{definition}
+\begin{theorem}
+    Nechť $X,Y$ mají sdruženou hustotu $f_{X,Y}$. Následující tvrzení jsou ekvivalentní:
+    \begin{enumerate}
+        \item $X,Y$ jsou nezávislé
+        \item $f_{X,Y}(x,y) = f_X(x) f_Y(y)$
+    \end{enumerate}
+    
+    \begin{proof}
+        \[\implies : f_{X,Y}(x,y) = \frac{\partial^2}{\partial x \partial y} F_{X,Y}(x,y) = \]
+        \[F'_X F'_y = f_X(x)f_Y(y)\]
+        \textbf{doplniť druhú implikáciu (nestihol som, zo slidov)}
+    \end{proof}
+\end{theorem}
+
+Vícerozměrné normální rozdělení\\
+
+\begin{enumerate}
+    \item $\phi(t) = \frac{e^{-t^2/2}}{\sqrt(2\pi)}$
+    \item $f(t_1,\dots, t_n) = \phi(t_1)\phi(t_2)\dots \phi(t_n) = \frac{e^{-\frac{t^2_1 + \dots + t^2_n}{2}}}{\sqrt{2\pi}}$
+    \item $f(t_1,\dots, t_n = (2\pi)^{-\frac{n}{2}}e^{-\frac{r^2}{2})}$, kde $r^2 = t^2_1 + \dots + t^2_n$ je radiálně symetrická funkce.
+    \item Nechť $Z = (Z_1,\dots, Z_n)$ má hustotu $f$.
+    \item $Z_1,\dots,Z_n$ jsou n.n.v, $Z_i \sim N(0,1)$
+    \item $Z/||Z||$ je uniformně náhodný bod na $n$-rozměrné sfěře
+    \item skalární součin $Z$ s libovolným jednotkovým vektorem je $N(0,1)$
+    \item $\left< u, Z \right> = \sum^n_{i=1} u_i Z_i$ má také rozdělení $N(0,1)$
+\end{enumerate}
+
+Vícerozměrné normální rozdělení obecné\\
+
+\begin{enumerate}
+    \item Obecněji můžeme vzít náhodný vektor s hustotou $ce^{Q(t)}$, kde $c > 0$ je vhodná konstanta a $Q(t)$ je obecná kvadratická funkce.
+    \item Používá se ve strojovém učení.
+    \item Souřadnice nejsou nezávislé.
+\end{enumerate}
+\end{document}
