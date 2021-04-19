@@ -11,23 +11,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Šestá přednáška}
 
-\begin{definition}
-    Palindromy
-
+\begin{definition}[Palindromy]
     Palindrom je řetězec $w$ stejný při čtení zepředu i zezadu, tj. $w = w^R$.
 \end{definition}
+
 \begin{theorem}
     Jazyk $L_{pal} = {w : w=w^R, w\in \Sigma^* }$ není regulární.
-    \begin{proof}
-        Sporem. Předpokládejme $L_{pal}$ je regulární, nechť $n$ je konstatnta z pumping lemma,
-        uvažujme slovo $w = 0^n10^n$.
-        
-        Z pumping lemmatu lze rozložit $w = xyz$, $y$ obsahuje jednu alebo více z prvních $n$ nul.
-        Tedy $xz$ má být v $L_{pal}$ ale není, t.j. není regulární.
-    \end{proof}
 \end{theorem}
+\begin{proof}
+    Sporem. Předpokládejme $L_{pal}$ je regulární, nechť $n$ je konstatnta z pumping lemma,
+    uvažujme slovo $w = 0^n10^n$.
+    
+    Z pumping lemmatu lze rozložit $w = xyz$, $y$ obsahuje jednu alebo více z prvních $n$ nul.
+    Tedy $xz$ má být v $L_{pal}$ ale není, t.j. není regulární.
+\end{proof}
 
-Formální (generativní) gramatiky, bezkontextové gramatiky
+\subsection{Formální (generativní) gramatiky, bezkontextové gramatiky}
+
 \begin{definition}
     Formální (generativní) gramatika je $G = (V,T,P,S)$ složena z
     \begin{enumerate}
@@ -41,19 +41,16 @@ Formální (generativní) gramatiky, bezkontextové gramatiky
     \end{enumerate}
 \end{definition}
 
-\begin{definition}
-    Bezkontextová gramatika (CFG)\\
-
+\begin{definition}[Bezkontextová gramatika (CFG)]
     je $G = (V,T,P,S)$ gramatika, obsahující pouze pravidla tvaru
     \[A \rightarrow \omega, A \in V, \omega \in (V\cup T)^*\]
 \end{definition}
-\begin{definition}
+
+\begin{definition}[Chomského hierarchie]
     \textbf{CHOMSKÉHO HIERARCHIE, DOPLNIT, 112/113}
 \end{definition}
 
-\begin{definition}
-    Derivace $\Rightarrow^*$
-
+\begin{definition}[Derivace $\Rightarrow^*$]
     Mějme gramatiku $G = (V,T,P,S)$.
     \begin{enumerate}
         \item Říkáme, že $\alpha$ se \textbf{přímo přepíše} na $\omega$ (píšeme $\alpha \Rightarrow_{G}\omega$
@@ -64,27 +61,24 @@ Formální (generativní) gramatiky, bezkontextové gramatiky
         t. j. $\alpha \Rightarrow^* \alpha$.
         \item posloupnost $\beta_1,\dots , \beta_n$ nazýváme derivací (odvození)
         \item pokud $\forall i \neq j : \beta_i \neq \beta_j$, hovoříme o minimálním odvození
-        
     \end{enumerate}
 \end{definition}
 
-\begin{definition}
-    Jazyk generovaný gramatikou $G$\\
-
+\begin{definition}[Jazyk generovaný gramatikou $G$]
     Jazyk $L(G)$ gramatiky $G = (V,T,P,S)$ je množina terminálních řetězců, pro které existuje derivace ze startovního symbolu
     \[L(G) = \{w \in T^* |S \Rightarrow^*_G w\}\]
 
     Jazyk neterminálu $A \in V$ definujeme $L(A) = \{w \in T^* | A \Rightarrow^*_G w\}$.
 \end{definition}
-\begin{definition}
-    Gramatika typu 3, pravá lineární\\
 
+\begin{definition}[Gramatika typu 3, pravá lineární]
     Gramatika $G$ je \textbf{pravá lineární, t.j. Typu 3} pokud obsahuje pouze pravidla tvaru\\
 
     $A \rightarrow wB,A\rightarrow w, A,B \in V, w \in T^*$.
 \end{definition}
-\begin{example}
 
+\begin{example}
+    {\color{white} x}
 
     \begin{enumerate}
         \item $P = \{S \rightarrow 0S, 1A|\lambda, A\rightarrow 0A|1B, B\rightarrow 0B|1S\}$
@@ -96,24 +90,23 @@ Formální (generativní) gramatiky, bezkontextové gramatiky
     $L\in RE \Rightarrow L \in \mathcal{L}_3$
 
     Pro každý jazyk rozpornávaný konečným automatem existuje gramatika typu 3, která ho generuje.
-
-    \begin{proof}
-        \begin{enumerate}
-            \item $L = L(A)$ pro deterministický konečný automat $A$.
-            \item definujeme gramatiku $G=(Q, \Sigma, P, q_0)$, kde pravidla $P$ mají tvar
-            \[p \rightarrow aq \text{ když } \delta(p,a) = q\]
-            \[p \rightarrow \lambda \text{ když } p \in F\]
-            \item je $L(A) = L(G)$?
-            \begin{enumerate}
-                \item $\lambda \in L(A) \Leftrightarrow q_0 \in F \Leftrightarrow (q_0 \rightarrow \lambda) \in P
-                \Leftrightarrow \lambda \in L(G)$
-                \item $a_1 \dots a_n \in L(A) \Leftrightarrow \exists q_0,\dots q_n \in Q : \delta(q_i, a_{i+1}) = q_{i+1},q_n \in F
-                \Leftrightarrow (q_0 \implies a_1q_1\implies \dots a_1 \dots a_nq_n \implies a_1,\dots a_n)$ je derivace pro $a_1,\dots a_n
-                \Leftrightarrow a_1,\dots a_n \in L(G)$
-            \end{enumerate}
-        \end{enumerate}
-    \end{proof}
 \end{theorem}
+\begin{proof}
+    \begin{enumerate}
+        \item $L = L(A)$ pro deterministický konečný automat $A$.
+        \item definujeme gramatiku $G=(Q, \Sigma, P, q_0)$, kde pravidla $P$ mají tvar
+        \[p \rightarrow aq \text{ když } \delta(p,a) = q\]
+        \[p \rightarrow \lambda \text{ když } p \in F\]
+        \item je $L(A) = L(G)$?
+        \begin{enumerate}
+            \item $\lambda \in L(A) \Leftrightarrow q_0 \in F \Leftrightarrow (q_0 \rightarrow \lambda) \in P
+            \Leftrightarrow \lambda \in L(G)$
+            \item $a_1 \dots a_n \in L(A) \Leftrightarrow \exists q_0,\dots q_n \in Q : \delta(q_i, a_{i+1}) = q_{i+1},q_n \in F
+            \Leftrightarrow (q_0 \implies a_1q_1\implies \dots a_1 \dots a_nq_n \implies a_1,\dots a_n)$ je derivace pro $a_1,\dots a_n
+            \Leftrightarrow a_1,\dots a_n \in L(G)$
+        \end{enumerate}
+    \end{enumerate}
+\end{proof}
 
 Příprava převodu gramatiky typu 3 na forall
 
@@ -139,39 +132,34 @@ Příprava převodu gramatiky typu 3 na forall
 \begin{theorem}
     Ke každé gramatice typu 3 existuje gramatika typu 3, která generuje stejný jazyk a 
     obsahuje pouze pravidla ve tvaru: $A \rightarrow aB, A \rightarrow \lambda, A,B \in V, a\in T$.
-    \begin{proof}
-        Pro gramatiku $G = (V,T,S,P)$ definujeme $G^| = (V^|,T,S,P^|)$, kde pro každé pravidlo zavedeme dostatečný počet nových
-        neterminálů $Y_2,\dots, Y_n, Z_1,\dots, Z_n$ a definujeme
-        
-        \textbf{DOPLNIT TABULKU}
-    \end{proof}
 \end{theorem}
-
-\begin{theorem}
-    $\lambda-NFA$ pro gramatiku typu 3 rozpoznávajíci stejný jazyk\\
-
-    Pro každý jazyk $L$ generovaný gramatikou typu 3 existuje $\lambda-NFA$ rozpoznávajíci $L$.
+\begin{proof}
+    Pro gramatiku $G = (V,T,S,P)$ definujeme $G^| = (V^|,T,S,P^|)$, kde pro každé pravidlo zavedeme dostatečný počet nových
+    neterminálů $Y_2,\dots, Y_n, Z_1,\dots, Z_n$ a definujeme
     
-    \begin{proof}
-        \begin{enumerate}
-            \item Vezmeme $G = (V,T,P,S)$ obsaující jen pravidla tvaru $A\rightarrow aB, A \rightarrow \lambda$,
-            $A,B \in V, a\in T$ generující $L$ (předchozí lemma)
-            \item definujeme nedeterministický $\lambda-NFA$ $A = (V,T,\delta, S, F)$ kde :
-            \begin{enumerate}
-                \item $F = \{A | (A\rightarrow \lambda) \in P\}$
-                \item $\delta(A,a) = \{B | (A \rightarrow aB) \in P\}$
-            \end{enumerate}
-            \item $L(G) = L(A)$
-            \begin{enumerate}
-                \item \textbf{DOPLNIT, 121}
-            \end{enumerate}
-        \end{enumerate}
-    \end{proof}
+    \textbf{DOPLNIT TABULKU}
+\end{proof}
+
+\begin{theorem}[$\lambda-NFA$ pro gramatiku typu 3 rozpoznávajíci stejný jazyk]
+    Pro každý jazyk $L$ generovaný gramatikou typu 3 existuje $\lambda-NFA$ rozpoznávajíci $L$.
 \end{theorem}
+\begin{proof}
+    \begin{enumerate}
+        \item Vezmeme $G = (V,T,P,S)$ obsaující jen pravidla tvaru $A\rightarrow aB, A \rightarrow \lambda$,
+        $A,B \in V, a\in T$ generující $L$ (předchozí lemma)
+        \item definujeme nedeterministický $\lambda-NFA$ $A = (V,T,\delta, S, F)$ kde :
+        \begin{enumerate}
+            \item $F = \{A | (A\rightarrow \lambda) \in P\}$
+            \item $\delta(A,a) = \{B | (A \rightarrow aB) \in P\}$
+        \end{enumerate}
+        \item $L(G) = L(A)$
+        \begin{enumerate}
+            \item \textbf{DOPLNIT, 121}
+        \end{enumerate}
+    \end{enumerate}
+\end{proof}
 
-\begin{definition}
-    Levé (a pravé) lineární gramatiky\\
-
+\begin{definition}[Levé (a pravé) lineární gramatiky]
     Gramatiky typu 3 nazýváme také \textbf{pravé lineární} (neterminál je vždy vpravo).
 
     Gramatika G je levá lineární, jestliže má pouze pravidla tvaru $A \rightarrow Bw, A \rightarrow w, A,B\in V, w\in T^*$.
@@ -179,15 +167,12 @@ Příprava převodu gramatiky typu 3 na forall
 
 \begin{theorem}
     Jazyky generované levou lineární gramatikou jsou právě regulární jazyky.
-
-    \begin{proof}
-        \textbf{DOPLNIT, 122}
-    \end{proof}
 \end{theorem}
+\begin{proof}
+    \textbf{DOPLNIT, 122}
+\end{proof}
 
-\begin{definition}
-    lineární gramatika, jazyk\\
-
+\begin{definition}[Lineární gramatika, jazyk]
     Gramatika je lineární, jestliže má pouze pravidla tvaru $A \rightarrow uBw, A \rightarrow w, A,B \in V, u, w \in T^*$ (na pravé straně vždy maxiálne jeden neterminál).
 
     Lineární jazyky jsou právě jazyky generované lineárnimi gramatikami.
@@ -198,15 +183,11 @@ Příprava převodu gramatiky typu 3 na forall
     \item Jde o vlastní podmnožinu $\subsetneq$.
 \end{enumerate}
 
-\begin{example}
-    lineární, neregulární jazyk\\
-
+\begin{example}[Lineární, neregulární jazyk]
     Jazyk $L = \{0^n1^n | n \geq 1\}$ není regulární jazyk, ale je lineární, generovaný gramatikou s pravidly $S \rightarrow 0S1|01$.
 \end{example}
 
-\begin{definition}
-    Bezkontextová gramatika\\
-
+\begin{definition}[Bezkontextová gramatika]
     Bezkontextová gramatika je gramatika, kde všechna pravidla jsou tvaru $A \rightarrow \omega, \omega \in (V\cup T)^*$
 
     CFG pro jednoduché výrazy
@@ -228,9 +209,7 @@ Příprava převodu gramatiky typu 3 na forall
     Pravidla 5 až 10 definují identifikátor $I$ odpovídajíci regulárnímu výrazu $(a+b)(a+b+0+1)^*$.
 \end{definition}
 
-\begin{definition}
-    Derivační strom\\
-
+\begin{definition}[Derivační strom]
     Mějme gramatiku $G = (V,T,P,S)$. Derivační strom pro $G$ je strom, kde 
     \begin{enumerate}
         \item Kořen (kreslíme nahoře) je označen startovním symbolem $S$,
@@ -242,15 +221,11 @@ Příprava převodu gramatiky typu 3 na forall
     \end{enumerate}
 \end{definition}
 
-\begin{definition}
-    Strom dáva slovo (yield)\\
-
+\begin{definition}[Strom dáva slovo (yield)]
     Říkáme, že derivační strom dáva slovo $w$ (yield), jestliže $w$ je slovo složené z ohodnocení listů bráno zleva doprava.
 \end{definition}
 
-\begin{definition}
-    Levá a pravá derivace\\
-
+\begin{definition}[Levá a pravá derivace]
     \begin{enumerate}
         \item Levá derivace (leftmost) $\Rightarrow_{lm}, \Rightarrow_{lm}^*$ v každém kroku přepisuje nejlevější neterminál.
         \item Pravá derivace (rightmost) $\Rightarrow_{rm}, \Rightarrow_{rm}^*$ v každém kroku přepisuje nejpravější neterminál.
@@ -270,45 +245,43 @@ Příprava převodu gramatiky typu 3 na forall
 \begin{theorem}
     Mějme $CFG G = (V,T,P,S)$ a derivační strom s kořenem $A$ dávající slovo $w \in T^*$. Pak existuje
     levá derivace $A \Rightarrow^*_{lm} w $ v $G$.
-
-    \begin{proof}
-
-        
-        \begin{proof}
-        Příprava důkazu: 'obalení derivace'\\
-
-        Mějme následující derivaci:
-        \[E \Rightarrow I \Rightarrow Ib \rightarrow ab.\]
-
-        Pro libovolná slova $\alpha, \beta \in (V\cup T)^*$ je také derivace:
-        \[\alpha E \beta \Rightarrow \alpha I \beta \Rightarrow \alpha Ib \beta \Rightarrow \alpha ab \beta.\]
-        \end{proof}
-
-        $\exists$ derivační strom, pak $\exists$ levá derivace $\Rightarrow_{lm}$\\
-
-        Indukcí podle výšky stromu:
-        \begin{enumerate}
-            \item Základ: výška 1: Kořen $A$ s dětmi dávajícimi $w$. Je to derivační strom, proto
-            $A \rightarrow w$ je pravidlo $\in P$, tedy $A \Rightarrow_{lm} w$ v jednom kroku.
-            \item Indukce: výška $n > 1$. Kořen $A$ s dětmi $X_1,X_2,\dots,X_k$.
-            \begin{enumerate}
-                \item Je-li $X_i \in T$, definujeme $w_i \equiv X_i$.
-                \item Je-li $X_i \in V$, z indukčního předpokladu $X_i \Rightarrow^*_{lm}w_i$.
-            \end{enumerate}
-
-            Levou derivaci konstruujeme induktivně pro $i = 1,\dots,k$ složíme $A \Rightarrow^*_{lm}w_1w_2 \dots w_i X_{i+1}X_{i+2}\dots X_k$.
-            \begin{enumerate}
-                \item Pro $X_i \in T$ jen zavedeme čítač $i + +$.
-                \item Pro $X_i \in V$ přepíšeme derivaci: $X_i\Rightarrow_{lm} \alpha_1 \Rightarrow_{lm} \alpha_2\dots \Rightarrow_{lm}w_i na$
-                \[w_1w_2\dots w_{i-1}X_iX_{i+1}X_{i+2}\dots X_k \Rightarrow_{lm}\]
-                \[w_1w_2\dots w_{i-1}\alpha_1X_{i+1}X_{i+2}\dots X_k \Rightarrow_{lm}\]
-
-
-                \[\Rightarrow_{lm} w_1w_2\dots w_{i-1}w_i X_{i+1}X_{i+2}\dots X_k\]                
-            \end{enumerate}
-
-            Pro $i = k$ dostaneme levou derivaci $w \in A$.
-        \end{enumerate}
-    \end{proof}
 \end{theorem}
+
+\begin{lemma}[Příprava důkazu, \uv{obalení derivace}]
+    Mějme následující derivaci:
+    \[E \Rightarrow I \Rightarrow Ib \rightarrow ab.\]
+\end{lemma}
+\begin{proof}
+    Pro libovolná slova $\alpha, \beta \in (V\cup T)^*$ je také derivace:
+    \[\alpha E \beta \Rightarrow \alpha I \beta \Rightarrow \alpha Ib \beta \Rightarrow \alpha ab \beta.\]
+\end{proof}
+
+\begin{proof}
+    $\exists$ derivační strom, pak $\exists$ levá derivace $\Rightarrow_{lm}$\\
+
+    Indukcí podle výšky stromu:
+    \begin{enumerate}
+        \item Základ: výška 1: Kořen $A$ s dětmi dávajícimi $w$. Je to derivační strom, proto
+        $A \rightarrow w$ je pravidlo $\in P$, tedy $A \Rightarrow_{lm} w$ v jednom kroku.
+        \item Indukce: výška $n > 1$. Kořen $A$ s dětmi $X_1,X_2,\dots,X_k$.
+        \begin{enumerate}
+            \item Je-li $X_i \in T$, definujeme $w_i \equiv X_i$.
+            \item Je-li $X_i \in V$, z indukčního předpokladu $X_i \Rightarrow^*_{lm}w_i$.
+        \end{enumerate}
+
+        Levou derivaci konstruujeme induktivně pro $i = 1,\dots,k$\\
+        složíme $A \Rightarrow^*_{lm}w_1w_2 \dots w_i X_{i+1}X_{i+2}\dots X_k$.
+        \begin{enumerate}
+            \item Pro $X_i \in T$ jen zavedeme čítač $i + +$.
+            \item Pro $X_i \in V$ přepíšeme derivaci: $X_i\Rightarrow_{lm} \alpha_1 \Rightarrow_{lm} \alpha_2\dots \Rightarrow_{lm}w_i na$
+            \[w_1w_2\dots w_{i-1}X_iX_{i+1}X_{i+2}\dots X_k \Rightarrow_{lm}\]
+            \[w_1w_2\dots w_{i-1}\alpha_1X_{i+1}X_{i+2}\dots X_k \Rightarrow_{lm}\]
+
+
+            \[\Rightarrow_{lm} w_1w_2\dots w_{i-1}w_i X_{i+1}X_{i+2}\dots X_k\]                
+        \end{enumerate}
+
+        Pro $i = k$ dostaneme levou derivaci $w \in A$.
+    \end{enumerate}
+\end{proof}
 \end{document}
