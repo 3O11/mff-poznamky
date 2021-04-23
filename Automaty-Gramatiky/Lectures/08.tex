@@ -1,0 +1,177 @@
+\documentclass[../main.tex]{subfiles}
+
+%{definition}{Definice}
+%{example}{Příklad}
+%{intuition}{Intuice}
+%{remark}{Poznámka}
+%{consequence}{Důsledek}
+%{observation}{Pozorování}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Osmá přednáška}
+
+\begin{example}
+    Gramatika $G = ({S,L,R}, {(,)},P,S)$:
+    \begin{enumerate}
+        \item $S \rightarrow LR|SS|LA$
+        \item $A \rightarrow SR$
+        \item $L \rightarrow ($
+        \item $R \rightarrow )$
+    \end{enumerate}
+    \[S \Rightarrow LR \Rightarrow (R \Rightarrow()\]
+    \[S \Rightarrow SS \Rightarrow LRS \Rightarrow (RS \Rightarrow ()S \Rightarrow ()LR \Rightarrow ()(R \Rightarrow ()()\]
+    \[S \Rightarrow LA \Rightarrow (A \Rightarrow (SR \Rightarrow (LRR \Rightarrow ((RR \Rightarrow (()R \Rightarrow (())\]
+\end{example}
+
+\begin{example}
+    Gramatika pro zjednodušené aritmetické výrazy $I \rightarrow a|b|Ia|Ib|I0|I1$
+    \begin{enumerate}
+        \item $F \rightarrow I|(E)$
+        \item $T \rightarrow F|T \ast F$
+        \item $E \rightarrow T|E + T$
+    \end{enumerate}
+    \[E \Rightarrow T \Rightarrow T \ast F \Rightarrow F \ast F \Rightarrow I \ast F \Rightarrow a\ast F \Rightarrow a\ast I \Rightarrow a\ast Ib \Rightarrow a\ast bb \]
+\end{example}
+
+\begin{example}
+    CYK Algoritmus\\
+
+    Gramatika $G = ({S,A,L,R}, {(,)}, P,S)$
+    \begin{enumerate}
+        \item $S \rightarrow LR|SS|LA$
+        \item $A \rightarrow SR$
+        \item $L \rightarrow ($
+        \item $R \rightarrow )$
+    \end{enumerate}
+    Tabulku vyplňujeme odspodu
+
+    \textbf{DOPLNIT TABULKU (pripnuta fotka na discorde)}
+\end{example}
+
+\begin{theorem}
+    Algoritmus CYK (Cocke-Younger-Kasami) v čase $O(n^3)$\\
+
+    \begin{enumerate}
+        \item Mějme gramatiku v ChNF $G = (V,T,P,S)$ pro jazyk $L$ a slovo $w = a_1a2\dots a_n \in T^*$
+        \item Vytvořme trojúhelníkovou tabulku:
+        \begin{enumerate}
+            \item horizontální osa $w$,
+            \item $X_{ij}$ jsou množiny neterminálů $A$ takových, že $A \Rightarrow^* a_i a_{i+1}\dots a_j$.
+            \item Základ: $X_{ii} =  {A; A\rightarrow a_i \in P}$
+            \item Indukce: $X_{ij} = {A \rightarrow BC; B\in X_{ik}, C \in X_{k+1,j}}$
+        \end{enumerate}
+        \item Vyplňujeme tabulku zdola nahoru
+        \item Pokud $S \in X_{1,n}$, potom $w \in L(G)$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{definition}
+    Chomskeho normální forma\\
+
+    Chomského normálni forma: všechna pravidla tvaru $A \rightarrow BC$ nebo $A \rightarrow a$, $A,B,C$ jsou neterminály, $a$ terminál\\
+    Každý bezkontextový jazyk (kromě slova $\lambda$) je generovaný gramatikou v Chomského normálním tvaru.\\
+    Postupně provedeme zjednodušení gramatiky, nejdřív:
+    \begin{enumerate}
+        \item \textbf{nestihol som (+-163 slide)}
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    zbytečný, užitečný, generující, dosažitelný symbol\\
+
+    \begin{enumerate}
+        \item Symbol $X$ je užitečný v gramatice $G = (V,T,P,S)$ pokud existuje derivace tvaru $S \Rightarrow^* \alpha X \beta \Rightarrow^* w$, kde $w \in T^*, X \in (V\cup T), \alpha, \beta \in (V\cup T)^*.$
+        \item Pokud $X$ není užitečný, říkáme, že je zbytečný.
+        \item $X$ je generující pokud $X \Rightarrow^* w$ pro nějaké slovo $w \in T^*$. Vždy $w\Rightarrow^* w$ v nula krocích.
+        \item $X$ je dosažitelný, pokud $S \Rightarrow^* \alpha X\beta$ pro nějaká $\alpha, \beta \in (V\cup T)^*$
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+    $Nechť G = (V,T,P,S)$ je $CFG$, předpokládejme $L(G) = \emptyset$ Zkonstruujeme $G_1 = (V_1,T_1,P_1,S)$ následově:
+    \begin{enumerate}
+        \item Eliminujeme ne-generující symboly a pravidla je obsahující
+        \item poté eliminujeme všechny symboly které jsou nedosažitelné.
+    \end{enumerate}
+    Pak $G_1$ nemá zbytečné symboly a $L(G_1) = L(G)$.
+\end{theorem}
+\begin{theorem}
+    Algoritmus : Generující symboly\\
+
+    Základ: Každý $a\in T$ je generující.\\
+    Indukce: $\forall$ pravidlo $A \rightarrow \alpha, : \forall $ symbol $\in \alpha$ je generující. Pak i $A$ je generující. Včetně $A\rightarrow \lambda$.
+\end{theorem}
+
+\begin{theorem}
+    Algoritmus : Dosažitelné symboly\\
+    
+    Základ: $S$ je dosažitelný.\\
+    Indukce: Je-li $A$ dosažitelný, pro všechna pravidla $A \rightarrow \alpha$ jsou všechny symboly v $\alpha$ dosažitelné.
+\end{theorem}
+
+\begin{theorem}
+    Výše uvedené algoritmy najdou právě všechny generující / dosažitelné symboly.    
+\end{theorem}
+
+\begin{definition}
+    Nulovatelný neterminál\\
+
+    Neterminál $A$ je nulovatelný, pokud $A \Rightarrow^* \lambda$.\\
+
+    Pro nulovatelné neterminály na pravé strané pravidla $B \rightarrow CAD$, vytvoříme dvě verze pravidla: s a bez nulovatelného terminálu.
+\end{definition}
+\begin{definition}
+    Algoritmus: Nalezení nulovatelných symbolů v $G$\\
+
+    Základ: Pokud $A\rightarrow \lambda$ je pravidlo $G$, pak $A$ je nulovatelné.\\
+    Indukce: Pokud $B \rightarrow C_1\dots C_k$, kde jsou všechna $C_i$ nulovatelná, je i $B$ nulovatelné. (terminály nejsou nulovatelné nikdy).
+\end{definition}
+\begin{definition}
+    Algoritmus: Konstrukce gramatiky bez $\lambda$-pravidel z $G$\\
+
+    \begin{enumerate}
+        \item Najdi nulovatelné symboly
+        \item Pro každé ... \textbf{Nestihol som pretože borka nahodila rychlost jak ježek na principoch}
+    \end{enumerate}
+\end{definition}
+\begin{definition}
+    Jednotkové pravidlo\\
+
+    Jednotkové pravidlo je $A \rightarrow B \in P$, kde $A,B$ jsou oba neterminály.
+\end{definition}
+
+\begin{definition}
+    Jednotkový pár\\
+
+    \textbf{nestihol som :)}
+\end{definition}
+
+\begin{definition}
+    Algoritmus: Nalezení jednotkových párů\\
+
+    Základ: $(A,A)$ pro každý $A\in V$ je jednotkový pár.\\
+    Indukce: Je-li $(A,B)$ jednotkový pár a $(B\rightarrow C) \in P$, pak $(A,C)$ je jednotkový pár.
+\end{definition}
+
+\begin{definition}
+    Nejaký ďalší algoritmus ktorý som nestihol\\
+
+
+\end{definition}
+
+\begin{theorem}
+    Gramatika v normálním tvaru, redukovaná\\
+
+    Mějme bezkontextovou gramatiku $G, L(G) - {\lambda} \neq \emptyset$. Pak existuje $CFG G_1: L(G_1) = L(G) - {\lambda} \& G_1 $ neobsahuje $\lambda$-pravidla ani zbytečné symboly. 
+    Gramatika $G_1$ se nazývá redukovaná.
+
+    \begin{proof}
+        Idea důkazu:
+        \begin{enumerate}
+            \item Začneme eliminací $\lambda$-pravidel
+            \item Eliminujeme ... :))))))))))))))))))))))))))))
+        \end{enumerate}
+    \end{proof}
+\end{theorem}
+\end{document}
