@@ -9,7 +9,7 @@ materials for that.
 ## Basic script structure
 
 Every script in Unity is basically just a class that inherits from
-`MonoBehaviour`. Otherwise, it's just a normal C# function. That means
+`MonoBehaviour`. Otherwise, it's just a normal C# class. That means
 there is no special syntax to follow.
 The only exception are methods that actually interact with the engine
 and the entities the scripts(components) are attached to.
