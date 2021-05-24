@@ -1,0 +1,88 @@
+\documentclass[../main.tex]{subfiles}
+
+%{definition}{Definice}
+%{example}{Příklad}
+%{intuition}{Intuice}
+%{remark}{Poznámka}
+%{consequence}{Důsledek}
+%{observation}{Pozorování}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Dvanáctá přednáška}
+
+\subsection{Testování hypotéz - ilustrace}
+\begin{itemize}
+    \item Chcem testovat, zda je mince spravedlivá.
+    \item $H_0:$ je spravedlivá - očekávaný stav světa
+    \item $H_1:$ není spravedlivá - překvapivé zjištění
+    \item Výsledky. zamítneme $H_0$ / nezamítneme $H_0$
+    \item Chyba 1. druhu: chybné zamítnutí. Zamítneme $H_0$, i když platí. Trapas.
+    \item Chyba 2. druhu: chybné přijetí. Nezamítneme $H_0$, ale ona neplatí. Promarněná příležitost.
+    \item Potřebujeme určit $k$ takové, že budeme zamítat $H_0$ pokud \textbf{DOPLNIT}
+\end{itemize}
+\begin{itemize}
+    \item Vybereme vhodný statistický model.
+    \item Volíme hladinu významnosti (significance level) $\alpha$: pravd. chybného zamítnutí $H_0$. Typicky $\alpha = 0.05$.
+    \item Určíme testovou statistiku $T = h(X_1,\dots,X_n)$, kterou budeme určovat z naměřených dat.
+    \item Určíme kritický obor (rejection region) - množinu $W$.
+    \item Naměříme hodnoty $x_1,\dots,x_n$ náh. veličin $X_1,\dots,X_n$.
+    \item Rozhodovací pravidlo: zamítneme $H_0$ pokud $h(x_1,\dots,x_n) \in W$.
+    \item $\alpha = P(h(X) \in W; H_0)$
+    \item $\beta = P(h(X) \notin W; H_1) \dots 1 - \beta$ je tzv. síla testu
+    \item často $\alpha$ nevolíme předem, ale spočítáme tzv. $p$-hodnotu: minimální $\alpha$, pro které bychom $H_0$ zamítli.
+\end{itemize}
+\begin{example}
+    Měříme teplotu, chceme $\mu = 5$°C
+    \begin{itemize}
+        \item $X_1,\dots,X_n$ náhodný výběr z $H(\vartheta,\sigma^2)$
+        \item $\sigma^2$ známe, $\mu$ dáno
+        \item $H_0 : \vartheta = \mu$, $H_1: \vartheta \neq \mu$
+    \end{itemize}
+    \[T = \frac{X_+\dots+X_n}{\mu} = \overline{X_n} \sim N(\vartheta, \sigma^2/n)\]
+    checknúť, či je to správne napísané \^\\
+    ... víme ze vzorce pro rozptyl
+    \[S = \frac{\overline{X_n} - \mu}{\sigma/\sqrt{n}} \sim N(0,1)\]
+    vezmeme množinu:
+    \[W := {s\in R : |s| > Z_{\alpha/2}}\]
+    kde $z_{\alpha/2} = \Phi^{-1}(1-\frac{\alpha}{2})$... pro $\alpha = 0.05$ dostaneme $1.96$
+\end{example}
+\begin{example}
+    příklad dvojvýběrového testu
+    \begin{itemize}
+        \item $X_1,\dots,X_{n_1}$ náhodný výběr z $Ber(\vartheta_X)$
+        \item $Y_1,\dots,Y_{n_2}$ náhodný výběr z $Ber(\vartheta_Y)$
+        \item $H_0 : \vartheta_X = \vartheta_Y$ \dots $H_1 : \vartheta_X \neq \vartheta_Y$
+    \end{itemize}
+    máme $n_1$ lidí a jiných $n_2$ lidí které léčíme různými metodami ($H_0 vs H_1$)
+    \[\widehat{\Theta_X} = \frac{X_1 +\dots + X_n}{n_1} \dots \text{odhad }\vartheta_X\]
+    \[\widehat{\Theta_Y} = \frac{Y_1 +\dots + Y_n}{n_2} \dots \text{odhad }\vartheta_Y\]
+    \[Z := \widehat{\Theta_X} - \widehat{\Theta_Y}\]
+    $\widehat{\Theta_X}, \widehat{\Theta_Y}$ mají přibližně normální rozdělení (Centrální limitní věta)
+
+    Předpokládáme, že platí $H_0$:
+    \[\mathcal{E}\widehat{\Theta_X} = \mathcal{E}\widehat{\Theta_Y} \implies \mathcal{E}Z = 0\]
+    Víme, že $Z$ je přibližně $N(0,\sigma^2)$, $\sigma^2$ neznáme
+    \[\sigma^2 = var(Z) = var(\widehat{\Theta_X}) - var(\widehat{\Theta_Y}) = \frac{var X_1}{n_1} + \frac{var Y_1}{n_2} = \frac{\vartheta_X(1-\vartheta_X)}{n_1} + \frac{\vartheta_Y(1-\vartheta_Y)}{n_1} = \vartheta(\frac{1}{n_1} + \frac{1}{n_2})\]
+    \[\widehat{\Theta} = \frac{\sum X_i + \sum Y_j}{n_1 + n_2} \dots \text{ odhad }\vartheta \implies \widehat{\sigma^2} := (\frac{1}{n_1} + \frac{1}{n_2}) \widehat{\Theta} (1- \widehat{\Theta}) \implies T:= \frac{\widehat{\Theta_X} - \widehat{\Theta_Y}}{\widehat{\sigma}}\]
+\end{example}
+\subsection{$p$-hacking}
+\begin{itemize}
+    \item napřed získáme data, pak v nich hledáme zajímavosti
+    \item když máme dost dat, tak tam nějaké budou "shodou okolností"
+    \item reprodukovatelnost - po explorační analýze dat uděláme nezávislý sběr dat a ten analyzujeme konfirmačně
+    \item nebo dopředu náhodně rozdělíme data na část pro tvorbu hypotéz a část pro jejich potvrzení \dots jednoduchý případ křížové validace (cross validation)
+\end{itemize}
+\subsection{$\chi^2_k$ - rozdělení $\chi$-kvadrát}
+\begin{definition}
+    $Z_1,\dots,Z_k \sim N(0,1)$ n.n.v. Rozdělení náhodné veličiny
+    \[Q = Z^2_1 + \dots + Z^2_k\]
+    se nazývá $\chi$-kvadrát s $k$ stupni volnosti.
+    \begin{itemize}
+        \item $\mathcal{E}(Q) = k$
+        \item $var(Q) = 2k$
+        \item hustota jde napsat vzorcem, lze najít např. na Wikipedii
+        \item $Q \dot{=} N(k,2k)$ pro velká $k$ (CLV)
+    \end{itemize}
+\end{definition}
+\end{document}
