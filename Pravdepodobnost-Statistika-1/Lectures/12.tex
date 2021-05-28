@@ -85,4 +85,71 @@
         \item $Q \dot{=} N(k,2k)$ pro velká $k$ (CLV)
     \end{itemize}
 \end{definition}
+\subsection{Multinomické a kategoriální rozdělení}
+\begin{definition}
+    Dána $p_1,\dots,p_k \geq 0$ a tak, že $p_1 + p_2 + \dots + p_k = 1$.
+    
+    $n$-krát zopakuji pokus, kde může nastat jedna z $k$ možností, $i$-tá má pravděpodobnost $p_i$.
+
+    $X_i :=$ kolikrát nastala $i$-tá možnost $(X_1,\dots,X_k)$ má multinomické rozdělení s parametry $n,(p_1,\dots,p_k).$
+    \begin{itemize}
+        \item triviální případ: $X_i = $ počet hodů kostkou, kdy padlo $i$
+        \item \textbf{Doplnit}
+    \end{itemize}
+\end{definition}
+\begin{definition}
+    Pearsonova $\chi^2$ Statistika\\
+    \begin{itemize}
+        \item $(X_1,\dots,X_k)$ - multinomické rozdělení s parametry $n, (p_1,\dots,p_k)$ jako minule
+        \item $\mathcal{E}_i = \mathcal{E}(X_i) = np_i$
+        \item Pearsonova $\chi^2$ statisika je funkce
+    \end{itemize}
+    \[\chi^2 = T:= \sum^k_{i=1} \frac{(X_i - E_i)^2}{E_i}\]
+\end{definition}
+\begin{theorem}
+    $T \rightarrow^d \chi^2_{k-1}$
+    \begin{proof}
+        pro $k=2$
+        \[X_1 + X_2 = n, p_1 + p_2 = 1, E_i = np_i\]
+        \[T = \frac{(X_1 - E_1)^2}{E_1} + \dots = \frac{(X_1 - np_1)^2 + (p_1 + p_2)}{np_1p_2}\]
+        \[ = \left(\frac{X_1 - np_1}{\sqrt{np - (1-p_1)}}\right)\]
+    \end{proof}
+\end{theorem}
+\subsection{Test dobré shody (goodness of fit)}
+\begin{itemize}
+    \item $(X_1,\dots,X_k)$ - multinomické rozdělení s parametry $n,\varphi = (\varphi_1,\dots,\varphi_k)$ jako minule
+    \item $n$ známe, $\varphi$ neznáme.
+    \item Hypotéza $H_0: \varphi = \varphi^*$
+    \item $E_i := n\varphi^*_i$ pro všechna $i$
+    \item Použijeme statistiku $\chi^2 = T:= \sum^k_{i=1} \frac{(X_i-E_i)^2}{E_i}$
+    \item Hyotézu $H_0$ zamítneme, pokud $T > \gamma$
+    \item $\gamma := F^{-1}_Q (1-\alpha)$, kde $Q \sim \chi^2_{k-1}$
+    \item $P$(chyba prvního druhu)$ = P(T > \gamma; H_0) \rightarrow P(Q>\gamma) = \alpha$
+\end{itemize}
+\begin{example}
+    Test dobré shody - házíme kostkou\\
+    \begin{itemize}
+        \item Házíme opakovaně kostkou. Jednotlivá čísla padla s četností 92,120,88,98,95 a 107.
+        \item Je kostka spravedlivá?
+    \end{itemize}
+    \[ n = 92 + 120 +\dots = 600\]
+    \[\vartheta^* = (\frac{1}{6}, \dots, \frac{1}{6}), E_i = n \frac{1}{6} = 100\]
+    \[T = \sum^6_{i=1} \frac{(X_i - 100)^2}{100} = \dots = \frac{(80^2 + 20^2 + 12^2 + 2^2 + 5^2 + 7^2}{100} = 6.86\]
+    \[Q \sim \chi^2_5 \dots F^{-1}_Q (1 - \alpha = 0.95) = 11.1\]
+    kdyby nám T vyšlo víc než 11.1, můžeme říct, že kostka je nespravedlivá.
+    \[p-\text{hodnota}: 1-F_Q(6.86) \dot{=} 1 - 0.77 = 0.23\]
+    zhruba ve čtvrtině hodů najdeme extremnejší odchylku.
+\end{example}
+Další rozšíření
+\begin{itemize}
+    \item Pro zkoumání rozdělení libovolné n.v. $Y$ můžeme vybrat "přihrádky" $B_1,\dots,B_k$ (rozklad $\mathcal{R}$) a zkoumat, kolikrát je $Y \in B_i$
+    \item Obdobný test pro nezávislost (diskrétních) náhodných veličin 
+\end{itemize}
+\begin{definition}
+    Lineární regrese
+    \begin{itemize}
+        \item data: $(x_i,y_i)$ pro $i=1,\dots,n$
+        \item \textbf{TODO} 
+    \end{itemize}
+\end{definition}
 \end{document}
