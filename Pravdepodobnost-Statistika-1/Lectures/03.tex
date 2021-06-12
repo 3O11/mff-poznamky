@@ -27,27 +27,29 @@
     $X = \{0$ s pravděpodobností $\frac{1}{2}, 1$ s psravděpodobností $\frac{1}{2}\}$
 \end{example}
 \begin{proof}
-    $F_X$ je neklesajíci funkce\\
+    $F_X$ je neklesající funkce
 
-    $x<y \implies P(X\leq x) \leq P(X\leq y)$\\
-    protože $A = {\omega : X(\omega) \leq x}$,\\
-    $B = {\omega : X(\omega) \leq y}$, pak\\
-    $A\subseteq B \implies P(A) \leq P(B)$
-\end{proof}\\
+    \noindent
+    $x<y \implies P(X\leq x) \leq P(X\leq y)$ protože $A = {\omega : X(\omega) \leq x}$ a\\
+    $B = {\omega : X(\omega) \leq y}$, pak $A\subseteq B \implies P(A) \leq P(B)$
+\end{proof}
+
 \begin{proof}
     $\lim_{x\rightarrow +\infty} F_X(x) = 1$\\
-
     $A_n = {X\leq n};$ platí $A_1 \subseteq A_2 \subseteq \dots$\\
     Takže $\bigcup^\infty_{n=1} A_n = \Omega$, podle véty o spojitosti pak\\
     \[P(\Omega) = \lim_{n\rightarrow \infty} P(A_n) = \lim_{n\rightarrow \infty} F_X(n)\]
-\end{proof}\\
-druhá limita obdobně
+\end{proof}
+
+Obdobně postupujeme pro druhou limitu.
 
 \begin{definition}[Bernoulliho/alternativní rozdělení] {\color{white} x}
     \begin{enumerate}
         \item $X = $ počet orlů při jednom hodu nespravedlivou mincí.
         \item Značíme $X \sim Bern(p)$. Někdy se značí $Alt(p)$.
     \end{enumerate}
+
+    \vspace{5mm}
 
     \begin{enumerate}
         \item Dáno $p \in [0,1]$.
@@ -56,6 +58,8 @@ druhá limita obdobně
         \item $p_X(k) = 0$ pro $k \neq 0,1$
     \end{enumerate}
 
+    \vspace{5mm}
+
     \begin{enumerate}
         \item Pro libovolný jev $A \in \mathcal{F}$ definujeme \textit{indikátorovou} n.v. $I_A$:
         \item $I_A(\omega) = 1$ pokud $\omega \in A, I_A(\omega) = 0$ jinak.
@@ -63,7 +67,8 @@ druhá limita obdobně
     \end{enumerate}
 \end{definition}
 
-\begin{definition} {\color{white} x}
+\begin{definition}[Binomické rozdělení]
+    {\color{white} x}
     \begin{enumerate}
         \item $X = $ počet orlů při $n$ hodech nespravedlivou mincí.
         \item Dáno $p \in [0,1] - $ pravděpodobnost orla při jednom hodu.
@@ -107,7 +112,7 @@ druhá limita obdobně
 
 \begin{remark}[Poissonovo paradigma]
 
-    $A_1,\dots A_n$ jsou (skoro-)nezávislé jevy s $P(A_i) = p_i$,
+    $A_1,\dots A_n$ jsou (skoro) nezávislé jevy s $P(A_i) = p_i$,
     $\lambda = \sum_j p_j$. Nechť $n$ je velké, každé z $p_i$ malé. Pak přibližně platí
     \[\sum^n_{i=1}I_{A_i} \sim Pois(\lambda)\]
 \end{remark}
@@ -130,17 +135,20 @@ druhá limita obdobně
 \begin{definition}[Střední hodnota]
     
     Pokud $X$ je diskrétní n.v., tak její střední hodnota (expectation) je označovaná $\mathbb{E}(X)$ a definovaná
-    \[\mathbb{E}(X) = \sum_{x\in Im(X)}x \times P(X=x),\]
+    \[\mathbb{E}(X) = \sum_{x\in Im(X)}xP(X=x),\]
     pokud součet má smysl.
     
-    Nechť $X$ je definovaná na diskrétním prostoru $(\Omega, \mathcal{F},P)$. Pak střední hodnotu lze také definovat
-    \[\mathbb{E}(X) = \sum_{\omega \in \Omega} X(\omega)P({\omega}).\]
-    ... vážený průměr 
-    \begin{proof}
-        dk., že obě definice souhlasí.
-        \[\sum_{x\in Im(X(\omega))} \sum_{\omega \in \Omega} X(\omega) P({\omega}) = \sum_{x\in Im(X)}(x\times P({\omega \in \Omega : X(\omega) = x}))\]
-    \end{proof}
+    Nechť $X$ je definovaná na diskrétním prostoru $(\Omega, \mathcal{F},P)$. Pak střední hodnotu lze také definovat jako vážený průměr
+    \[\mathbb{E}(X) = \sum_{\omega \in \Omega} X(\omega)P({\omega}).\] 
 \end{definition}
+
+\begin{remark}
+    Obě definice spolu souhlasí.
+\end{remark}
+\begin{proof}
+    \[\sum_{x\in Im(X(\omega))} \sum_{\omega \in \Omega} X(\omega) P({\omega}) = \sum_{x\in Im(X)}(x\times P({\omega \in \Omega : X(\omega) = x}))\]
+\end{proof}
+
 \begin{definition}[Rozptyl]
 
     Rozptyl(variace) n.v. $X$ nazveme číslo $\mathbb{E}((X-\mathbb{E}X)^2)$.\\
