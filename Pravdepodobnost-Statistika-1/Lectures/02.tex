@@ -39,8 +39,10 @@ V pravděpodobnostním prostoru $(\Omega, \mathcal{F},P)$ platí pro $A,B \in \m
     \item $Q(A) = P(A|B)$ splňuje axiomy pro pravděpodobnost.
     \[P(\emptyset | B) = 0\]
     \[P(\Omega | B) = \frac{P(B)}{P(B)} = 1\]
-    \[P(A_1 \circ A_2 | B) = \frac{P((A_1\circ A_2)\cup B)}{P(B)} = \frac{P((A_1\cap B) \cup (A_2 \cap B))}{P(B)} = \frac{P(A_1\cap B)}{P(B) + \frac{P(A_2 \cap B)}{P(B)}}
-     = P(A_1 | B) + P(A_2 | B)\]
+    \begin{align*}
+        P(A_1 \circ A_2 | B) &= \frac{P((A_1\circ A_2)\cup B)}{P(B)} = \frac{P((A_1\cap B) \cup (A_2 \cap B))}{P(B)}\\ &= \frac{P(A_1\cap B)}{P(B) + \frac{P(A_2 \cap B)}{P(B)}}
+        = P(A_1 | B) + P(A_2 | B)
+    \end{align*}
 \end{enumerate}
 
 
@@ -54,16 +56,16 @@ V pravděpodobnostním prostoru $(\Omega, \mathcal{F},P)$ platí pro $A,B \in \m
     \[P(A_1)P(A_2|A_1)P(A_3)|A_1\cap A_2) \dots P(A_n | \bigcap^{n-1}_{i=1} A_i)\]
 \end{theorem}
 \begin{proof}
-    indukcí    
+    indukcí % Alright then, keep your secrets.
 \end{proof}
 
 
 \begin{example}
-    Příklad: vytáhneme 3 karty z balíčku 52 karet. Jaká je P(žádne srdce)?
+    Vytáhneme 3 karty z balíčku 52 karet. Jaká je P(žádné srdce)?
 
-    $A_i =$ i-tá karta není srdce\\
+    $A_i =$ i-tá karta není srdce
     \[P(A_1\cap A_2 \cap A_3) = P(A_1) \times P(A_2 | A_1) P(A_3 | A_2\cap A_1) = \frac{13*3}{52} \times \frac{13*3 -1}{51} \times \frac{13*3 - 2}{50}\]
-    \\ \[\frac{\text{\#dobrých}}{\text{\#všech}} = \frac{\binom{39}{3}}{\binom{52}{3}}\]
+    \[\frac{\text{\#dobrých}}{\text{\#všech}} = \frac{\binom{39}{3}}{\binom{52}{3}}\]
 \end{example}
 
 \begin{definition}
@@ -74,8 +76,8 @@ V pravděpodobnostním prostoru $(\Omega, \mathcal{F},P)$ platí pro $A,B \in \m
     \end{enumerate}
 \end{definition}
 
-\begin{theorem}
-    Věta o úplné pravd. = Rozbor všech možností
+\begin{theorem}[Věta o úplné pravděpodobnosti]
+    = Rozbor všech možností
     \\ Pokud $B_1,B_2,...$ je rozklad $\Omega$ a $A \in \mathcal{F},$ tak
     \[P(A) = \sum_i P(B_i)P(A|B_i)\]
     (sčítance s $P(B_i) = 0$ považujeme za $0$).
@@ -109,7 +111,7 @@ V pravděpodobnostním prostoru $(\Omega, \mathcal{F},P)$ platí pro $A,B \in \m
     \[+ P(\text{výhra}|\text{1. kolo prohra})P(\text{1. kolo prohra})\]
     \[\text{výhra}\implies P_{a+1}, \text{prohra}\implies P_{a-1}\]
     \[P_a = \frac{P_{a+1}}{2} + \frac{P_{a-1}}{2}\]
-    \[\text{ekvivalencia <=> pls}\]
+    \[ \Leftrightarrow \]
     \[P_a - P_{a-1} = P_{a+1} - P_a = \Delta\]
     \[1 = P_n = P_0 + n*\Delta \implies \Delta = \frac{1}{n}\]
     \[P_a = \frac{a}{a+b} = \frac{a}{n}\]
@@ -141,8 +143,8 @@ V pravděpodobnostním prostoru $(\Omega, \mathcal{F},P)$ platí pro $A,B \in \m
 
 \begin{definition}
     Jevy $\{A_i : i \in I\}$ jsou (vzájemně) nezávislé, pokud pro každou konečnou množinu $J \subseteq I$
-    \[P(\bigcap_{i\in J} A_i) = \prod_{i\in J} P(A_i).\]
-    Pokud podmínka platí jen pro dvouprvkové množiny $J$, nazýváme jevy $\{A_i\}$ po dvou nezávislé (pairwise independenet).
+    \[P\left(\bigcap_{i\in J} A_i\right) = \prod_{i\in J} P(A_i).\]
+    Pokud podmínka platí jen pro dvouprvkové množiny $J$, nazýváme jevy $\{A_i\}$ po dvou nezávislé (pairwise independent).
 \end{definition}
 
 \begin{definition}
@@ -157,7 +159,7 @@ V pravděpodobnostním prostoru $(\Omega, \mathcal{F},P)$ platí pro $A,B \in \m
     \end{proof}
  
     $A_n \subset {P,O}^\mathbb{N}, A_n = $ mezi prvními $n$ hody padl aspoň jednou orel.
-    \[P(A) = P(\geq 1 orel v \infty hodech) = lim_{n\rightarrow \infty} \dots = 1\]
+    \[P(A) = P(\geq 1 \hspace{1mm} \text{orel v} \hspace{1mm} \infty \hspace{1mm} \text{hodech}) = lim_{n\rightarrow \infty} \dots = 1\]
 \end{definition}
 
 \begin{definition}[Náhodná veličina]
@@ -168,7 +170,7 @@ V pravděpodobnostním prostoru $(\Omega, \mathcal{F},P)$ platí pro $A,B \in \m
 
 \begin{definition}
     Pravděpodobnostní funkce diskrétní náhodné veličiny $X$ je funkce $p_X : \mathbb{R} \rightarrow [0,1]$ taková, že 
-    \[p_X(x) = P(X = x) = P(\{x \in \Omega : X(\omega) = x\})\]
+    \[p_X(x) = P(X = x) = P(\{\omega \in \Omega : X(\omega) = x\})\]
 \end{definition}
 
 \begin{definition}
