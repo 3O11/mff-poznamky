@@ -11,6 +11,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{První přednáška}
 
+\subsection{Úvodem}
+
 Modely náhody $\rightarrow$ Pravděpodobnost $\rightarrow$ Pozorovaná data 
 $\rightarrow$ Modely náhody\\
 Model náhody např. kostka 1,\dots,6,\\
@@ -42,13 +44,14 @@ hodně pozorovaných dat $\rightarrow$ statistika na model náhody.
 \vspace{5mm}
 \noindent 
 Některé jevy neumíme/nechceme popsat kauzálně
-\begin{enumerate}
+\begin{itemize}
     \item hod kostkou
     \item tři hody kostkou, nekonečně mnoho hodů kostkou
     \item hod šipkou na terč
     \item počet emailů za den
-    \item dobu běhu programu (v reálnem počítači)...
-\end{enumerate}
+    \item dobu běhu programu (v reálnem počítači)
+    \item a další ...
+\end{itemize}
 Důvody:
 \begin{itemize}
     \item fyzikální vlastnost přírody
@@ -56,6 +59,7 @@ Důvody:
     \item neznáme vlivy (působení dalších lidí, programů...)
     \item randomizované algoritmy (test prvočíselnosti, quicksort)
     \item náhodné grafy (Ramseyovy čísla)
+    \item a další ...
 \end{itemize}
 
 
@@ -125,7 +129,7 @@ např. pro $\Omega = \mathbb{R}$ to již nejde.
         \item $\Omega = A\cup A^c$; $A,A^c$ disj.,\\
         $1 = P(\Omega) = P(A) + P(A^c)$
         \item $P(B) = P(A) + P(B\backslash A) \geq P(A)$
-        \item cvičení \textbf{TODOOT}
+        \item Využíváme Princip Inkluze a Exkluze. (ale nevim jiste, jestli to staci)
         \item trik zdisjunktnění: z $A_1,A_2...$ uděláme disjunktní množiny
          \[B_1 = A_1, B_2 = A_2 \backslash A_1, B_3 = A_3 \backslash A_1 \cup A_2 \dots\]
          \[B_i \subseteq A_i \implies P(B_i) \leq P(A_i)\]
@@ -138,19 +142,21 @@ např. pro $\Omega = \mathbb{R}$ to již nejde.
 \end{proof}
 
 \begin{example}[Pravděpodobnostní prostory]
-    % šeredný hack, aby mi enumerate začalo na nové řádce
-    $ $\\
+    {\color{white} x} % Vkladame "bily znak" aby se enumerate spravne odradkovalo
     \begin{enumerate}
         \item 
-        Konečný s uniformní pravděpodobností\\
+        \textit{Konečný s uniformní pravděpodobností}
+
         $\Omega$ je libovolná konečná množina, $\mathcal{F} = \mathcal{P}(\Omega)$,\\
         $P(A) = \frac{|A|}{|\Omega|}$.
         \item 
-        Diskrétní\\
+        \textit{Diskrétní}
+
         $\Omega = \{\omega_1,\omega_2\dots\}$ je libovolná spočetná množina. Jsou dány $p_1,p_2\dots \in [0,1]$ se součtem 1.\\
         $P(A) = \sum_{i:\omega_i \in A} p_i$ (cinknutá loterie, nějaké možnosti mají jiné procenta)
         \item 
-        Spojitý\\
+        \textit{Spojitý}
+
         $\Omega \subseteq \mathbb{R}^d$ pro vhodné $d$ ($\Omega$ např. uzavřená nebo otevřená)\\
         $\mathcal{F}$ vhodná (obsahuje např. všechny otevřené množiny)\\
         $f:\Omega \rightarrow [0,1]$ je funkcne taková, že $\int_{\Omega} f(x)dx = 1$.\\
@@ -160,7 +166,8 @@ např. pro $\Omega = \mathbb{R}$ to již nejde.
         $P(A) = \frac{V_d(A)}{V_d(\Omega)}$, kde $V_d(A) = \int_A 1$ je d-rozměrný objem A.
         
         \item 
-        Bernoulliho krychle - nekonečné opakování\\
+        \textit{Bernoulliho krychle - nekonečné opakování}
+
         $\Omega = S^{\mathbb{N}}$, kde S je diskrétní s pravděpodobností $Q$,\\
         $\mathcal{F}$ vhodná (obsahuje např. všechny množiny tvaru\\
         $A = A_1 \times \dots \times A_k \times S \times S \times \dots $)\\
@@ -169,7 +176,7 @@ např. pro $\Omega = \mathbb{R}$ to již nejde.
 \end{example}
 
 \begin{example}[Nepříklady]
-    $ $\\
+    {\color{white} x}
     \begin{enumerate}
         \item Náhodné přirozené číslo: můžeme si vybrat mnoha způsoby, Ale všechna přirozená čísla nemají stejnou pravděpodobnost.\\
         není možné, aby měly všechny stejnou nenulovou pravděpodobnost, protože pokud $P(0) = P(1) = P(2)\dots = P$ tak $P(\mathbb{N}) = p + p + p\dots = \infty$.
