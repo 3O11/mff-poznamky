@@ -1,0 +1,228 @@
+\documentclass[../main.tex]{subfiles}
+
+%{definition}{Definice}
+%{example}{Příklad}
+%{intuition}{Intuice}
+%{remark}{Poznámka}
+%{consequence}{Důsledek}
+%{observation}{Pozorování}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Desátá přednáška}
+\subsection{Uzávěrová vlastnosti}
+\begin{theorem}
+    CFL uzavřené na sjednocení, konkatenaci, uzávěr, reverzi\\
+
+    CFL jsou uzavřené na sjednocení, konkatenaci, iteraci (*), pozitivní iteraci (+), homomorfismus, zrcadlový obraz $w^R$.
+    \begin{proof}
+        \begin{itemize}
+            \item Sjednocení:
+            \begin{itemize}
+                \item pokud $V_1 \cap V_2 \neq \emptyset$ přejmenujeme neterminály,
+                \item přidáme nový symbol $S_{new}$ a pravidlo $S_{new} \rightarrow S_1|S_2$.
+            \end{itemize}
+            \item Zřetězení $L_1.L_2$
+            \begin{itemize}
+                \item $S_{new} \rightarrow S_1S_2$ (pro $V_1 \cap V_2 = \emptyset$, jinak přejmenujeme)  
+            \end{itemize}
+            \item iterace $L* =\bigcup_{i\geq 0} L^i$
+            \begin{itemize}
+                \item $S_{new} \rightarrow SS_{new}|\lambda$
+            \end{itemize}
+            \item pozitivní iterace $L^+ = \bigcup_{igeq 1} L^i$
+            \begin{itemize}
+                \item $S_{new} \rightarrow SS_{new}|S$
+            \end{itemize}
+            \item zrcadlový obraz $L^R = \{w^R|w\in L\}$
+            \begin{itemize}
+                \item $X \rightarrow \omega^R$ obrátíme pravou stranu pravidel. 
+            \end{itemize}
+        \end{itemize}
+    \end{proof}
+\end{theorem}
+
+\begin{example}
+    \begin{itemize}
+        \item Jazyk $L = \{0^n1^n2^n|n\geq 1\} = \{0^n1^n2^i | n, i \geq 1\} \cap \{0^i1^n2^n|n,i\geq 1\}$
+        není CFL, i když oba členy průniku jsou bezkontextové, dokonce deterministické bezkontextové.
+        \[\{0^n1^n2^i|n,i \geq 1\} \rightarrow \{S \rightarrow AC, A \rightarrow 0A1 | 01, C \rightarrow 2C|2\}\]
+        \[\{0^i1^n2^n|n,i \geq 1\} \rightarrow \{S \rightarrow AB, A \rightarrow 0A | 0, B \rightarrow 1B2|12\}\]
+        \item průnik není CFL z pumping lemmatu. 
+    \end{itemize}
+    paralelní běh dvou zásobníkových automatů
+    \begin{itemize}
+        \item řídící jednotky umíme spojit (viz konečné automaty)
+        \item čtení umíme spojit (jeden automat může čekat)
+        \item bohužel dva zásobníky nelze obecně spojit do jednoho
+    \end{itemize}
+    dva neomezené zásobníky $\rightarrow$ Turingův stroj, rekurzivně spočetné jazyky $\mathcal{L}_0$ 
+\end{example}
+\begin{theorem}
+    CFL i DCFL jsou uzavřené na průnik s regulárním jazykem\\
+    \begin{itemize}
+        \item Mějme $L$ bezkontextový jazyk a $R$ regulární jazyk.\\
+            Pak $L\cap R$ je bezkontextový jazyk.
+        \item Mějme $L$ deterministický CFL a $R$ regulární jazyk.\\
+            Pak $L\cap R$ je deterministický CFL.
+    \end{itemize}
+    \begin{proof}
+        \begin{itemize}
+            \item zásobníkový a konečný automat můžeme spojit
+            \begin{itemize}
+                \item FA $A_1 = (Q_1,\Sigma,\delta_1,q_1,F_1)$
+                \item PDA přijímaný stavem $M_1 = (Q_2,\Sigma,\Gamma,\delta_2,q_2,Z_0,F_2)$
+            \end{itemize}
+            \item nový automat $M = (Q_1 \times Q_2, \Sigma, \Gamma, \delta, (q_1,q_2), Z_0, F_1 \times F_2)$
+            \begin{itemize}
+                \item $((r,s),\alpha)\in \delta((p,q),a,Z)$ právě když 
+                \item $ a\neq \lambda: r = \delta_1(p,a)\&(s,\alpha)\in \delta_2(q,a,Z)$ \dots automaty čtou vstup, PDA mění zásobník, FA stojí.
+                \item $a = \lambda: (s,\alpha)\in \delta_2(q,\lambda,Z)$
+                \item $r = p$
+            \end{itemize}
+            \item zřejmě $L(M) = L(A_1) \cap L(M_2)$
+            \begin{itemize}
+                \item paralelní běh automatů.
+            \end{itemize}
+        \end{itemize}
+    \end{proof}
+\end{theorem}
+\begin{example}
+    Substituce\\
+    Mějme gramatiku $G = ({E},{a,+,(,)},{E \rightarrow E + E|(E)|a},E)$. Mějme substituci:
+    \begin{itemize}
+        \item $\sigma(a) = L(G_a), G_a = ({I},{a,b,0,1},{I\rightarrow I0|I1|Ia|Ib|a|b},I),$
+        \item $\sigma(+) = {-,\times,:,div,mod}$,
+        \item $\sigma(() = {(}$,
+        \item $\sigma()) = {)}$.
+    \end{itemize}
+    \begin{itemize}
+        \item $(a+a) + a \in L(G)$
+        \item $(a001 - bba)\ast b_1 \in \sigma((a+a)+a)\subset \sigma(L(G))$,
+        \item v $\sigma(a)$ chybí $+$ pro ukázku, že $(a+a) + a \notin \sigma(L(G))$.
+    \end{itemize}
+    Co se stane, když změníme definici:
+    \begin{itemize}
+        \item $\sigma(() = {(,[}$,
+        \item $\sigma()) = {),]}$?
+    \end{itemize}
+\end{example}
+\begin{example}
+    Homomorfismus\\
+    Mějme gramatiku $G = ({E},{a,+,(,)},{E \rightarrow E+E|(E)|a},E)$. Mějme homomorfismus:
+    \begin{itemize}
+        \item $h(a) = \lambda$
+        \item $h(+) = \lambda$
+        \item $h(() = left$
+        \item $h()) = right$
+    \end{itemize}
+    \begin{itemize}
+        \item $h((a+a)+a) = leftright,$
+        \item $h^{-1}(leftright) \ni (a + +)a.$
+    \end{itemize}
+\end{example}
+\begin{theorem}
+    CFL jsou uzavřené na substituci\\
+
+    Mějme CFL jazyk $L$ nad $\Sigma$ a substituci $\sigma$ na $\Sigma$ takovou, že $\sigma(a)$ je CFL $\forall a\in \Sigma$. Pak je 
+    i $\sigma(L)$ CFL (bezkontextový).
+    \begin{proof}
+        \begin{itemize}
+            \item Idea: listy v derivačním stromu generují další stromy,
+            \item Přejmenujeme neterminály na jednoznačné všude v $G = (V,\Sigma, P,S), G_a = (V_a,T_a,P_a,S_a), a \in \Sigma$.
+            \item Vytvoříme novou gramatiku $G = (V',T',P',S)$ pro $\sigma(L)$:
+            \begin{itemize}
+                \item $V' = V \cup \bigcup_{a\in \Sigma}V_a$,
+                \item $T'$
+            \end{itemize}
+        \end{itemize}
+    \end{proof}
+\end{theorem}
+\begin{example}
+    Substituce\\
+
+    
+    % \begin{tabular}{}
+    %     $L = {a^ib^j|0\leq i\leq j)}$ && $S \rightarrow aSb|Sb|\lambda$\\
+    %     $\sigma(a) = L_1 = {c^id^i|i \geq 0}$ && $S_1 \rightarrow cS_1d|\lambda$\\
+    %     $TO$ && $DO$\\
+    % \end{tabular}
+\end{example}
+\begin{theorem}
+    CFL jsou uzavřené na inverzní homomorfismus\\
+
+    Mějme CFL jazyk $L$ a homomorfismus $h$. Pak $h^{-1}(L)$ je bezkontextový jazyk.
+    Je-li $TO DO$
+    \begin{proof}
+        \begin{itemize}
+            \item pro $L$ máme PDA $M = (Q,\Sigma,\delta,q_0,Z_0,F)$ (koncovým stavem)
+            \item $h : T \rightarrow \Sigma^*$
+            \item definujeme PDA $M' = (Q',T,\Gamma,\delta', [q_0,\lambda],Z_0,F\times {\lambda})$, kde
+            \[\textbf{DOPLNIT, slide 196}\]
+            Pro deterministický PDA $M$ je i $M'$ deterministický.
+        \end{itemize}
+    \end{proof}
+\end{theorem}
+\[197\]
+\begin{proof}
+    Důkaz sporem\\
+    \begin{itemize}
+        \item Nechť $L$ je bezkontextový jazyk
+        \item $L_1 = \{01^j2^k3^l|j,k,l \geq 0\}$ je regulární Jazyk
+        \begin{itemize}
+            \item ${S \rightarrow 0B,B \rightarrow 1B|C,C\rightarrow 2C|D,D\rightarrow 3D|\lambda}$
+        \end{itemize}
+        \item $L\cap L_1 = {01^i2^i3^i|i\geq 0}$ není bezkontextový $\implies$ spor
+    \end{itemize}
+\end{proof}
+
+\begin{theorem}
+    Rozdíl s regulárním jazykem\\
+
+    Mějme bezkontextový jazyk $L$ a regulární jazyk $R$. Pak:
+    \begin{itemize}
+        \item $L-R$ je CFL.
+    \end{itemize}
+    \begin{proof}
+        $L - R = L \cap \overline{}{R}, \overline{R}$ je regulární.
+    \end{proof}
+\end{theorem}
+\begin{theorem}
+    CFL nejsou uzavřené na doplněk ani rozdíl\\
+    
+    Mějme bezkontextové jazyky $L,L_1,L_2$, regulární jazyk $R$. Pak:
+    \begin{itemize}
+        \item $\overline{L}$ nemusí být CFL. \dots $L_1 \cap L_2 = \overline{\overline{L_1} \textbf{TODO}}$
+    \end{itemize}
+\end{theorem}
+\subsection{Uzávěrové vlastnosti deterministických CFL}
+\begin{itemize}
+    \item Rozumné programovací jazyky jsou deterministické CFL.
+    \item Deterministické bezkontextové jazyky
+    \begin{itemize}
+        \item nejsou uzavřené na průnik
+        \item jsou uzavřené na průnik s regulárním jazykem
+        \item jsou uzavřené na inverzní homomorfismus
+    \end{itemize}
+\end{itemize}
+\begin{theorem}
+    Doplněk deterministického CFL je opět deterministický CFL.
+    \begin{proof}
+        \begin{itemize}
+            \item idea: prohodíme koncové a nekoncové stavy
+            \item nedefinované kroky ošetříme 'podložkou' na zásobníku
+            \item cyklus odhalíme pomocí čítače
+            \item až po přečtení slova prochádzí koncové a nekoncové stavy (stačí si pamatovat, zda prošel koncovým stavem.)
+        \end{itemize}
+    \end{proof}
+\end{theorem}
+\textbf{Uzávěrové vlastnosti v kostce - doplnit tabulku (202/255-274)}
+\begin{remark}
+    Ne-uzavřenost deterministických CFL
+    \begin{proof}
+        Vzhledem k uzavřenosti DCFL na doplněk by byl DCFL i $\overline{L}\cap a*b*c* = {a^ib^jc^k|i=j=k}$,
+        o kterém víme, že není CFL (pumping lemma)
+    \end{proof}
+\end{remark}
+\textbf{DCFL nejsou uzavřené na homomorfismus (201/255-274 )}
+\end{document}

@@ -1,0 +1,123 @@
+\documentclass[../main.tex]{subfiles}
+
+%{definition}{Definice}
+%{example}{Příklad}
+%{intuition}{Intuice}
+%{remark}{Poznámka}
+%{consequence}{Důsledek}
+%{observation}{Pozorování}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Devátá přednáška}
+
+\subsection{Nerovnosti, které známe z minula}
+\begin{itemize}
+    \item Markov 
+    \[X\geq 0 \implies P(X\geq a\mathbb{E}(X))\leq \frac{1}{a}\]
+    \item Čebyšev
+    \[P(|X-\mathbb{E}(X))|\geq a\sigma_X)\leq \frac{1}{a^2}\]
+    \item Chernoff ($\sigma_X = \sqrt{n}$)
+    \[X = \sum^n_{i=1}X_i,X_i = \pm 1 \implies P(|X-\mathbb{E}(X)|> a\sigma_X)\leq 2e^{-a^2/2}\]
+\end{itemize}
+
+\subsection{Slabý zákon velkých čísel}
+\begin{theorem}
+    Nechť $X_1,\dots ,X_n$ jsou stejné rozdělené n.n.v. se střední hodnotou $\mu$ a rozptylem $\sigma^2$.
+    Označme $S_n = (X_1 + \dots + X_n)/n$.\\
+    Pak pro každé $\varepsilon > 0$ platí
+    \[\lim_{n\rightarrow \infty} P(|S_n - \mu | \geq \varepsilon) = 0.\]
+    Říkáme, že posloupnost $S_n$ konverguje k $\mu$ v pravděpodobnosti, píšeme $S_n \rightarrow^P \mu$.
+    \begin{proof}
+        \begin{itemize}
+            \item \[\mathbb{E}S_n = \mathbb{E}\frac{X_1 + \dots + X_n}{n} = \frac{\mathbb{E}X_1 + \dots + \mathbb{E}X_n}{n}
+             = \frac{\mu + \dots + \mu}{n} = \mu\]
+            \item \[var(S_n) = var \left(\frac{X_1 + \dots + X_n}{n}\right) = \frac{var(X_1) + \dots + var(X_n)}{n^2} 
+            = \frac{\sigma^2 + \dots + \sigma^2}{n^2} = \frac{\sigma^2}{n}\]
+            \item \[P(|S_n - \mathbb{E}S_n | \geq a\sigma_{S_n}) \leq \frac{1}{a^2} = \frac{1}{\left(\frac{\varepsilon \sqrt{n}}{\sigma}\right)} = \frac{\sigma^2}{\varepsilon^2 n} \rightarrow_{n\rightarrow \infty} 0\]
+        \end{itemize}
+    \end{proof}
+\end{theorem}
+\subsection{Centrální limitní věta}
+\begin{theorem}
+    Nechť $X_1,\dots,X_n$ jsou stejně rozdělené n.n.v se střední hodnotou $\mu$ a rozptylem $\sigma^2$. Označme
+    \[Y_n = ((X_1 + \dots + X_n) - n\mu)/(\frac{n}\sigma).\]
+    Pak $Y_n \rightarrow^d N(0,1)$. Neboli, pokud $F_n$ je distribuční funkce $Y_n$, tak
+    \[\lim_{n \rightarrow \infty}F_n(x) = \Phi(x) \forall x\in \mathbb{R}.\]
+    Říkáme, že posloupnost $Y_n$ konverguje k $N(0,1)$ v distribuci.
+    \\ \textbf{Doplnit tri grafy z prezentace}
+\end{theorem}
+
+\subsection{Momentová vytvořující funkce}
+\begin{definition}
+    Pro náhodnou veličinu $X$ označíme
+    \[M_X(t) = \mathbb{E}(e^{t_{X}}).\]
+    Funkci $M_X(t)\dots$
+    \textbf{DOPLNIT}
+\end{definition}
+
+\subsection{Statistika}
+\begin{example}
+    1. ilustrace - počet leváků:\\
+    \begin{itemize}
+        \item \#L = 6 = 14\%
+        \item \#P = 37 = 87\%
+        \item spolu: 43 = 100\%
+    \end{itemize}
+    Tipujeme, že je 4 - 12\% leváků v ČR.\\
+    \begin{remark}
+
+        otázky statistiky $\rightarrow$ co můžeme z výsledků v malém vzorku odvodit o výsledcích v celé skupině
+        \begin{itemize}
+        \item bodové odhady \dots 14\%
+        \item intervalové odhady \dots (10\%, 20\%)
+        \end{itemize}
+        Obtíže statistiky $\rightarrow$ otázky typu
+        \begin{itemize}
+            \item máme reprezentativní vzorek?
+            \item je otázka dobře formulovaná?
+        \end{itemize}
+    \end{remark}
+\end{example}
+\begin{example}
+    2. ilustrace - doba běhu programu:\\
+    \begin{itemize}
+        \item $X_1,\dots,X_n \sim F$ n.n.v., $F$ je jejich distribuční funkce
+    \end{itemize}
+    \begin{definition}
+        Empirická distribuční funkce (empirical CDF) je definována
+        \[\hat{F}_n(x) = \frac{\sum^n_{i=1}I(X_i \leq x)}{n},\]
+        kde $I(X_i \leq x) = 1$ pokud $X_i \leq x$ a 0 jinak.
+    \end{definition}
+\end{example}
+
+\begin{theorem}
+    Pro pevné $x$ platí
+    \begin{itemize}
+        \item $\mathbb{E}(\hat{F}_n(x)) = F(x)$
+        \item $var(\hat{F}_n(X)) = \frac{F(x)(1-F(x))}{n}$
+        \item $\hat{F}_n(x)$ konverguje k $F(x)$ v pravděpodobnosti, píšeme $\hat{F}_n(x)\rightarrow^P F(x)$.
+    \end{itemize}
+    \begin{proof}
+        Slabý zákon velkých čísel:
+        \[\mathbb{E}\hat{F}_n(x) = \mathbb{E}S_n = \mathbb{E}I(X_i \leq x) = P(X_i \leq x) = F(x)\]
+        \[var(\hat{F}_n(x)) = \frac{var(X'_1)}{n}\]
+        \[X'_i \sim Bern(p) \dots p=F(x)\]
+    \end{proof}
+\end{theorem}
+
+\subsection{Empirická distribuční funkce - Dvoretzky-Keifer-Wolfowitz (DKW)}
+\begin{theorem}
+    Nechť $X_1,\dots,X_n \sim F$ jsou n.n.v., $\hat{F}_n$ jejich empirická distribuční funkce.
+    Nechť $\mathbb{E}(X_i)$ je konečná. Zvolme $\alpha \in (0,1)$ (pravděpodobnost chyby) 
+    a označme $\varepsilon = \sqrt{\frac{1}{2n}log \frac{2}{\alpha}}$. Pak platí:
+    \[P(\hat{F}_n(x) - \varepsilon) \leq F(x) \leq \textbf{TO DO}\]
+\end{theorem}
+\subsection{Intro - explorační analýza dat (exploratory data analysis)}
+\begin{itemize}
+    \item posbíráme data ( a dáme pozor na systémové chyby - nezávislost, nezaujatost\dots)
+    \item různé tabulky (třeba v Excelu a spol.)
+    \item vhodné obrázky: histogram, krabicový diagram (boxplot) atd.
+\end{itemize}
+
+\end{document}

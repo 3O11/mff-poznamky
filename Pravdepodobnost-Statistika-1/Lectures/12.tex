@@ -1,0 +1,155 @@
+\documentclass[../main.tex]{subfiles}
+
+%{definition}{Definice}
+%{example}{Příklad}
+%{intuition}{Intuice}
+%{remark}{Poznámka}
+%{consequence}{Důsledek}
+%{observation}{Pozorování}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Dvanáctá přednáška}
+
+\subsection{Testování hypotéz - ilustrace}
+\begin{itemize}
+    \item Chcem testovat, zda je mince spravedlivá.
+    \item $H_0:$ je spravedlivá - očekávaný stav světa
+    \item $H_1:$ není spravedlivá - překvapivé zjištění
+    \item Výsledky. zamítneme $H_0$ / nezamítneme $H_0$
+    \item Chyba 1. druhu: chybné zamítnutí. Zamítneme $H_0$, i když platí. Trapas.
+    \item Chyba 2. druhu: chybné přijetí. Nezamítneme $H_0$, ale ona neplatí. Promarněná příležitost.
+    \item Potřebujeme určit $k$ takové, že budeme zamítat $H_0$ pokud \textbf{DOPLNIT}
+\end{itemize}
+\begin{itemize}
+    \item Vybereme vhodný statistický model.
+    \item Volíme hladinu významnosti (significance level) $\alpha$: pravd. chybného zamítnutí $H_0$. Typicky $\alpha = 0.05$.
+    \item Určíme testovou statistiku $T = h(X_1,\dots,X_n)$, kterou budeme určovat z naměřených dat.
+    \item Určíme kritický obor (rejection region) - množinu $W$.
+    \item Naměříme hodnoty $x_1,\dots,x_n$ náh. veličin $X_1,\dots,X_n$.
+    \item Rozhodovací pravidlo: zamítneme $H_0$ pokud $h(x_1,\dots,x_n) \in W$.
+    \item $\alpha = P(h(X) \in W; H_0)$
+    \item $\beta = P(h(X) \notin W; H_1) \dots 1 - \beta$ je tzv. síla testu
+    \item často $\alpha$ nevolíme předem, ale spočítáme tzv. $p$-hodnotu: minimální $\alpha$, pro které bychom $H_0$ zamítli.
+\end{itemize}
+\begin{example}
+    Měříme teplotu, chceme $\mu = 5$°C
+    \begin{itemize}
+        \item $X_1,\dots,X_n$ náhodný výběr z $H(\vartheta,\sigma^2)$
+        \item $\sigma^2$ známe, $\mu$ dáno
+        \item $H_0 : \vartheta = \mu$, $H_1: \vartheta \neq \mu$
+    \end{itemize}
+    \[T = \frac{X_+\dots+X_n}{\mu} = \overline{X_n} \sim N(\vartheta, \sigma^2/n)\]
+    checknúť, či je to správne napísané \^\\
+    ... víme ze vzorce pro rozptyl
+    \[S = \frac{\overline{X_n} - \mu}{\sigma/\sqrt{n}} \sim N(0,1)\]
+    vezmeme množinu:
+    \[W := {s\in R : |s| > Z_{\alpha/2}}\]
+    kde $z_{\alpha/2} = \Phi^{-1}(1-\frac{\alpha}{2})$... pro $\alpha = 0.05$ dostaneme $1.96$
+\end{example}
+\begin{example}
+    příklad dvojvýběrového testu
+    \begin{itemize}
+        \item $X_1,\dots,X_{n_1}$ náhodný výběr z $Ber(\vartheta_X)$
+        \item $Y_1,\dots,Y_{n_2}$ náhodný výběr z $Ber(\vartheta_Y)$
+        \item $H_0 : \vartheta_X = \vartheta_Y$ \dots $H_1 : \vartheta_X \neq \vartheta_Y$
+    \end{itemize}
+    máme $n_1$ lidí a jiných $n_2$ lidí které léčíme různými metodami ($H_0 vs H_1$)
+    \[\widehat{\Theta_X} = \frac{X_1 +\dots + X_n}{n_1} \dots \text{odhad }\vartheta_X\]
+    \[\widehat{\Theta_Y} = \frac{Y_1 +\dots + Y_n}{n_2} \dots \text{odhad }\vartheta_Y\]
+    \[Z := \widehat{\Theta_X} - \widehat{\Theta_Y}\]
+    $\widehat{\Theta_X}, \widehat{\Theta_Y}$ mají přibližně normální rozdělení (Centrální limitní věta)
+
+    Předpokládáme, že platí $H_0$:
+    \[\mathcal{E}\widehat{\Theta_X} = \mathcal{E}\widehat{\Theta_Y} \implies \mathcal{E}Z = 0\]
+    Víme, že $Z$ je přibližně $N(0,\sigma^2)$, $\sigma^2$ neznáme
+    \[\sigma^2 = var(Z) = var(\widehat{\Theta_X}) - var(\widehat{\Theta_Y}) = \frac{var X_1}{n_1} + \frac{var Y_1}{n_2} = \frac{\vartheta_X(1-\vartheta_X)}{n_1} + \frac{\vartheta_Y(1-\vartheta_Y)}{n_1} = \vartheta(\frac{1}{n_1} + \frac{1}{n_2})\]
+    \[\widehat{\Theta} = \frac{\sum X_i + \sum Y_j}{n_1 + n_2} \dots \text{ odhad }\vartheta \implies \widehat{\sigma^2} := (\frac{1}{n_1} + \frac{1}{n_2}) \widehat{\Theta} (1- \widehat{\Theta}) \implies T:= \frac{\widehat{\Theta_X} - \widehat{\Theta_Y}}{\widehat{\sigma}}\]
+\end{example}
+\subsection{$p$-hacking}
+\begin{itemize}
+    \item napřed získáme data, pak v nich hledáme zajímavosti
+    \item když máme dost dat, tak tam nějaké budou "shodou okolností"
+    \item reprodukovatelnost - po explorační analýze dat uděláme nezávislý sběr dat a ten analyzujeme konfirmačně
+    \item nebo dopředu náhodně rozdělíme data na část pro tvorbu hypotéz a část pro jejich potvrzení \dots jednoduchý případ křížové validace (cross validation)
+\end{itemize}
+\subsection{$\chi^2_k$ - rozdělení $\chi$-kvadrát}
+\begin{definition}
+    $Z_1,\dots,Z_k \sim N(0,1)$ n.n.v. Rozdělení náhodné veličiny
+    \[Q = Z^2_1 + \dots + Z^2_k\]
+    se nazývá $\chi$-kvadrát s $k$ stupni volnosti.
+    \begin{itemize}
+        \item $\mathcal{E}(Q) = k$
+        \item $var(Q) = 2k$
+        \item hustota jde napsat vzorcem, lze najít např. na Wikipedii
+        \item $Q \dot{=} N(k,2k)$ pro velká $k$ (CLV)
+    \end{itemize}
+\end{definition}
+\subsection{Multinomické a kategoriální rozdělení}
+\begin{definition}
+    Dána $p_1,\dots,p_k \geq 0$ a tak, že $p_1 + p_2 + \dots + p_k = 1$.
+    
+    $n$-krát zopakuji pokus, kde může nastat jedna z $k$ možností, $i$-tá má pravděpodobnost $p_i$.
+
+    $X_i :=$ kolikrát nastala $i$-tá možnost $(X_1,\dots,X_k)$ má multinomické rozdělení s parametry $n,(p_1,\dots,p_k).$
+    \begin{itemize}
+        \item triviální případ: $X_i = $ počet hodů kostkou, kdy padlo $i$
+        \item \textbf{Doplnit}
+    \end{itemize}
+\end{definition}
+\begin{definition}
+    Pearsonova $\chi^2$ Statistika\\
+    \begin{itemize}
+        \item $(X_1,\dots,X_k)$ - multinomické rozdělení s parametry $n, (p_1,\dots,p_k)$ jako minule
+        \item $\mathcal{E}_i = \mathcal{E}(X_i) = np_i$
+        \item Pearsonova $\chi^2$ statisika je funkce
+    \end{itemize}
+    \[\chi^2 = T:= \sum^k_{i=1} \frac{(X_i - E_i)^2}{E_i}\]
+\end{definition}
+\begin{theorem}
+    $T \rightarrow^d \chi^2_{k-1}$
+    \begin{proof}
+        pro $k=2$
+        \[X_1 + X_2 = n, p_1 + p_2 = 1, E_i = np_i\]
+        \[T = \frac{(X_1 - E_1)^2}{E_1} + \dots = \frac{(X_1 - np_1)^2 + (p_1 + p_2)}{np_1p_2}\]
+        \[ = \left(\frac{X_1 - np_1}{\sqrt{np - (1-p_1)}}\right)\]
+    \end{proof}
+\end{theorem}
+\subsection{Test dobré shody (goodness of fit)}
+\begin{itemize}
+    \item $(X_1,\dots,X_k)$ - multinomické rozdělení s parametry $n,\varphi = (\varphi_1,\dots,\varphi_k)$ jako minule
+    \item $n$ známe, $\varphi$ neznáme.
+    \item Hypotéza $H_0: \varphi = \varphi^*$
+    \item $E_i := n\varphi^*_i$ pro všechna $i$
+    \item Použijeme statistiku $\chi^2 = T:= \sum^k_{i=1} \frac{(X_i-E_i)^2}{E_i}$
+    \item Hyotézu $H_0$ zamítneme, pokud $T > \gamma$
+    \item $\gamma := F^{-1}_Q (1-\alpha)$, kde $Q \sim \chi^2_{k-1}$
+    \item $P$(chyba prvního druhu)$ = P(T > \gamma; H_0) \rightarrow P(Q>\gamma) = \alpha$
+\end{itemize}
+\begin{example}
+    Test dobré shody - házíme kostkou\\
+    \begin{itemize}
+        \item Házíme opakovaně kostkou. Jednotlivá čísla padla s četností 92,120,88,98,95 a 107.
+        \item Je kostka spravedlivá?
+    \end{itemize}
+    \[ n = 92 + 120 +\dots = 600\]
+    \[\vartheta^* = (\frac{1}{6}, \dots, \frac{1}{6}), E_i = n \frac{1}{6} = 100\]
+    \[T = \sum^6_{i=1} \frac{(X_i - 100)^2}{100} = \dots = \frac{(80^2 + 20^2 + 12^2 + 2^2 + 5^2 + 7^2}{100} = 6.86\]
+    \[Q \sim \chi^2_5 \dots F^{-1}_Q (1 - \alpha = 0.95) = 11.1\]
+    kdyby nám T vyšlo víc než 11.1, můžeme říct, že kostka je nespravedlivá.
+    \[p-\text{hodnota}: 1-F_Q(6.86) \dot{=} 1 - 0.77 = 0.23\]
+    zhruba ve čtvrtině hodů najdeme extremnejší odchylku.
+\end{example}
+Další rozšíření
+\begin{itemize}
+    \item Pro zkoumání rozdělení libovolné n.v. $Y$ můžeme vybrat "přihrádky" $B_1,\dots,B_k$ (rozklad $\mathcal{R}$) a zkoumat, kolikrát je $Y \in B_i$
+    \item Obdobný test pro nezávislost (diskrétních) náhodných veličin 
+\end{itemize}
+\begin{definition}
+    Lineární regrese
+    \begin{itemize}
+        \item data: $(x_i,y_i)$ pro $i=1,\dots,n$
+        \item \textbf{TODO} 
+    \end{itemize}
+\end{definition}
+\end{document}

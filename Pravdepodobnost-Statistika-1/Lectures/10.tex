@@ -1,0 +1,141 @@
+\documentclass[../main.tex]{subfiles}
+
+%{definition}{Definice}
+%{example}{Příklad}
+%{intuition}{Intuice}
+%{remark}{Poznámka}
+%{consequence}{Důsledek}
+%{observation}{Pozorování}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Desátá přednáška}
+
+\subsection{náhodný výběr}
+\begin{itemize}
+    \item bez vracení \\
+    $\Omega = {\text{všechny }n-\text{tice obyvatel ČR}}$\\
+    Pro $\omega = (\omega_1,\dots, \omega_n)$ zvolíme $X_i = I(\omega_i$ je levák$)$.
+    \item s vracením \\
+    $\Omega = \{$všechny $n$-tice obyvatel ČR, mohou se opakovat$\}$\\
+    Pro $\omega = (\omega_1,\dots,\omega_n)$ zvolíme $X_i = I(\omega_i$ je levák$)$.
+    \item varianty (stratifikovaný výběr)\\
+    \textbf{TODO}
+\end{itemize}
+
+\subsection{Statistika - model}
+\begin{itemize}
+    \item nezávislá měření - hodnoty n.n.v. $X_1,\dots,X_n \sim F$ náhodný výběr s distribuční funkcí $F$ s rozsahem $n$
+    \item neparametrické modely: povolujeme velkou třídu $F$.
+    \item parametrické modely: $F \in \{F_\vartheta: \vartheta \in \Theta\}$
+    \item příklady:
+    \begin{itemize}
+        \item $Pois(\lambda)$ (parametr $\vartheta$)
+        \item \textbf{TODO}
+    \end{itemize}
+\end{itemize}
+\subsection{Zkoumané úlohy - cíle konfirmační analýzy}
+\begin{enumerate}
+    \item bodové odhady
+    \item intervalové odhady
+    \item testování hypotéz
+    \item (linární) regrese
+\end{enumerate}
+\begin{definition}
+    statistika - libovolná funkce náhodného výběru, t. j. \textbf{TODO}
+\end{definition}
+
+\begin{example}
+    Výběrový průměr a rozptyl\\
+    \[\overline{X}_n = \frac{1}{n}\sum^n_{i=1}X_i\]
+    \[\overline{S}_n = \frac{1}{n}\sum^n_{i=1}(X_i - \overline{X}_n)^2\]
+    \[\widehat{S}_n = \frac{1}{n-1}\sum^n_{i=1}(X_i - \overline{X}_n)^2 \]
+\end{example}
+\begin{definition}
+    Odhad je libovolná statistika.
+\end{definition}
+
+\subsection{Vlastnosti bodových odhadů}
+\begin{definition}
+    Odhad $\widehat{\Theta}_n = \widehat{\Theta}_n(X_1,\dots,X_n)$ parametrů $\vartheta$ je
+    \begin{itemize}
+        \item nestranný (unbiased), pokud $\vartheta = \mathbb{E}(\widehat{\Theta}_n)$ (pro každé $\vartheta$)
+        \item asymptoticky nestranný (asymptotically unbiased) - pokud $\vartheta = \lim_{n \rightarrow \infty} \mathbb{E}(\widehat{\Theta}_n)$
+        \item konzistentní (consistent) - pokud $\widehat{\Theta}_n \rightarrow^P \vartheta$
+        \item vychýlení (bias) $bias_\vartheta (\widehat{\Theta}_n):=\mathbb{E}(\widehat{\Theta}_n - \vartheta)$
+        \item střední kvadratická chyba je $MSE := \mathbb{E}((\widehat{\Theta}_n - \vartheta)^2)$
+    \end{itemize}
+\end{definition}
+\begin{theorem}
+    \[MSE = bias_\vartheta(\widehat{\Theta}_n)^2 + var_\vartheta(\widehat{\Theta}_n)\]
+    \begin{proof}
+        \textbf{TODO}
+    \end{proof}
+\end{theorem}
+\begin{theorem}
+    Parametry výběrového momentu a rozptylu\\
+
+    \begin{enumerate}
+        \item $\overline{X}_n$ je konzistentní nestranný odhad $\mu = \mathbb{E}X_1 = \mathbb{E}X_2 =\dots$
+        \item $\overline{S}_n$ je konzistentní asymptoticky nestranný odhad $\sigma^2$
+        \item $\widehat{S}_n$ je konzistentní nestranný odhad $\sigma^2$
+    \end{enumerate}
+    \begin{proof}
+        1. 
+        \[\overline{X}_n = \frac{1}{n} X_1 + X_2 + \dots + X_n\]
+        $\overline{X}_i$ je nestranný, t. j. $\mathbb{E}\overline{X}_n = \mu$
+        \[ = \frac{1}{n} \mathbb{E}X_1 + \mathbb{E}X_2 + \dots + \mathbb{E}X_n = \frac{1}{n} \mu + \mu + \dots + \mu = \mu\]
+        $\overline{X}_n$ je konzistentní, t. j. $\overline{X}_n \rightarrow^P \mu$ (slabý zákon velkých čísel) \\
+        $var(\overline{X}_n) = frac{\sigma^2}{n} \dots$ Čebyšev\\
+        2. 
+        \[\overline{S}_n = \frac{1}{n} \sum^n_{i=1}(X_i - \overline{X}_i)^2\]
+        \[\mathbb{E}\overline{S}_n = \mathbb{E}\frac{1}{n}\sum^n_{i=1}((X_i - \mu) - (\overline{X}_i - \mu))^2\]
+        \[ = \mathbb{E}\frac{1}{n}\sum\left[(X_i - \mu)^2 - 2(X_i - \mu)(\overline{X}_i-\mu) + (\overline{X}_i - \mu)^2\right]\]
+        \[ = \mathbb{E}\frac{1}{n}\sum(X_i - \mu) - \mathbb{E} \frac{2}{n} \sum (X_i - \mu)(\overline{X_i-\mu}) + \mathbb{E}(\overline{X}_n - \mu)^2\]
+        \[ \frac{1}{n} \sum \mathbb{E}(X_i - \mu)^2 - \mathbb{} (\overline{X}_n - \mu)^2\]
+        \[ = \sigma^2 - var(\overline{X}_n) = \sigma^2 - \frac{\sigma^2}{n} = \frac{n-1}{n}\sigma^2\]
+        3. 
+        \[\widehat{S}_n = \frac{n}{n-1}\overline{S}_n\]
+        \[\mathbb{E}\widehat{S}_n = \frac{n}{n-1}\mathbb{E}\widehat{S}_n = \sigma^2 >> \widehat{S}_n \text{ je nestranný odhad.}\]
+    \end{proof}
+\end{theorem}
+Je lepší $\widehat{S}_n$ nebo $\overline{S}_n$?\\
+$\rightarrow \widehat{S}_n$ je nestranný, $\overline{S}_n$ ne.\\
+
+\subsection{Metoda momentů}
+\begin{itemize}
+    \item $m_r(\vartheta) := \mathbb{E}(X^r)$ pro $X \sim F_\vartheta \dots r$-tý momentu
+    \item $\widehat{m_r(\vartheta)}:= \frac{1}{n} \sum^n_{i=1}X^r_i$ pro náhodný výběr $X_1,\dots,X_n$ z $F_\vartheta$ \dots $r$-tý výběrový moment
+\end{itemize}
+\begin{theorem}
+    $\widehat{m_r(\vartheta)}$ je nestranný konzistentní odhad pro $m_r(\vartheta)$.
+    \begin{proof}
+        \[\mathbb{E}\widehat{m_r(\vartheta)} = \frac{1}{n} \sum \mathbb{E}(X^r_i) = \frac{1}{n}\sum \mathbb{E}(X^r_i) = m_r(\vartheta)\]
+    \end{proof}
+\end{theorem}
+\begin{example}
+    $X_1,\dots,X_n \sim Bern(p) \dots X_i = $"$i$-tý člověk je levák"\\
+    $\vartheta = p \in \left[0,1\right]$\\
+    $m_1(\vartheta) = \mathbb{E}X_1 = \vartheta$\\
+    $\widehat{m_r(\vartheta)} = \frac{1}{n}(X_1+\dots+X_n) = \overline{X}_n$
+\end{example}
+
+\subsection{Metoda maximální věrohodnosti (maximal likelihood, ML)}
+\begin{itemize}
+    \item náh. výběr $X = (X_1,\dots,X_n)$ z modelu s parametrem $\vartheta$
+    \item možný výsledek $x = (x_1,\dots,x_n)$
+    \item \dots sdružená pravděpodobnostní funkce $p_X(x;\vartheta)$
+    \item \dots sdružená hustota $f_X(x;\vartheta)$
+    \item věrohodnost (likelihood) $L(x;\vartheta)$ značí $p_X$ nebo $f_X$
+    \item normálně: máme pevné $\vartheta$, a $L(x;\vartheta)$ je funkce $x$
+    \item teď: máme pevné $x$ a $L(x;\vartheta)$ je funkce $\vartheta$
+\end{itemize}
+\begin{itemize}
+    \item Metoda MV (ML): volíme takové $\vartheta$, pro které je $L(x;\vartheta)$ maximální
+    \item definujeme také $\mathcal{l}(x;\vartheta) = log(L(x;\vartheta))$
+    \item díky nezávislosti je
+\end{itemize}
+\[L(x;\vartheta) = p(x_1;\vartheta)p(x_2;\vartheta)\dots p(x_n;\vartheta)\]
+\[\mathcal{l}(x;\vartheta) = \sum^n_{i=1} log p(x_i;\vartheta)\]
+\[ O = \mathcal{l}'(x;\vartheta) = \sum \frac{1}{p(x_i;\vartheta) \textbf{TO DO}}\]
+\end{document}

@@ -1,0 +1,130 @@
+\documentclass[../main.tex]{subfiles}
+
+%{definition}{Definice}
+%{example}{Příklad}
+%{intuition}{Intuice}
+%{remark}{Poznámka}
+%{consequence}{Důsledek}
+%{observation}{Pozorování}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Třináctá přednáška}
+
+\subsection{Simpsonův paradox}
+\textbf{DOPLNIT (tabulka + graf)}
+Problém s tím, jestli jsou naměřená data (skupiny dat) dostatečně homogenní
+
+\subsection{Permutační test}
+\begin{example}
+    \begin{itemize}
+        \item Máme k dispozici dvě sady nezávislých náhodných veličin (náhodné výběry):
+        \item $X_1,\dots,X_n \sim F_X$ a $Y_1,\dots,Y_m \sim F_Y$
+        \item Chceme rozhodnout, zda platí $H_0 : F_X = F_Y$ nebo $H_1 : F_X \neq F_Y$
+        \item Příklady: doba běhu programu před/po vylepšení, hladina cholesterolu u lidí co jedí/nejedí Zázrčnou Superpotravu™, frekvenci
+        \item \textbf{TODO} 
+    \end{itemize}
+    Postup:
+    \begin{itemize}
+        \item Zvolíme vhodnou statistiku, například.
+        \[T(X_1,\dots,X_n,Y_1,\dots,Y_m) = |\overline{X}_n - \overline{Y}_m|\]
+        \item $t_{\text{obs}} := T(X_1,\dots,X_n, Y_1,\dots,Y_m)$
+        \item Za předpokladu $H_0$ jsou "všechny permutace stejné": $X_i$ i $Y_j$ se generovaly ze stejného rozdělení.
+        \item Náhodně zpermutujeme zadaných $m+n$ čísel a pro každou permutaci vyčíslíme $T$ - dostaneme čísla $T_1,\dots,T_{(m+n)!}$ (každé stejně pravděpodobné).
+        \item Jako $p$-hodnotu vezmeme pravděpodobnost, že $T > t_{\text{obs}}$, neboli
+        \[p = \frac{1}{(m+n)!}\sum_{j} I(T_j>t_{\text{obs}}).\]
+        \item To je pravděpodobnost chyby 1. druhu, neboli $H_0$ zamítneme, pokud je $p<\alpha$ (pro naši zvolenou hodnotu $\alpha$, např. $\alpha = 0.05$).
+    \end{itemize}
+    Vylepšení:
+    \begin{itemize}
+        \item Zkoušet všechny permutace může trvat moc dlouho. Vezmeme tedy jen vhodný počet $B$ nezávisle náhodně vygenerovaných permutací a spočítáme jenom
+        $B$ hodnot $T_1,\dots,T_B$.
+        \item Jako $p$-hodnotu vezmeme odhad pravděpodobnosti, že $T > t_{\text{obs}}$
+        \item \textbf{DOPLNIT} 
+    \end{itemize}
+\end{example}
+\subsection{Bootstrap}
+\begin{example}
+    Základní idea
+    \begin{itemize}
+        \item z naměřených dat $X_1 = x_1 \dots,X_n = x_n \sim F$ vytvoříme $\widehat{F}_n$
+        \item další data můžeme samplovat z $\widehat{F}_n$
+        \item to se dělá tak, že vybereme uniformně náhodné \textbf{DOPLNIT}
+    \end{itemize}
+    Základní použití
+    \begin{itemize}
+        \item $T_n = g(X_1,\dots,X_n)$ nějaká statistika (funkce dat)
+        \item chceme odhadnout $var T_n$
+        \item nasamplujeme $X^*_1,\dots,X^*_n \sim \widehat{F}_n$ (viz minulá strana)
+        \item spočteme $T^*_n = g(X^*_1,\dots,g^*_n)$
+        \item opakujeme $B$-krát, dostaneme $T^*_{n,1},\dots,T^*_{n,B}$
+        \item odhad rozptylu:
+        \[\frac{1}{B}\sum^{B}_{b=1}\left(T^*_{n,b}-\frac{1}{B}\sum^{B}_{k=1}T^*_{n,k}\right)^2\]
+    \end{itemize}
+\end{example}
+\subsection{Bayesovská statistika}
+\subsubsection{Frekventistický/klasický přístup}
+\begin{itemize}
+    \item Pravděpodobnost je dlouhodobá frekvence (z 6000 hodů kostkou padla šestka 1026krát). Je to objektivní vlastnost reálného světa.
+    \item Parametry jsou pevné, neznáme konstanty. Nelze o nich říkat smysluplné pravděpodobnostní výroky.
+    \item Navrhujeme statistické procedury tak, aby měly žádané dlouhodobé vlastnosti. Např. 95\% z našich intervalových odhadů pokryje neznámy parametr.
+\end{itemize}
+\subsubsection{Bayesovský přístup}
+\begin{itemize}
+    \item Pravděpodobnost popisuje, jak moc věříme nějakému jevu, jak moc jsme ochotní se vsadit. (Pravděpodobnost, že Thomas Bayes měl 18. prosince 1760 šálek čaje je 90\%.)
+    \item Můžeme vyslovovat pravděpodobnostní výroky i o parametrech (třebaže jsou to pevné konstanty).
+    \item Spočítáme distribuci $\vartheta$ a z ní tvoříme bodové a intervalové odhady, atd.
+\end{itemize}
+Bayesovská metoda - základní popis
+\begin{itemize}
+    \item neznámý parametr považujeme za náhodnou veličinu $\Theta$.
+    \item zvolíme apriorní distribuci (prior distribution), neboli hustotu pravděpodobnosti $f_{\Theta}(\vartheta)$ nezávislou na datech.
+    \item zvolíme statistický model $F_{X|\Theta}(x|\vartheta)$, který popisuje co naměříme (s jakou pravděpodobností), v závislosti na hodnotě parametru
+    \item poté, co pozorujeme hodnotu $X = x$, spočítáme posteriorní distribuci (posterior distribution) $f_{\Theta|X}(\vartheta|x)$
+    \item z té pak odvodíme co potřebujeme, např. najdeme $a,b$ tak, aby 
+    \[\int^b_a f_{\Theta|X}(\vartheta|x)d\vartheta \geq 1 - \alpha\]
+    \item $\vartheta = \theta$ malá théta, $\Theta$ je velká théta 
+\end{itemize}
+
+\begin{theorem} (Bayesova věta pro diskrétní náhodné veličiny)\\
+    $X,\Theta$ jsou diskrétní n.v.
+    \[p_{\Theta|X} (\vartheta | x) = \frac{p_{X|\Theta}(x|\vartheta)p_\Theta(\vartheta)}{\sum_{\vartheta' \in I_{m\Theta}}p_{X|\Theta}(x|\vartheta')p_\Theta(\vartheta')}.\]
+    (sčítance s $p_\Theta(\vartheta') = 0$ považujeme za 0).
+\end{theorem}
+\begin{theorem} (Bayesova věta pro spojité náhodné veličiny)\\
+    $X,\Theta$ jsou spojité n.v., které mají hustotu $f_X, f_\Theta$ i sdruženou hustotu $f_{X,\Theta}$
+    \[p_{\Theta|X} (\vartheta | x) = \frac{f_{X|\Theta}(x|\vartheta)f_\Theta(\vartheta)}{\int{\vartheta' \in I_{m\Theta}}f_{X|\Theta}(x|\vartheta')f_\Theta(\vartheta')d\vartheta'}.\]
+    
+\end{theorem}
+Bayesovské bodové odhady - MAP a LMS\\
+MAP - Maximum A-Posteriori\\
+Volíme $\widehat{\vartheta}$ tak, aby maximalizovalo
+\begin{itemize}
+    \item $p_{\Theta|X}(\vartheta|x)$ v diskrétním případě
+    \item $f_{\Theta|X}(\vartheta|x)$ v spojitém případě
+    \item Podobné metodě $ML$ v klasickém přístupu, pokud bychom volili "flat prior" - uniformní $p_\Theta(\vartheta)$.
+\end{itemize}
+LMS - Least Mean Square\\
+Též metoda podmíněné střední hodnoty
+\begin{itemize}
+    \item Volíme $\widehat{\vartheta} = \mathbb{E}(\Theta|X = x)$.
+    \item Nestranný bodový odhad, má nejmenší možnou hodnotu LMS: $\mathbb{E}((\Theta - \widehat{\vartheta})^2 |X = x)$.
+\end{itemize}
+\begin{example}
+    Bayesovský klasifikátor spamů:
+    \begin{itemize}
+        \item vytvoříme seznam podezřelých slov (money, win, pharmacy,\dots)
+        \item n.v. $X_i$ (0 nebo 1) popisuje, zda email obsahuje podezřelé slovo $w_i$.
+        \item n.v. $\Theta$ popisuje, zda email je spam $\Theta = 1$ nebo ne $\Theta = 0$.
+        \item Z pŘedchodzích emailů získáme odhady $p_{X\Theta}, p_\Theta$
+        \item Použijeme Bayesovu větu na výpočet $p_{\Theta | X}$ 
+    \end{itemize}
+\end{example}
+\begin{example}
+    Romeo a Julie se mají sejít přesně v poledne. Julie ale přijde pozdě o dobu popsanou náhodnou veličinou $X \sim U(0, \vartheta)$.
+    Parametr $\vartheta$ modelujeme náhodnou veličinou $\Theta \sim U(0,1)$. Co z naměřené hodnoty $X = x$ usoudíme o $\vartheta$?
+    
+    \textbf{Doplnit řešení}
+\end{example}
+\subsection{Generování náhodných veličin}
+\end{document}
