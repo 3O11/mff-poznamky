@@ -21,21 +21,20 @@
     \end{enumerate}
 \end{theorem}
 \begin{proof}
-    1.\\
+\begin{enumerate}
+    \item
     \[\mathbb{E}(X) = \sum_{x \in X} x  P(X = x) = 0  P(X = 0) + \sum_{x > \& x \in X} x  P(X = 0) = 
-    \sum_{x<0 \& x\in X} x P(X=x) = 0\]
+    \sum_{x<0 \land x\in X} x P(X=x) = 0\]
     \[\implies \forall x > 0 : P(x = x) = 0 \implies P(X = 0) = 1\]
-
-    2.\\
+    \item
     \[\mathbb{E}(X) = \sum x P(X\geq x) = 0\]
     \[\text{kdyby ne: } P(x\geq 0) = 0, \text{všechny členy v sumě by byly záporné...spor}\]
-
-    3.\\
+    \item
     \[\mathbb{E}(a X+b) = \sum_{x\in X} (a x + b)P(X=x) = a\sum xP(X=x) + b\sum P(X=x)\]
-
-    4.\\
+    \item
     \[\mathbb{E}(X+Y) = \sum_{\omega}(X(\omega)+Y(\omega))P({\omega}) = \sum X(\omega)P({\omega})
     + \sum Y(\omega)P({\omega}) = \mathbb{E}(X) + \mathbb{E}(Y)\]
+\end{enumerate}
 \end{proof}
 
 \begin{theorem}
@@ -62,12 +61,12 @@
 \end{definition}
 
 \begin{theorem}
-    \[var(X) = \mathbb{E}(X^2) - \mathbb{E}(X)^2\]
+    $var(X) = \mathbb{E}(X^2) - \mathbb{E}(X)^2$
 \end{theorem}
 \begin{proof}
     \[\mu = \mathbb{E}(X)\]
     \[var(X) = \mathbb{E}((X - \mu)^2) = \mathbb{E}(X^2-2\mu + \mu^2) = \mathbb{E}(X^2) - 2\mu \mathbb{E}(X) + \mu^2\]
-    \[ = \]
+    \[ = \] % What the &#@% is this?
 \end{proof}
 
 \begin{definition}[Podmíněná střední hodnota]
