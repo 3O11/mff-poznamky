@@ -12,13 +12,11 @@
 \section{Sedmá přednáška}
 
 
-\begin{definition}
-    Cauchyho rozdělení\\
+\begin{definition}[Cauchyho rozdělení]
 
-    Cauchyho rozdělení: hustota $f(x) = \frac{1}{\pi (1+x^2)}$\\
+    hustota $f(x) = \frac{1}{\pi (1+x^2)}$
     nemá střední hodnotu!
 
-    \textbf{pridať obrázok}
     \begin{remark}
         \[\int^\infty_{-\infty} f = \frac{1}{\pi} \int^\infty_{-\infty} \frac{1}{1+x^2} = \frac{1}{\pi}\left[arctg(x)\right]^\infty_{-\infty} = 1\]
         \[\mathbb{E}X = \int^\infty_{-\infty} x f(x) = \int^\infty_0 \frac{2x}{2\pi (1+x^2)} + \int^0_{-\infty}\frac{x}{\pi (1+x^2)}\]
@@ -28,11 +26,10 @@
     
 \end{definition}
 
-\begin{definition}
-    Gamma rozdělení\\
+\begin{definition} [Gamma rozdělení]
 
     $Gamma(w,\lambda)$, gamma rozdělení s parametry $w > 0$ a $\lambda > 0$ má hustotu
-    \[f(x) = 0 \text{ pro } x \leq 0 \& \frac{1}{\Gamma(w)}\lambda^w x^{w-1} e^{-\lambda x} \text{ pro } x\geq 0\]
+    \[f(x) = 0 \text{ pro } x \leq 0 \hspace{7mm} \& \hspace{7mm} \frac{1}{\Gamma(w)}\lambda^w x^{w-1} e^{-\lambda x} \text{ pro } x\geq 0\]
     kde $\Gamma(w) = (w-1)! = \int^\infty_0 x^{w-1}e^{-x}dx$
 
     Pro $w = 1$ dostáváme znovu exponenciální rozdělení ... $\frac{1}{0!}\lambda^1 e^{-\lambda x}$\\
@@ -139,8 +136,8 @@
 Vícerozměrné normální rozdělení\\
 
 \begin{enumerate}
-    \item $\phi(t) = \frac{e^{-t^2/2}}{\sqrt(2\pi)}$
-    \item $f(t_1,\dots, t_n) = \phi(t_1)\phi(t_2)\dots \phi(t_n) = \frac{e^{-\frac{t^2_1 + \dots + t^2_n}{2}}}{\sqrt{2\pi}}$
+    \item $\varphi(t) = \frac{e^{-t^2/2}}{\sqrt(2\pi)}$
+    \item $f(t_1,\dots, t_n) = \varphi(t_1)\varphi(t_2)\dots \varphi(t_n) = \frac{e^{-\frac{t^2_1 + \dots + t^2_n}{2}}}{\sqrt{2\pi}}$
     \item $f(t_1,\dots, t_n = (2\pi)^{-\frac{n}{2}}e^{-\frac{r^2}{2})}$, kde $r^2 = t^2_1 + \dots + t^2_n$ je radiálně symetrická funkce.
     \item Nechť $Z = (Z_1,\dots, Z_n)$ má hustotu $f$.
     \item $Z_1,\dots,Z_n$ jsou n.n.v, $Z_i \sim N(0,1)$

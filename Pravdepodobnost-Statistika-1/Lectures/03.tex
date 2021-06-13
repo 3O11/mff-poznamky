@@ -39,10 +39,11 @@
     $A_n = {X\leq n};$ platí $A_1 \subseteq A_2 \subseteq \dots$\\
     Takže $\bigcup^\infty_{n=1} A_n = \Omega$, podle véty o spojitosti pak\\
     \[P(\Omega) = \lim_{n\rightarrow \infty} P(A_n) = \lim_{n\rightarrow \infty} F_X(n)\]
+
+    Obdobně postupujeme pro druhou limitu.
 \end{proof}
 
-Obdobně postupujeme pro druhou limitu.
-
+\subsection{Typy rozdělení}
 \begin{definition}[Bernoulliho/alternativní rozdělení] {\color{white} x}
     \begin{enumerate}
         \item $X = $ počet orlů při jednom hodu nespravedlivou mincí.
@@ -148,7 +149,7 @@ Obdobně postupujeme pro druhou limitu.
 \begin{proof}
     \[\sum_{x\in Im(X(\omega))} \sum_{\omega \in \Omega} X(\omega) P({\omega}) = \sum_{x\in Im(X)}(x\times P({\omega \in \Omega : X(\omega) = x}))\]
 \end{proof}
-
+\subsection{Rozptyl a LOTUS}
 \begin{definition}[Rozptyl]
 
     Rozptyl(variace) n.v. $X$ nazveme číslo $\mathbb{E}((X-\mathbb{E}X)^2)$.\\

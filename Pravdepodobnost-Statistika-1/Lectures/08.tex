@@ -17,7 +17,12 @@
     zúžení náhodné veličiny na množinu: $X$ je n.v. na $(\Omega, \mathcal{F},P), B \in \mathcal{F}$, t. ž. $P(B) >0$.
     \[F_{X|B}(x):= P(X \leq x |B)\]
     K tomu příslušní hustotní funkce $f_{X|B}$:\\
-    Pokud $B = {X\in S},$ tak \textbf{TO DO}
+    Pokud $B = \{X\in S\},$ tak 
+    \[f_{X|B}(x) = 
+    \begin{cases}    
+        \frac{f_X(x)}{P(X\in S)} \dots \text{ pokud } x\in S\\
+        0 \dots \text{ jinak }
+    \end{cases}\]
 \end{definition}
 \begin{theorem}
     Věta o rozkladu hustoty\\
@@ -32,11 +37,14 @@
 \end{theorem}
 
 \begin{theorem}
-    Marginální věta\\
+    Marginální hustota\\
 
     \[f_X(x) = \int_{y\in \mathbb{R}} f_{X,Y}(x,y)dy\]
     \[f_Y(y) = \int_{y\in \mathbb{R}} f_{X,Y}(x,y)dx\]
 \end{theorem}
+\begin{proof}
+    \textbf{TODO}
+\end{proof}
 
 \begin{definition}
     Podmíněná hustota\\
@@ -71,13 +79,13 @@
 \end{theorem}
 
 \begin{example}
-    $X,Y \sim N(0,1)$ nezávislé. n.v. \dots $f_X = f_Y = \phi$ \dots $\phi(t) = \frac{1}{\sqrt{2\pi}}e^{-\frac{t^2}{2}}$
+    $X,Y \sim N(0,1)$ nezávislé. n.v. \dots $f_X = f_Y = \varphi$ \dots $\varphi(t) = \frac{1}{\sqrt{2\pi}}e^{-\frac{t^2}{2}}$
     \[Z = X+Y\]
     \[f_Z(z) = \int^\infty_{-\infty} f_X(x)f_Y(z-x)dx=\]
     \[= \int^\infty_{-\infty} \frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}} \frac{1}{\sqrt(2\pi)}e^{-\frac{(z-x)^2}{2}}dx\]
     \[= \frac{1}{2\pi} e^{-\frac{z^2}{2}}\int^\infty_{-\infty}e^{-x^2 + zx}dx\]
     \[= \frac{1}{2\pi} e^{-\frac{z^2}{2}+\frac{z^2}{4}} \int e^{-(x-\frac{z}{2})^2}dx\]
-    \[= \frac{1}{\sqrt{2}\sqrt{2\pi} e^{-\frac{z^2}{4}} \text{\textbf{DOPLNIT}}}\]
+    \[= \frac{1}{\sqrt{2}\sqrt{2\pi}} e^{-\frac{z^2}{4}} \dots \text{ hustota } N(0,2) \]
 \end{example}
 
 \begin{definition}
@@ -94,7 +102,7 @@
     Nechť $X$ je spojitá n.v.. Pokud $B_1,B_2,\dots$ je rozklad, tak
     \[\mathbb{E}(X) = \sum_i P(B_i)\mathbb{E}(X|B_i).\]
     Důkaz: pomocí rozkladu hustoty:
-    \[\int xf_X(x) = \int x\sum_i \dots \text{\textbf{TO DO}}\]
+    \[\int xf_X(x) = \int^\infty_{-\infty} x\sum_i P(B_i) f_{X|B}(x) = \sum_i P(B_i) \int x f_{X|B_i} (x)\]
 \end{theorem}
 
 \begin{definition}
@@ -199,6 +207,6 @@
 
     Nechť $X = \sum^n_{i=1} X_i$, kde $X_i$ jsou n.n.v. nabývající hodnot $\pm 1$ s pravděpodobností $1/2$. Pak pro $t>0$ platí:
     \[P(X\leq -t) = P(X\geq t) \leq e^{-\frac{t^2}{2\sigma^2}},\]
-    kde $\sigma = \sigma_X = $\textbf{DOPSAT} 
+    kde $\sigma = \sigma_X = \sqrt{n}$ 
 \end{theorem}
 \end{document}
