@@ -97,7 +97,7 @@
     \[p\mathbb{E}(X) = p + (1-p) = 1\]
     \[\mathbb{E}(X) = \frac{1}{p}\]
 \end{remark}
-
+\subsection{Parametry rozdělení}
 \begin{theorem}[Parametry rozdělení - Bernoulliho]
     {\color{white} x}
 
@@ -146,7 +146,6 @@
         \[\mathbb{E}(Y_j) = P(Y_j = 1) = \frac{n}{N} \]
         \[= \frac{\binom{N-1}{n-1}}{\binom{N}{n}} = \frac{n}{N}\]
     \end{enumerate}
-    \textbf{SKONTROLOVAŤ, STRATIL SOM SA :Sadge: <- later :sadge:}
 \end{theorem}
 
 \begin{theorem}[Parametry rozdělení - geometrické]
@@ -167,34 +166,44 @@
     \[\mathbb{E}(X) = \sum k \frac{\lambda^k}{k!}e^{-\lambda} = 1\]
     \[\lambda \sum \frac{\lambda^{k-1}}{(k-1)!}e^{-\lambda} = \lambda\]    
 \end{theorem}
-
+\subsection{Náhodné vektory}
 \begin{definition}[Základní popis náhodných vektorů]
+    {\color{white} x}
     \begin{enumerate}
-        \item $X,Y$ - \textbf{nestihol som, lebo preskočil slide za 2 sekundy :) boli tam asi 4 odrážky}
+        \item $X,Y$ - náhodné veličiny na stejném pravděpodobnostním prostoru ($\Omega, \mathcal{F},P$).
+        \item Budeme chtít uvažovat ($X,Y$) jako jeden objekt - náhodný vektor.
+        \item Jak to udělat?
+        \item Příklad: házíme dvakrát čtyřstěnnout kostkou, $X = $ první hod, $Y = $ druhý hod.
     \end{enumerate}
 \end{definition}
 
 \begin{definition}
-    Nejaká definícia, nesithol som, lebo som rantoval.
-
-    Cool, to pak musime dohledat a fixnout :sadge:
+    Pro diskrétní n.v. $X,Y$ na pravděpodobnostím prostoru $(\Omega, \mathcal{F},P)$ definujeme jejich sdruženou pravděpodobnostní funkci
+    (joint pmf) $p_{X,Y} = \mathbb{R}^2 \rightarrow [0,1]$ předpisem
+    \[p_{X,Y} (x,y) = P({\omega \in \Omega : X(\omega) = x\& Y(\omega) = y}) = P(X = x \& Y = y)\]
 \end{definition}
 
-\begin{definition}[Marginální rozdělení]
-    {\color{white} x}
-    
-    \begin{enumerate}
-        \item Máme-li dáno $p_{X,Y},$ jak zjistit rozdělení jednotlivých složek, t.j. $p_X$ a $p_Y$ ?
-    \end{enumerate}
+\subsection{Marginální rozdělení}
 
-    Je tohle skutecne definice, kdyz u ni je dukaz? :kek:
-\end{definition}
-\begin{proof}
+Máme-li dáno $p_{X,Y},$ jak zjistit rozdělení jednotlivých složek, t.j. $p_X$ a $p_Y$ ?
+
+\begin{theorem}
     Nechť $X,Y$ jsou diskrétní n.v. Pak:
     \[p_X(x) = P(X=x) = \sum_{Y\in Im(Y)} P(X = x \& Y=y) = \sum_{Y\in Im(Y)} p_{X,Y}(x,y)\]
     \[p_Y(y) = P(Y=y) = \sum_{X\in Im(X)} P(X = x \& Y=y) = \sum_{Y\in Im(Y)} p_{X,Y}(x,y)\]
-\end{proof}
-
+\end{theorem}
+\begin{theorem}
+    Nechť $X,Y$ jsou n.v. na $(\Omega, \mathcal{F},P)$, nechť $g: \mathbb{R}^2 \rightarrow \mathbb{R}$ je funkce.
+    \begin{itemize}
+        \item Pak $Z = g(X,Y)$ je n.v. na $(\Omega, \mathcal{F},P)$
+        \item a platí pro ni 
+    \end{itemize}
+    \[\mathbb{E}(g(X,Y)) = \sum_{x\in Im(X)} \sum_{y\in Im(Y)} g(x,y)P(X=x,Y=y).\]
+\end{theorem}
+\begin{theorem}
+    Pro $X,Y$ n.v. a $a,b \in \mathbb{R}$ platí
+    \[\mathbb{E}(aX + bY) = a\mathbb{E}(X) + b\mathbb{E}(Y).\]
+\end{theorem}
 \begin{definition}[Nezávislost náhodných veličin]
     Diskrétní n.v. $X,Y$ jsou nezávislé (independent) pokud pro každé $x,y \in \mathbb{R}$ jsou jevy 
     $\{X=x\}$ a $\{Y=y\}$ nezávislé. To nastane právě když
@@ -203,7 +212,7 @@
 
 \begin{theorem}[Součin nezávislých n.v.]
     Pro nezávislé diskrétní n.v. $X,Y$ platí
-    \[\mathbb{XY} = \mathbb{E}(X)\mathbb{E}(Y)\]
+    \[\mathbb{E}XY = \mathbb{E}(X)\mathbb{E}(Y)\]
 \end{theorem}
 \begin{proof}
     \[\mathbb{E}(XY) = \sum_{x\in Im(X), y \in Im(Y)} P(X=x, Y=y)\]
