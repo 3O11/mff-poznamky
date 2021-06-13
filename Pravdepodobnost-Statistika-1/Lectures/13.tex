@@ -17,6 +17,7 @@ Problém s tím, jestli jsou naměřená data (skupiny dat) dostatečně homogen
 
 \subsection{Permutační test}
 \begin{example}
+    {\color{white} x}
     \begin{itemize}
         \item Máme k dispozici dvě sady nezávislých náhodných veličin (náhodné výběry):
         \item $X_1,\dots,X_n \sim F_X$ a $Y_1,\dots,Y_m \sim F_Y$
@@ -43,7 +44,9 @@ Problém s tím, jestli jsou naměřená data (skupiny dat) dostatečně homogen
         \item \textbf{DOPLNIT} 
     \end{itemize}
 \end{example}
+
 \subsection{Bootstrap}
+
 \begin{example}
     Základní idea
     \begin{itemize}
@@ -62,19 +65,23 @@ Problém s tím, jestli jsou naměřená data (skupiny dat) dostatečně homogen
         \[\frac{1}{B}\sum^{B}_{b=1}\left(T^*_{n,b}-\frac{1}{B}\sum^{B}_{k=1}T^*_{n,k}\right)^2\]
     \end{itemize}
 \end{example}
+
 \subsection{Bayesovská statistika}
 \subsubsection{Frekventistický/klasický přístup}
+
 \begin{itemize}
     \item Pravděpodobnost je dlouhodobá frekvence (z 6000 hodů kostkou padla šestka 1026krát). Je to objektivní vlastnost reálného světa.
     \item Parametry jsou pevné, neznáme konstanty. Nelze o nich říkat smysluplné pravděpodobnostní výroky.
     \item Navrhujeme statistické procedury tak, aby měly žádané dlouhodobé vlastnosti. Např. 95\% z našich intervalových odhadů pokryje neznámy parametr.
 \end{itemize}
+
 \subsubsection{Bayesovský přístup}
 \begin{itemize}
     \item Pravděpodobnost popisuje, jak moc věříme nějakému jevu, jak moc jsme ochotní se vsadit. (Pravděpodobnost, že Thomas Bayes měl 18. prosince 1760 šálek čaje je 90\%.)
     \item Můžeme vyslovovat pravděpodobnostní výroky i o parametrech (třebaže jsou to pevné konstanty).
     \item Spočítáme distribuci $\vartheta$ a z ní tvoříme bodové a intervalové odhady, atd.
 \end{itemize}
+
 Bayesovská metoda - základní popis
 \begin{itemize}
     \item neznámý parametr považujeme za náhodnou veličinu $\Theta$.
@@ -86,17 +93,20 @@ Bayesovská metoda - základní popis
     \item $\vartheta = \theta$ malá théta, $\Theta$ je velká théta 
 \end{itemize}
 
-\begin{theorem} (Bayesova věta pro diskrétní náhodné veličiny)\\
+\begin{theorem}[Bayesova věta pro diskrétní náhodné veličiny]
     $X,\Theta$ jsou diskrétní n.v.
     \[p_{\Theta|X} (\vartheta | x) = \frac{p_{X|\Theta}(x|\vartheta)p_\Theta(\vartheta)}{\sum_{\vartheta' \in I_{m\Theta}}p_{X|\Theta}(x|\vartheta')p_\Theta(\vartheta')}.\]
     (sčítance s $p_\Theta(\vartheta') = 0$ považujeme za 0).
 \end{theorem}
-\begin{theorem} (Bayesova věta pro spojité náhodné veličiny)\\
+\begin{theorem}[Bayesova věta pro spojité náhodné veličiny]
     $X,\Theta$ jsou spojité n.v., které mají hustotu $f_X, f_\Theta$ i sdruženou hustotu $f_{X,\Theta}$
     \[p_{\Theta|X} (\vartheta | x) = \frac{f_{X|\Theta}(x|\vartheta)f_\Theta(\vartheta)}{\int{\vartheta' \in I_{m\Theta}}f_{X|\Theta}(x|\vartheta')f_\Theta(\vartheta')d\vartheta'}.\]
     
 \end{theorem}
-Bayesovské bodové odhady - MAP a LMS\\
+
+Bayesovské bodové odhady - MAP a LMS
+\begin{itemize}
+\item 
 MAP - Maximum A-Posteriori\\
 Volíme $\widehat{\vartheta}$ tak, aby maximalizovalo
 \begin{itemize}
@@ -104,14 +114,17 @@ Volíme $\widehat{\vartheta}$ tak, aby maximalizovalo
     \item $f_{\Theta|X}(\vartheta|x)$ v spojitém případě
     \item Podobné metodě $ML$ v klasickém přístupu, pokud bychom volili "flat prior" - uniformní $p_\Theta(\vartheta)$.
 \end{itemize}
+\item
 LMS - Least Mean Square\\
 Též metoda podmíněné střední hodnoty
 \begin{itemize}
     \item Volíme $\widehat{\vartheta} = \mathbb{E}(\Theta|X = x)$.
     \item Nestranný bodový odhad, má nejmenší možnou hodnotu LMS: $\mathbb{E}((\Theta - \widehat{\vartheta})^2 |X = x)$.
 \end{itemize}
-\begin{example}
-    Bayesovský klasifikátor spamů:
+\end{itemize}
+
+\begin{example}[Bayesovský klasifikátor spamů]
+    {\color{white} x}
     \begin{itemize}
         \item vytvoříme seznam podezřelých slov (money, win, pharmacy,\dots)
         \item n.v. $X_i$ (0 nebo 1) popisuje, zda email obsahuje podezřelé slovo $w_i$.
@@ -120,11 +133,14 @@ Též metoda podmíněné střední hodnoty
         \item Použijeme Bayesovu větu na výpočet $p_{\Theta | X}$ 
     \end{itemize}
 \end{example}
+
 \begin{example}
     Romeo a Julie se mají sejít přesně v poledne. Julie ale přijde pozdě o dobu popsanou náhodnou veličinou $X \sim U(0, \vartheta)$.
     Parametr $\vartheta$ modelujeme náhodnou veličinou $\Theta \sim U(0,1)$. Co z naměřené hodnoty $X = x$ usoudíme o $\vartheta$?
     
     \textbf{Doplnit řešení}
 \end{example}
+
 \subsection{Generování náhodných veličin}
+
 \end{document}
