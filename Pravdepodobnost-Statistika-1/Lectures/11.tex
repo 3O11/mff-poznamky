@@ -13,10 +13,12 @@
 
 \subsection{Intervalové odhady}
 \begin{itemize}
-    \item místo jednoho čísla s nejistým významem vypočítáme z dat interval $[\widehat{\Theta}^-, \widehat{\Theta}^+]$
+    \item místo jednoho čísla s nejistým významem vypočítáme z dat interval $\left[\widehat{\Theta}^-, \widehat{\Theta}^+\right]$
 \end{itemize}
-\begin{definition}
-    Nechť $\widehat{\Theta}^-, \widehat{\Theta}^+$ jsou n.v., které závisí na náhodném výběru 
+
+\begin{definition}[Konfidenční interval]
+    Nechť $\widehat{\Theta}^-, \widehat{\Theta}^+$ jsou n.v.,
+    které závisí na náhodném výběru 
     $X = (X_1,\dots,X_n)$ z distribuce $F_{\vartheta}$. Tyto n.v. určují intervalový odhad, též konfidenční interval o spolehlivosti
     $1-\alpha (1-\alpha \textit{ confidence interval}),$ pokud 
     \[P(\widehat{\Theta}^- \leq \vartheta \leq \widehat{\Theta}^+) \geq 1 - \alpha\]
@@ -25,32 +27,35 @@
         \item jednostranný odhad: $[\widehat{\Theta}^-, \infty)$ nebo $(-\infty, \widehat{\Theta}^+]$
     \end{itemize}
 \end{definition}
+
 \begin{theorem}
     $X_1,\dots,X_n$ je náhodný výběr z $N(\vartheta, \sigma^2)$.\\
     $\sigma$ známe, $\vartheta$ chceme určit, $\alpha \in (0,1)$.\\
     Nechť $\Phi(z_{\alpha/2}) = 1 - \alpha / 2$. Zvolíme $\widehat{\Theta}_n := \widehat{X}_n$.
-    \[C_n := [\widehat{\Theta}_n - z_{\alpha/2}\frac{\sigma}{\sqrt{n}}, \widehat{\Theta}_n + z_{\alpha/2}\frac{\sigma}{\sqrt{n}}]\]
+    \[C_n := \left[\widehat{\Theta}_n - z_{\alpha/2}\frac{\sigma}{\sqrt{n}}, \widehat{\Theta}_n + z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\right]\]
     Pak $P(C_n \ni \vartheta) = 1 - \alpha$.
-    \begin{proof}
-        \[C_n \ni \vartheta \Leftrightarrow |\widehat{\Theta}_n - \vartheta | \leq z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\]
-        \[\Leftrightarrow \left|\frac{\widehat{\Theta}_n - \vartheta}{\sigma/\sqrt{n}}\right| \leq z_{\alpha/2}\]
-        \[ \frac{\widehat{\Theta}_n - \vartheta}{\sigma/\sqrt{n}} = Z \sim N(0,1)\]
-        \[P(C_n \ni \vartheta) = P(|Z| \leq z_{\alpha/2}) = \Phi(z_{\alpha/2}) - \Phi(-z_{\alpha/2})\]
-        \[= (1- \alpha/2) - (+ \alpha/2) = 1 - \alpha\]
-    \end{proof}
 \end{theorem}
+\begin{proof}
+    \[C_n \ni \vartheta \Leftrightarrow |\widehat{\Theta}_n - \vartheta | \leq z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\]
+    \[\Leftrightarrow \left|\frac{\widehat{\Theta}_n - \vartheta}{\sigma/\sqrt{n}}\right| \leq z_{\alpha/2}\]
+    \[ \frac{\widehat{\Theta}_n - \vartheta}{\sigma/\sqrt{n}} = Z \sim N(0,1)\]
+    \[P(C_n \ni \vartheta) = P(|Z| \leq z_{\alpha/2}) = \Phi(z_{\alpha/2}) - \Phi(-z_{\alpha/2})\]
+    \[= (1- \alpha/2) - (+ \alpha/2) = 1 - \alpha\]
+\end{proof}
+
 \begin{theorem}
     $X_1,\dots,X_n$ je náhodný výběr z rozdělení se střední hodnotou $\vartheta$, rozptylem $\sigma^2$.\\
     $\sigma$ známe, $\vartheta$ chceme určit, $\alpha \in (0,1)$.\\
     Nechť $\Phi(z_{\alpha/2}) = 1 - \alpha / 2$. Zvolíme $\widehat{\Theta}_n := \widehat{X}_n$.
-    \[C_n := [\widehat{\Theta}_n - z_{\alpha/2}\frac{\sigma}{\sqrt{n}}, \widehat{\Theta}_n + z_{\alpha/2}\frac{\sigma}{\sqrt{n}}]\]
+    \[C_n := \left[\widehat{\Theta}_n - z_{\alpha/2}\frac{\sigma}{\sqrt{n}}, \widehat{\Theta}_n + z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\right]\]
     Pak $\lim_{n \rightarrow \infty} P(C_n \ni \vartheta) = 1 - \alpha$.
-    \begin{proof}
-        Centrální limitní věta.
-    \end{proof}
 \end{theorem}
-\begin{definition}
-    Studentovo rozdělení
+\begin{proof}
+    Centrální limitní věta.
+\end{proof}
+
+\begin{definition}[Studentovo rozdělení]
+    {\color{white} x}
     \begin{itemize}
         \item $\overline{X}_n = \frac{1}{n} \sum^n_{i=1} X_i \dots$ výběrový průměr
         \item $\widehat{S}^2_n = \frac{1}{n-1}\sum^n_{i=1} (X_i - \overline{X}_n)^2$ \dots výběrový rozptyl
@@ -62,17 +67,20 @@
         \item Distribuční funkci budeme značit $\Psi_{n-1}$. Je v tabulkách, v $R:pt(x,n-1)$\textbf{TODO}
     \end{itemize}
 \end{definition}
+
 \begin{theorem}
     $X_1,\dots,X_n$ je náhodný výběr z $N(\vartheta,\sigma^2)$.\\
     $\vartheta$ chceme určit, $\sigma$ neznáme, $\alpha \in (0,1).$ Nechť
     \[\Psi_{n-1}(z_{\alpha/2}) = 1 - \alpha/2. \widehat{\Theta}_n = \widehat{X}_n, \widehat{S}^2_n = \frac{1}{n-1} \sum^n_{i=1} (X_i - \overline{X}_n)^2\]
     \[C_n := \left[\widehat{\Theta}_n - z_{\alpha/2} \frac{\widehat{S}_n}{\sqrt{n}}, \widehat{\Theta}_n + z_{\alpha/2}\frac{\widehat{S}_n}{\sqrt{n}}\right]\]
     Pak $P(C_n \ni \vartheta) = 1 - \alpha$
-    \begin{proof}
-        \[P(C_n \ni \vartheta) = P (|Z| \leq z_{\alpha/2}) = \Psi_{n-1}(z_{\alpha/2}) - \Psi_{n-1}(-z_{\alpha/2}) = 1 - \alpha/2 - \alpha/2 = 1-\alpha\]
-        \[* Z = \frac{}{} - \text{ st. } t-\text{rozdělení s } n-1.\]
-    \end{proof}
 \end{theorem}
+
+\begin{proof}
+    \[P(C_n \ni \vartheta) = P (|Z| \leq z_{\alpha/2}) = \Psi_{n-1}(z_{\alpha/2}) - \Psi_{n-1}(-z_{\alpha/2}) = 1 - \alpha/2 - \alpha/2 = 1-\alpha\]
+    \[* Z = \frac{}{} - \text{ st. } t-\text{rozdělení s } n-1.\]
+\end{proof}
+
 \subsection{Testování hypotéz}
 \begin{itemize}
     \item Je naše mince spravedlivá?
@@ -86,10 +94,12 @@
     \item $H_0$ - nulová hypotéza - značí defaultní, konzervativní model (léčba, mince je spravedlivá)
     \item $H_1$ - alternativní hypotéza - značí alternativní model "pozoruhodnost"
 \end{itemize}
-Testování hypotéz - ilustrace
-\begin{itemize}
-    \item Chceme testovat, zda je mince spravedlivá.
-    \item Hodíme $n$-krát mincí, orel padne $S$-krát.
-    \item Pokud je $|S-n/2|$ moc velké, tak mince není spravedlivá.
-\end{itemize}
+\begin{example}[Testování hypotéz]
+    {\color{white} x}
+    \begin{itemize}
+        \item Chceme testovat, zda je mince spravedlivá.
+        \item Hodíme $n$-krát mincí, orel padne $S$-krát.
+        \item Pokud je $|S-n/2|$ moc velké, tak mince není spravedlivá.
+    \end{itemize}
+\end{example}
 \end{document}

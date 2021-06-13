@@ -20,7 +20,9 @@
     $\Omega = \{$všechny $n$-tice obyvatel ČR, mohou se opakovat$\}$\\
     Pro $\omega = (\omega_1,\dots,\omega_n)$ zvolíme $X_i = I(\omega_i$ je levák$)$.
     \item varianty (stratifikovaný výběr)\\
-    \textbf{TODO}
+    Chceme adekvátně reprezentovat různé podmnožiny
+    (dané věkem, bydlištěm, \dots ).
+    Nebudeme dále zkoumat.
 \end{itemize}
 
 \subsection{Statistika - model}
@@ -42,11 +44,11 @@
     \item (linární) regrese
 \end{enumerate}
 \begin{definition}
-    statistika - libovolná funkce náhodného výběru, t. j. \textbf{TODO}
+    statistika - libovolná funkce náhodného výběru, tj. např. aritmetický průměr, medián, maximum atd.
+    \[ T = T(X_1, \dots , X_n) \]
 \end{definition}
 
-\begin{example}
-    Výběrový průměr a rozptyl\\
+\begin{example}[Výběrový průměr a rozptyl]
     \[\overline{X}_n = \frac{1}{n}\sum^n_{i=1}X_i\]
     \[\overline{S}_n = \frac{1}{n}\sum^n_{i=1}(X_i - \overline{X}_n)^2\]
     \[\widehat{S}_n = \frac{1}{n-1}\sum^n_{i=1}(X_i - \overline{X}_n)^2 \]
@@ -56,7 +58,8 @@
 \end{definition}
 
 \subsection{Vlastnosti bodových odhadů}
-\begin{definition}
+
+\begin{definition}[Vlastnosti bodových odhadů]
     Odhad $\widehat{\Theta}_n = \widehat{\Theta}_n(X_1,\dots,X_n)$ parametrů $\vartheta$ je
     \begin{itemize}
         \item nestranný (unbiased), pokud $\vartheta = \mathbb{E}(\widehat{\Theta}_n)$ (pro každé $\vartheta$)
@@ -65,6 +68,7 @@
         \item vychýlení (bias) $bias_\vartheta (\widehat{\Theta}_n):=\mathbb{E}(\widehat{\Theta}_n - \vartheta)$
         \item střední kvadratická chyba je $MSE := \mathbb{E}((\widehat{\Theta}_n - \vartheta)^2)$
     \end{itemize}
+
 \end{definition}
 \begin{theorem}
     \[MSE = bias_\vartheta(\widehat{\Theta}_n)^2 + var_\vartheta(\widehat{\Theta}_n)\]
@@ -72,33 +76,37 @@
         \textbf{TODO}
     \end{proof}
 \end{theorem}
-\begin{theorem}
-    Parametry výběrového momentu a rozptylu\\
-
+\begin{theorem}[Parametry výběrového momentu a rozptylu]
+    {\color{white} x}
     \begin{enumerate}
         \item $\overline{X}_n$ je konzistentní nestranný odhad $\mu = \mathbb{E}X_1 = \mathbb{E}X_2 =\dots$
         \item $\overline{S}_n$ je konzistentní asymptoticky nestranný odhad $\sigma^2$
         \item $\widehat{S}_n$ je konzistentní nestranný odhad $\sigma^2$
     \end{enumerate}
-    \begin{proof}
-        1. 
-        \[\overline{X}_n = \frac{1}{n} X_1 + X_2 + \dots + X_n\]
-        $\overline{X}_i$ je nestranný, t. j. $\mathbb{E}\overline{X}_n = \mu$
-        \[ = \frac{1}{n} \mathbb{E}X_1 + \mathbb{E}X_2 + \dots + \mathbb{E}X_n = \frac{1}{n} \mu + \mu + \dots + \mu = \mu\]
-        $\overline{X}_n$ je konzistentní, t. j. $\overline{X}_n \rightarrow^P \mu$ (slabý zákon velkých čísel) \\
-        $var(\overline{X}_n) = frac{\sigma^2}{n} \dots$ Čebyšev\\
-        2. 
-        \[\overline{S}_n = \frac{1}{n} \sum^n_{i=1}(X_i - \overline{X}_i)^2\]
-        \[\mathbb{E}\overline{S}_n = \mathbb{E}\frac{1}{n}\sum^n_{i=1}((X_i - \mu) - (\overline{X}_i - \mu))^2\]
-        \[ = \mathbb{E}\frac{1}{n}\sum\left[(X_i - \mu)^2 - 2(X_i - \mu)(\overline{X}_i-\mu) + (\overline{X}_i - \mu)^2\right]\]
-        \[ = \mathbb{E}\frac{1}{n}\sum(X_i - \mu) - \mathbb{E} \frac{2}{n} \sum (X_i - \mu)(\overline{X_i-\mu}) + \mathbb{E}(\overline{X}_n - \mu)^2\]
-        \[ \frac{1}{n} \sum \mathbb{E}(X_i - \mu)^2 - \mathbb{} (\overline{X}_n - \mu)^2\]
-        \[ = \sigma^2 - var(\overline{X}_n) = \sigma^2 - \frac{\sigma^2}{n} = \frac{n-1}{n}\sigma^2\]
-        3. 
-        \[\widehat{S}_n = \frac{n}{n-1}\overline{S}_n\]
-        \[\mathbb{E}\widehat{S}_n = \frac{n}{n-1}\mathbb{E}\widehat{S}_n = \sigma^2 >> \widehat{S}_n \text{ je nestranný odhad.}\]
-    \end{proof}
 \end{theorem}
+
+\begin{proof}
+{\color{white} x}
+\begin{enumerate}
+    \item
+    \[\overline{X}_n = \frac{1}{n} X_1 + X_2 + \dots + X_n\]
+    $\overline{X}_i$ je nestranný, t. j. $\mathbb{E}\overline{X}_n = \mu$
+    \[ = \frac{1}{n} \mathbb{E}X_1 + \mathbb{E}X_2 + \dots + \mathbb{E}X_n = \frac{1}{n} \mu + \mu + \dots + \mu = \mu\]
+    $\overline{X}_n$ je konzistentní, t. j. $\overline{X}_n \rightarrow^P \mu$ (slabý zákon velkých čísel) \\
+    $var(\overline{X}_n) = frac{\sigma^2}{n} \dots$ Čebyšev
+    \item
+    \[\overline{S}_n = \frac{1}{n} \sum^n_{i=1}(X_i - \overline{X}_i)^2\]
+    \[\mathbb{E}\overline{S}_n = \mathbb{E}\frac{1}{n}\sum^n_{i=1}((X_i - \mu) - (\overline{X}_i - \mu))^2\]
+    \[ = \mathbb{E}\frac{1}{n}\sum\left[(X_i - \mu)^2 - 2(X_i - \mu)(\overline{X}_i-\mu) + (\overline{X}_i - \mu)^2\right]\]
+    \[ = \mathbb{E}\frac{1}{n}\sum(X_i - \mu) - \mathbb{E} \frac{2}{n} \sum (X_i - \mu)(\overline{X_i-\mu}) + \mathbb{E}(\overline{X}_n - \mu)^2\]
+    \[ \frac{1}{n} \sum \mathbb{E}(X_i - \mu)^2 - \mathbb{} (\overline{X}_n - \mu)^2\]
+    \[ = \sigma^2 - var(\overline{X}_n) = \sigma^2 - \frac{\sigma^2}{n} = \frac{n-1}{n}\sigma^2\]
+    \item
+    \[\widehat{S}_n = \frac{n}{n-1}\overline{S}_n\]
+    \[\mathbb{E}\widehat{S}_n = \frac{n}{n-1}\mathbb{E}\widehat{S}_n = \sigma^2 >> \widehat{S}_n \text{ je nestranný odhad.}\]
+\end{enumerate}
+\end{proof}
+
 Je lepší $\widehat{S}_n$ nebo $\overline{S}_n$?\\
 $\rightarrow \widehat{S}_n$ je nestranný, $\overline{S}_n$ ne.\\
 
@@ -109,10 +117,11 @@ $\rightarrow \widehat{S}_n$ je nestranný, $\overline{S}_n$ ne.\\
 \end{itemize}
 \begin{theorem}
     $\widehat{m_r(\vartheta)}$ je nestranný konzistentní odhad pro $m_r(\vartheta)$.
-    \begin{proof}
-        \[\mathbb{E}\widehat{m_r(\vartheta)} = \frac{1}{n} \sum \mathbb{E}(X^r_i) = \frac{1}{n}\sum \mathbb{E}(X^r_i) = m_r(\vartheta)\]
-    \end{proof}
 \end{theorem}
+\begin{proof}
+    \[\mathbb{E}\widehat{m_r(\vartheta)} = \frac{1}{n} \sum \mathbb{E}(X^r_i) = \frac{1}{n}\sum \mathbb{E}(X^r_i) = m_r(\vartheta)\]
+\end{proof}
+
 \begin{example}
     $X_1,\dots,X_n \sim Bern(p) \dots X_i = $"$i$-tý člověk je levák"\\
     $\vartheta = p \in \left[0,1\right]$\\
