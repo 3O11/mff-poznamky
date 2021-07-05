@@ -37,26 +37,24 @@
 \end{definition}
 \begin{theorem}
     Nechť $X$ je n.v. s distribční funkcí $F_X = F$, nechť $F$ je spojitá a rostoucí. Pak $F(X) \sim U(0,1)$.\\
-    
-    \begin{proof}
-        \[F_Y(y) = P(F(X) \leq y) = 0 \text{ pro } y < 0 \& 1 \text{ pro } y \geq 1\]
-        \[\text{pro } y \in (0,1) P(X \leq x) \implies \text{ stejné jevy } \dots = F(x) = y\]
-    \end{proof}
 \end{theorem}
+\begin{proof}
+    \[F_Y(y) = P(F(X) \leq y) = 0 \text{ pro } y < 0 \& 1 \text{ pro } y \geq 1\]
+    \[\text{pro } y \in (0,1) P(X \leq x) \implies \text{ stejné jevy } \dots = F(x) = y\]
+\end{proof}
 
 \begin{theorem}
     Nechť $F$ je funkce \textit{"typu distribuční funkce"} : neklesajíci zprava spojitá funkce s $lim_{x\rightarrow -\infty} F(x) = 0$ a $\lim_{x \rightarrow \infty} F(x) = 1$.
 
     Nechť $Q$ je odpovídající kvantilová funkce. Nechť $U \sim U(0,1), X = Q(U)$. Pak $X$ má distribuční funkci $F$.
-
-    \begin{proof}
-        \[F_X(x) = P(Q(U) \leq x)\]
-        \begin{remark}
-            \[Q(p) = inf\{x: F(X) \geq p\} \implies Q(p) \leq x \Leftrightarrow F(x) \geq p\]
-        \end{remark}
-        \[F_X(x) = P(U \leq F(x)) = F(x)\]
-    \end{proof}
 \end{theorem}
+\begin{proof}
+    \[F_X(x) = P(Q(U) \leq x)\]
+    \begin{remark}
+        \[Q(p) = inf\{x: F(X) \geq p\} \implies Q(p) \leq x \Leftrightarrow F(x) \geq p\]
+    \end{remark}
+    \[F_X(x) = P(U \leq F(x)) = F(x)\]
+\end{proof}
 
 \begin{example}
     \[F(x) = 1-e^{-\lambda x} \dots Exp(\lambda)\]
@@ -125,13 +123,12 @@
         \item $X,Y$ jsou nezávislé
         \item $f_{X,Y}(x,y) = f_X(x) f_Y(y)$
     \end{enumerate}
-    
-    \begin{proof}
-        \[\implies : f_{X,Y}(x,y) = \frac{\partial^2}{\partial x \partial y} F_{X,Y}(x,y) = \]
-        \[F'_X F'_y = f_X(x)f_Y(y)\]
-        \textbf{doplniť druhú implikáciu (nestihol som, zo slidov)}
-    \end{proof}
 \end{theorem}
+\begin{proof}
+    \[\implies : f_{X,Y}(x,y) = \frac{\partial^2}{\partial x \partial y} F_{X,Y}(x,y) = \]
+    \[F'_X F'_y = f_X(x)f_Y(y)\]
+    \textbf{doplniť druhú implikáciu (nestihol som, zo slidov)}
+\end{proof}
 
 Vícerozměrné normální rozdělení\\
 
