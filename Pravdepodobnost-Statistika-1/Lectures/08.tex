@@ -69,14 +69,14 @@
 
     Nechť spojité $X,Y$ jsou n.n.v. Pak $Z = X+Y$ je také spojitá n.v. a její hustotu dostaneme jako konvoluci funkcí $f_X,f_Y$, neboli
     \[f_Z(z) = \int^\infty_{-\infty}f_X(x)f_Y(z-x)dx\]
-    \begin{proof}
-        Náhled: \[P(Z=z | X=x) = P(Y = z-x)\]
-        \[f_{Z|X}(z|x) = f_Y(z-x)\]
-        (n.v. $Z|X=x$ je stejná jako $Y+x$)
-        \[f_Z(z) = \int^\infty_{-\infty} f_{Z|X} (z|x)f_X(x) =\]
-        \[=\int f_Y(z-x)f_X(x)\]
-    \end{proof}
 \end{theorem}
+\begin{proof}
+    Náhled: \[P(Z=z | X=x) = P(Y = z-x)\]
+    \[f_{Z|X}(z|x) = f_Y(z-x)\]
+    (n.v. $Z|X=x$ je stejná jako $Y+x$)
+    \[f_Z(z) = \int^\infty_{-\infty} f_{Z|X} (z|x)f_X(x) =\]
+    \[=\int f_Y(z-x)f_X(x)\]
+\end{proof}
 
 \begin{example}
     $X,Y \sim N(0,1)$ nezávislé. n.v. \dots $f_X = f_Y = \varphi$ \dots $\varphi(t) = \frac{1}{\sqrt{2\pi}}e^{-\frac{t^2}{2}}$
