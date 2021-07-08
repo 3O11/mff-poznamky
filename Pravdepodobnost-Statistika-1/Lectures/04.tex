@@ -23,8 +23,8 @@
 \begin{proof}
 \begin{enumerate}
     \item
-    \[\mathbb{E}(X) = \sum_{x \in X} x  P(X = x) = 0  P(X = 0) + \sum_{x > \& x \in X} x  P(X = 0) = 
-    \sum_{x<0 \land x\in X} x P(X=x) = 0\]
+    \[\mathbb{E}(X) = \sum_{x \in Im(X)} x  P(X = x) = 0  P(X = 0) + \sum_{x > 0 \& x \in X} x  P(X = 0) + 
+    \sum_{x < 0 \& x \in X} x P(X=x) = 0\]
     \[\implies \forall x > 0 : P(x = x) = 0 \implies P(X = 0) = 1\]
     \item
     \[\mathbb{E}(X) = \sum x P(X\geq x) = 0\]
