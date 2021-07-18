@@ -36,25 +36,27 @@
     Pokud $X_1,\dots ,X_n$ jsou n.n.v s rozdělením $Exp(\lambda)$, tak $X_1 + \dots + X_n \sim Gamma(n, \lambda)$.  
 \end{definition}
 \begin{theorem}
-    Nechť $X$ je n.v. s distribční funkcí $F_X = F$, nechť $F$ je spojitá a rostoucí. Pak $F(X) \sim U(0,1)$.\\
+    Nechť $X$ je n.v. s distribuční funkcí $F_X = F$, nechť $F$ je spojitá a rostoucí. Pak $F(X) \sim U(0,1)$.\\
+    
+    \begin{proof}
+        \[F_Y(y) = P(F(X) \leq y) = 0 \text{ pro } y < 0 \& 1 \text{ pro } y \geq 1\]
+        \[\text{pro } y \in (0,1) P(X \leq x) \implies \text{ stejné jevy } \dots = F(x) = y\]
+    \end{proof}
 \end{theorem}
-\begin{proof}
-    \[F_Y(y) = P(F(X) \leq y) = 0 \text{ pro } y < 0 \& 1 \text{ pro } y \geq 1\]
-    \[\text{pro } y \in (0,1) P(X \leq x) \implies \text{ stejné jevy } \dots = F(x) = y\]
-\end{proof}
 
 \begin{theorem}
     Nechť $F$ je funkce \textit{"typu distribuční funkce"} : neklesajíci zprava spojitá funkce s $lim_{x\rightarrow -\infty} F(x) = 0$ a $\lim_{x \rightarrow \infty} F(x) = 1$.
 
     Nechť $Q$ je odpovídající kvantilová funkce. Nechť $U \sim U(0,1), X = Q(U)$. Pak $X$ má distribuční funkci $F$.
+
+    \begin{proof}
+        \[F_X(x) = P(Q(U) \leq x)\]
+        \begin{remark}
+            \[Q(p) = inf\{x: F(X) \geq p\} \implies Q(p) \leq x \Leftrightarrow F(x) \geq p\]
+        \end{remark}
+        \[F_X(x) = P(U \leq F(x)) = F(x)\]
+    \end{proof}
 \end{theorem}
-\begin{proof}
-    \[F_X(x) = P(Q(U) \leq x)\]
-    \begin{remark}
-        \[Q(p) = inf\{x: F(X) \geq p\} \implies Q(p) \leq x \Leftrightarrow F(x) \geq p\]
-    \end{remark}
-    \[F_X(x) = P(U \leq F(x)) = F(x)\]
-\end{proof}
 
 \begin{example}
     \[F(x) = 1-e^{-\lambda x} \dots Exp(\lambda)\]
@@ -69,8 +71,9 @@
     jejich sdruženou distribuční funkci (joint cdf) $F_{X,Y} : \mathbb{R}^2 \rightarrow [0,1]$ předpisem
     \[F_{X,Y}(x,y) = P(\{\omega \in \Omega : X(\omega) \leq x \& Y(\omega) \leq y\}).\]
     \begin{enumerate}
-        \item Formální podmínka: potřebujeme $\{X\leq x \& Y \leq Y\} \in \mathcal{F}$, jinak $(X,Y)$ není náhodný vektor.
-        \item Mohli bychom definovat i pro více než dvě n.v. \dots $F_{X_1,\dots ,X_n(x_1,\dots ,x_n)} = P(X_1 \leq x_1 \& \dots X_n \leq x_n)$.
+        \item Formální podmínka: potřebujeme $\{X\leq x \& Y \leq y\} \in \mathcal{F}$, jinak $(X,Y)$ není náhodný vektor.
+        \item Mohli bychom definovat i pro více než dvě n.v. \dots $F_{X_1,\dots
+            ,X_n(x_1,\dots ,x_n)} = P(X_1 \leq x_1 \& \dots X_n \leq x_n)$.
         \item Můžeme odsud odvodit pravděpodobnost obdélníku:
         \[P(X \in (a,b] \& Y \in (c,d]) = F(b,d) - F(b,c) - F(a,d) + F(a,c)\]
     \end{enumerate}
@@ -94,7 +97,7 @@
 \begin{remark}
     \[f_{X,Y}(x,y) = \frac{\partial^2}{\partial x \partial y} F_{X,Y}(x,y)\]
     \[f_{X,Y}(x) \doteq \frac{P(x\leq X \leq x + \Delta_x \& y\leq Y \leq y + \Delta_y)}{\Delta_x \Delta_y}\]
-    \[P((X,Y)\in A) = \int_A f = \int^{x+\Delta_x}_x \int^{y+\Delta_y}_y f_{X,Y}(s,t)dsdt = f_{x,s}(x,s)\Delta_x \Delta_y\]
+    \[P((X,Y)\in A) = \int_A f = \int^{x+\Delta_x}_x \int^{y+\Delta_y}_y f_{X,Y}(s,t)dsdt = f_{X,Y}(x,y)\Delta_x \Delta_y\]
 \end{remark}
 
 \begin{definition}
@@ -104,10 +107,10 @@
     \[\mathbb{E}(g(X,Y)) = \int^\infty_{-\infty} \int^\infty_{-\infty} g(x,y)f_{X,Y}(x,y)dxdy.\]
     A tak jako v diskrétním případu odsud odvodíme
     \[\mathbb{E}(aX+bY+c) = a\mathbb{E}(X) + b\mathbb{E}(Y) + c\]
-    \[\mathbb{E}(g(X,Y)) = \int \int g(x,y)f_{X,Y}(x,y) = \int \int ax f(x,y) + \int \int by f(x,y) + c \int^\infty_{-\infty}f(x,y)=\]
-    \[a \int x \int f_{X,Y}(x,y)dydx + b \int y \int f(x,y)dydx + 1 =\]
-    \[a \int xf_X(x) + b \int yf_Y(y) + 1 = \]
-    \[ a\mathbb{E}(X) + b\mathbb{E}(Y) + 1\]
+    \[\mathbb{E}(g(X,Y)) = \int \int g(x,y)f_{X,Y}(x,y) = \int \int ax f(x,y) + \int \int by f(x,y) + c \int^\infty_{-\infty}\int^\infty_{-\infty}f(x,y)=\]
+    \[a \int x \int f_{X,Y}(x,y)dydx + b \int y \int f(x,y)dydx + c =\]
+    \[a \int xf_X(x) + b \int yf_Y(y) + c = \]
+    \[ a\mathbb{E}(X) + b\mathbb{E}(Y) + c\]
 \end{definition}
 
 \begin{definition}
@@ -123,12 +126,13 @@
         \item $X,Y$ jsou nezávislé
         \item $f_{X,Y}(x,y) = f_X(x) f_Y(y)$
     \end{enumerate}
+    
+    \begin{proof}
+        \[\implies : f_{X,Y}(x,y) = \frac{\partial^2}{\partial x \partial y} F_{X,Y}(x,y) = \]
+        \[F'_X F'_Y = f_X(x)f_Y(y)\]
+        \textbf{doplniť druhú implikáciu (nestihol som, zo slidov)}
+    \end{proof}
 \end{theorem}
-\begin{proof}
-    \[\implies : f_{X,Y}(x,y) = \frac{\partial^2}{\partial x \partial y} F_{X,Y}(x,y) = \]
-    \[F'_X F'_y = f_X(x)f_Y(y)\]
-    \textbf{doplniť druhú implikáciu (nestihol som, zo slidov)}
-\end{proof}
 
 Vícerozměrné normální rozdělení\\
 
