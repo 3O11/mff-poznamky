@@ -18,8 +18,7 @@
     \begin{enumerate}
         \item Pokud $F_X$ je spojitá, tak $Q_X = F^{-1}_X.$
         \item Obecně platí: $Q_X(p) \leq x \Leftrightarrow p \leq F_X(x)$.
-        \item $Q_X(\frac{1}{2})$ = medián (pozor, když  $F_X$ nená rostoucí)
-        \item Pokud $F_X$ je spojitá, tak $Q_X = F^{-1}_X$.
+        \item $Q_X(\frac{1}{2})$ = medián (pozor, když  $F_X$ není rostoucí)
     \end{enumerate}
 \end{definition}
 
@@ -37,8 +36,8 @@
 \begin{theorem}[Práce s hustotou]
     Nechť spojitá n.v. $X$ má hustotu $f_X$. Pak
     \begin{enumerate}
-        \item $P(X=x) = 0 \forall x \in \mathbb{R}$.
-        \item $P(a\leq X \leq b) = \int^b_a f_x(t) dt \forall a,b \in \mathbb{R}$.
+        \item $P(X=x) = 0\ \forall x \in \mathbb{R}$.
+        \item $P(a\leq X \leq b) = \int^b_a f_X(t) dt\ \forall a,b \in \mathbb{R}$.
         \item V důsledku taky platí (pro rozumnou množinu A):
             \[P(X\in A) = \int_A f_X(t) dt\]
     \end{enumerate} 
@@ -146,6 +145,7 @@
 \begin{remark}[Odolnost vůči součtu]
     Pokud $X_1,\dots,X_k$ jsou n.n.v., kde $X_i \sim N(\mu_i, \sigma^2_i)$, pak
     \[X_1 + \dots + X_k \sim N(\mu, \sigma^2),\]
+    kde $\mu = \mu_1 + \hdots + \mu_n$.
 \end{remark}
 
 \begin{remark}[Normální rozdělení - klíčové vlastnosti]

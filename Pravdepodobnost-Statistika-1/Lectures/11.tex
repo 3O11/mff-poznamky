@@ -20,7 +20,7 @@
     Nechť $\widehat{\Theta}^-, \widehat{\Theta}^+$ jsou n.v.,
     které závisí na náhodném výběru 
     $X = (X_1,\dots,X_n)$ z distribuce $F_{\vartheta}$. Tyto n.v. určují intervalový odhad, též konfidenční interval o spolehlivosti
-    $1-\alpha (1-\alpha \textit{ confidence interval}),$ pokud 
+    $1-\alpha$ (\textit{confidence interval}) pokud 
     \[P(\widehat{\Theta}^- \leq \vartheta \leq \widehat{\Theta}^+) \geq 1 - \alpha\]
     \begin{itemize}
         \item tohle jsou tzv. oboustranné odhady
@@ -62,8 +62,9 @@
     \end{itemize}
     \begin{itemize}
         \item Nechť $X_1, \dots X_n \sim N(\mu,\sigma^2)$
-        \item Pak $\frac{\overline{X}_n - \mu}{\widehat{S}_n/\sqrt{n}} \sim N(0,1)$
-        \item Studentovo $t$-rozdělení s $n-1$ stupni volnosti je rozdělení n.v. $\frac{\overline{X}_n - \mu}{\widehat{S}_n/\sqrt{n}}$
+        \item Pak $\frac{\overline{X}_n - \mu}{\widehat{S}^2_n/\sqrt{n}} \sim N(0,1)$
+        \item Studentovo $t$-rozdělení s $n-1$ stupni volnosti je rozdělení n.v.
+            $\frac{\overline{X}_n - \mu}{\widehat{S}^2_n/\sqrt{n}}$
         \item Distribuční funkci budeme značit $\Psi_{n-1}$. Je v tabulkách, v $R:pt(x,n-1)$\textbf{TODO}
     \end{itemize}
 \end{definition}
@@ -71,7 +72,8 @@
 \begin{theorem}
     $X_1,\dots,X_n$ je náhodný výběr z $N(\vartheta,\sigma^2)$.\\
     $\vartheta$ chceme určit, $\sigma$ neznáme, $\alpha \in (0,1).$ Nechť
-    \[\Psi_{n-1}(z_{\alpha/2}) = 1 - \alpha/2. \widehat{\Theta}_n = \widehat{X}_n, \widehat{S}^2_n = \frac{1}{n-1} \sum^n_{i=1} (X_i - \overline{X}_n)^2\]
+    \[\Psi_{n-1}(z_{\alpha/2}) = 1 - \alpha/2,\ \widehat{\Theta}_n =
+    \widehat{X}_n,\ \widehat{S}^2_n = \frac{1}{n-1} \sum^n_{i=1} (X_i - \overline{X}_n)^2\]
     \[C_n := \left[\widehat{\Theta}_n - z_{\alpha/2} \frac{\widehat{S}_n}{\sqrt{n}}, \widehat{\Theta}_n + z_{\alpha/2}\frac{\widehat{S}_n}{\sqrt{n}}\right]\]
     Pak $P(C_n \ni \vartheta) = 1 - \alpha$
 \end{theorem}

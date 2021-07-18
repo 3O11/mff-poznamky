@@ -40,7 +40,7 @@
     Marginální hustota\\
 
     \[f_X(x) = \int_{y\in \mathbb{R}} f_{X,Y}(x,y)dy\]
-    \[f_Y(y) = \int_{y\in \mathbb{R}} f_{X,Y}(x,y)dx\]
+    \[f_Y(y) = \int_{x\in \mathbb{R}} f_{X,Y}(x,y)dx\]
 \end{theorem}
 \begin{proof}
     \textbf{TODO}
@@ -61,7 +61,7 @@
     Podmíněná, sdružená a marginální hustota\\
 
     \[f_{X,Y}(x,y) = f_Y(y)f_{X|Y}(x|y)\]
-    \[f_X(x) = \int^\infty_{-\infty} f_()\]
+    \[f_X(x) = \int^\infty_{-\infty} f_{X,Y}(x|y)f_Y(y)\dy\]
 \end{theorem}
 
 \begin{theorem}
@@ -69,14 +69,14 @@
 
     Nechť spojité $X,Y$ jsou n.n.v. Pak $Z = X+Y$ je také spojitá n.v. a její hustotu dostaneme jako konvoluci funkcí $f_X,f_Y$, neboli
     \[f_Z(z) = \int^\infty_{-\infty}f_X(x)f_Y(z-x)dx\]
+    \begin{proof}
+        Náhled: \[P(Z=z | X=x) = P(Y = z-x)\]
+        \[f_{Z|X}(z|x) = f_Y(z-x)\]
+        (n.v. $Z|X=x$ je stejná jako $Y+x$)
+        \[f_Z(z) = \int^\infty_{-\infty} f_{Z|X} (z|x)f_X(x) =\]
+        \[=\int f_Y(z-x)f_X(x)\]
+    \end{proof}
 \end{theorem}
-\begin{proof}
-    Náhled: \[P(Z=z | X=x) = P(Y = z-x)\]
-    \[f_{Z|X}(z|x) = f_Y(z-x)\]
-    (n.v. $Z|X=x$ je stejná jako $Y+x$)
-    \[f_Z(z) = \int^\infty_{-\infty} f_{Z|X} (z|x)f_X(x) =\]
-    \[=\int f_Y(z-x)f_X(x)\]
-\end{proof}
 
 \begin{example}
     $X,Y \sim N(0,1)$ nezávislé. n.v. \dots $f_X = f_Y = \varphi$ \dots $\varphi(t) = \frac{1}{\sqrt{2\pi}}e^{-\frac{t^2}{2}}$
@@ -125,7 +125,7 @@
     \[cov(X,Y) = \mathbb{E}(XY) - \mathbb{E}(X)\mathbb{E}(Y).\]
     \begin{enumerate}
         \item $var(X) = cov(X,X)$
-        \item $cov(X,\alpha Y + \beta Z + c) = \alpha cov(X,Y) + \beta cov(X,Z)$
+        \item $cov(X,\alpha Y + \beta Z + c) = \alpha\ cov(X,Y) + \beta\ cov(X,Z)$
         \item $cov(X,Y) = 0$ pokud $X,Y$ jsou nezávislé
         \item ale nejen tehdy
     \end{enumerate}
@@ -139,7 +139,7 @@
         \item je to "přenormovaná" kovariance
         \item $-1 \leq \varrho(X,Y) \leq 1$.
         \item Korelace neznamená příčinnou souvislot! (Např. korelace je symetrická, kauzalita nikoli!)
-        \item Naopak, nekorelace neznamená nezávislot. (Př. $X$ libovolná, $Y = +X$ nebo $Y = -X$, obojí se stejnou pravděpodobností).    \end{enumerate}
+        \item Naopak, nekorelace neznamená nezávislost. (Př. $X$ libovolná, $Y = +X$ nebo $Y = -X$, obojí se stejnou pravděpodobností).    \end{enumerate}
 \end{definition}
 \begin{theorem}
     Rozptyl součtu\\
@@ -189,7 +189,7 @@
     \[P(X\geq a) \leq \frac{\mathbb{E}(X)}{a}\]
     \begin{proof}
         \[\mathbb{E}(X) = P(X\geq a)\mathbb{E}(X|X\geq a) + P(X< a) \mathbb{E}(X|X<a)\]
-        \[ \mathbb{E}(X) \leq P(X\geq a)a\]
+        \[ \mathbb{E}(X) \geq P(X\geq a)a\]
     \end{proof}
 \end{theorem}
 \begin{theorem}

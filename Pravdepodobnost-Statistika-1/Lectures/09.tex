@@ -18,7 +18,7 @@
     \item Čebyševova
     \[P(|X-\mathbb{E}(X))|\geq a\sigma_X)\leq \frac{1}{a^2}\]
     \item Chernoffova ($\sigma_X = \sqrt{n}$)
-    \[X = \sum^n_{i=1}X_i,X_i = \pm 1 \implies P(|X-\mathbb{E}(X)|> a\sigma_X)\leq 2e^{-a^2/2}\]
+    \[X = \sum^n_{i=1}X_i,\ X_i = \pm 1 \implies P(|X-\mathbb{E}(X)| \geq a\sigma_X)\leq 2e^{-a^2/2}\]
 \end{itemize}
 
 \subsection{Slabý zákon velkých čísel}
@@ -43,9 +43,9 @@
 \subsection{Centrální limitní věta}
 \begin{theorem}[Centrální limitní věta]
     Nechť $X_1,\dots,X_n$ jsou stejně rozdělené n.n.v se střední hodnotou $\mu$ a rozptylem $\sigma^2$. Označme
-    \[Y_n = ((X_1 + \dots + X_n) - n\mu)/(\frac{n}\sigma).\]
+    \[Y_n = ((X_1 + \dots + X_n) - n\mu)/(\sqrt{n}\cdot\sigma).\]
     Pak $Y_n \rightarrow^d N(0,1)$. Neboli, pokud $F_n$ je distribuční funkce $Y_n$, tak
-    \[\lim_{n \rightarrow \infty}F_n(x) = \Phi(x) \forall x\in \mathbb{R}.\]
+    \[\lim_{n \rightarrow \infty}F_n(x) = \Phi(x)\ \forall x\in \mathbb{R}.\]
     Říkáme, že posloupnost $Y_n$ konverguje k $N(0,1)$ v distribuci.
     \\ \textbf{Doplnit tri grafy z prezentace}
 \end{theorem}
@@ -116,7 +116,7 @@
     Nechť $X_1,\dots,X_n \sim F$ jsou n.n.v., $\hat{F}_n$ jejich empirická distribuční funkce.
     Nechť $\mathbb{E}(X_i)$ je konečná. Zvolme $\alpha \in (0,1)$ (pravděpodobnost chyby) 
     a označme $\varepsilon = \sqrt{\frac{1}{2n}log \frac{2}{\alpha}}$. Pak platí:
-    \[P(\hat{F}_n(x) - \varepsilon) \leq F(x) \leq \textbf{TO DO}\]
+    \[P(\hat{F}_n(x) - \varepsilon \leq F(x) \leq \hat{F}_n(x) + \varepsilon)\geq 1-\alpha\]
 \end{theorem}
 
 \subsection{Intro - explorační analýza dat (exploratory data analysis)}

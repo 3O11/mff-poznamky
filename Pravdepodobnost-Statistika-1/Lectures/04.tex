@@ -23,8 +23,8 @@
 \begin{proof}
 \begin{enumerate}
     \item
-    \[\mathbb{E}(X) = \sum_{x \in Im(X)} x  P(X = x) = 0  P(X = 0) + \sum_{x > 0 \& x \in X} x  P(X = 0) + 
-    \sum_{x < 0 \& x \in X} x P(X=x) = 0\]
+    \[\mathbb{E}(X) = \sum_{x \in X} x  P(X = x) = 0  P(X = 0) + \sum_{x > \& x \in X} x  P(X = 0) = 
+    \sum_{x<0 \land x\in X} x P(X=x) = 0\]
     \[\implies \forall x > 0 : P(x = x) = 0 \implies P(X = 0) = 1\]
     \item
     \[\mathbb{E}(X) = \sum x P(X\geq x) = 0\]
@@ -97,9 +97,7 @@
     \[p\mathbb{E}(X) = p + (1-p) = 1\]
     \[\mathbb{E}(X) = \frac{1}{p}\]
 \end{remark}
-
 \subsection{Parametry rozdělení}
-
 \begin{theorem}[Parametry rozdělení - Bernoulliho]
     {\color{white} x}
 
@@ -158,8 +156,8 @@
     \end{enumerate}
 \end{theorem}
 
-\begin{theorem}[Parametry rozdělení - Poissonovo]
-    Pro $X\sim Pois(\lambda)$ je
+\begin{theorem}[Parametry rozdělení - hypergeometrické]
+    Pro $X\sim Hyper(N,K,n)$ je
     \begin{enumerate}
         \item $\mathbb{E}(X) = \lambda$
         \item $var(X) = \lambda$
@@ -168,9 +166,7 @@
     \[\mathbb{E}(X) = \sum k \frac{\lambda^k}{k!}e^{-\lambda} = 1\]
     \[\lambda \sum \frac{\lambda^{k-1}}{(k-1)!}e^{-\lambda} = \lambda\]    
 \end{theorem}
-
 \subsection{Náhodné vektory}
-
 \begin{definition}[Základní popis náhodných vektorů]
     {\color{white} x}
     \begin{enumerate}
@@ -184,7 +180,7 @@
 \begin{definition}
     Pro diskrétní n.v. $X,Y$ na pravděpodobnostím prostoru $(\Omega, \mathcal{F},P)$ definujeme jejich sdruženou pravděpodobnostní funkci
     (joint pmf) $p_{X,Y} = \mathbb{R}^2 \rightarrow [0,1]$ předpisem
-    \[p_{X,Y} (x,y) = P(\{\omega \in \Omega : X(\omega) = x \& Y(\omega) = y\}) = P(X = x \& Y = y)\]
+    \[p_{X,Y} (x,y) = P({\omega \in \Omega : X(\omega) = x\& Y(\omega) = y}) = P(X = x \& Y = y)\]
 \end{definition}
 
 \subsection{Marginální rozdělení}
@@ -193,8 +189,8 @@ Máme-li dáno $p_{X,Y},$ jak zjistit rozdělení jednotlivých složek, t.j. $p
 
 \begin{theorem}
     Nechť $X,Y$ jsou diskrétní n.v. Pak:
-    \[p_X(x) = P(X=x) = \sum_{y\in Im(Y)} P(X = x \& Y=y) = \sum_{y\in Im(Y)} p_{X,Y}(x,y)\]
-    \[p_Y(y) = P(Y=y) = \sum_{x\in Im(X)} P(X = x \& Y=y) = \sum_{x\in Im(X)} p_{X,Y}(x,y)\]
+    \[p_X(x) = P(X=x) = \sum_{Y\in Im(Y)} P(X = x \& Y=y) = \sum_{Y\in Im(Y)} p_{X,Y}(x,y)\]
+    \[p_Y(y) = P(Y=y) = \sum_{X\in Im(X)} P(X = x \& Y=y) = \sum_{Y\in Im(Y)} p_{X,Y}(x,y)\]
 \end{theorem}
 \begin{theorem}
     Nechť $X,Y$ jsou n.v. na $(\Omega, \mathcal{F},P)$, nechť $g: \mathbb{R}^2 \rightarrow \mathbb{R}$ je funkce.

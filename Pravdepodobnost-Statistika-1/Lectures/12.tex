@@ -40,12 +40,11 @@
         \item $\sigma^2$ známe, $\mu$ dáno
         \item $H_0 : \vartheta = \mu$, $H_1: \vartheta \neq \mu$
     \end{itemize}
-    \[T = \frac{X_+\dots+X_n}{\mu} = \overline{X_n} \sim N(\vartheta, \sigma^2/n)\]
-    checknúť, či je to správne napísané \^\\
+    \[T = \frac{X_1+\dots+X_n}{\mu} = \overline{X}_n \sim N(\vartheta, \sigma^2/n)\]
     ... víme ze vzorce pro rozptyl
     \[S = \frac{\overline{X_n} - \mu}{\sigma/\sqrt{n}} \sim N(0,1)\]
     vezmeme množinu:
-    \[W := {s\in R : |s| > Z_{\alpha/2}}\]
+    \[W := \{s\in R : |s| > Z_{\alpha/2}\}\]
     kde $z_{\alpha/2} = \Phi^{-1}(1-\frac{\alpha}{2})$... pro $\alpha = 0.05$ dostaneme $1.96$
 \end{example}
 
@@ -56,17 +55,24 @@
         \item $Y_1,\dots,Y_{n_2}$ náhodný výběr z $Ber(\vartheta_Y)$
         \item $H_0 : \vartheta_X = \vartheta_Y$ \dots $H_1 : \vartheta_X \neq \vartheta_Y$
     \end{itemize}
-    Máme $n_1$ lidí a jiných $n_2$ lidí které léčíme různými metodami ($H_0 vs H_1$)
-    \[\widehat{\Theta_X} = \frac{X_1 +\dots + X_n}{n_1} \dots \text{odhad }\vartheta_X\]
-    \[\widehat{\Theta_Y} = \frac{Y_1 +\dots + Y_n}{n_2} \dots \text{odhad }\vartheta_Y\]
-    \[Z := \widehat{\Theta_X} - \widehat{\Theta_Y}\]
-    $\widehat{\Theta_X}, \widehat{\Theta_Y}$ mají přibližně normální rozdělení (Centrální limitní věta)
+    Máme $n_1$ lidí a jiných $n_2$ lidí které léčíme různými metodami ($H_0$ vs $H_1$)
+    \[\widehat{\Theta}_X = \frac{X_1 +\dots + X_{n_1}}{n_1} \dots \text{odhad }\vartheta_X\]
+\[\widehat{\Theta}_Y = \frac{Y_1 +\dots + Y_{n_2}}{n_2} \dots \text{odhad }\vartheta_Y\]
+    \[Z := \widehat{\Theta}_X - \widehat{\Theta}_Y\]
+    $\widehat{\Theta}_X, \widehat{\Theta}_Y$ mají přibližně normální rozdělení (Centrální limitní věta)
 
     Předpokládáme, že platí $H_0$:
-    \[\mathcal{E}\widehat{\Theta_X} = \mathcal{E}\widehat{\Theta_Y} \implies \mathcal{E}Z = 0\]
+    \[\mathbb{E}\widehat{\Theta}_X = \mathbb{E}\widehat{\Theta}_Y \implies
+    \mathbb{E}Z = 0\]
     Víme, že $Z$ je přibližně $N(0,\sigma^2)$, $\sigma^2$ neznáme
-    \[\sigma^2 = var(Z) = var(\widehat{\Theta_X}) - var(\widehat{\Theta_Y}) = \frac{var X_1}{n_1} + \frac{var Y_1}{n_2} = \frac{\vartheta_X(1-\vartheta_X)}{n_1} + \frac{\vartheta_Y(1-\vartheta_Y)}{n_1} = \vartheta(\frac{1}{n_1} + \frac{1}{n_2})\]
-    \[\widehat{\Theta} = \frac{\sum X_i + \sum Y_j}{n_1 + n_2} \dots \text{ odhad }\vartheta \implies \widehat{\sigma^2} := (\frac{1}{n_1} + \frac{1}{n_2}) \widehat{\Theta} (1- \widehat{\Theta}) \implies T:= \frac{\widehat{\Theta_X} - \widehat{\Theta_Y}}{\widehat{\sigma}}\]
+    \[\sigma^2 = var(Z) = var(\widehat{\Theta}_X) - var(\widehat{\Theta}_Y) =
+    \frac{var X_1}{n_1} + \frac{var Y_1}{n_2} =
+\frac{\vartheta_X(1-\vartheta_X)}{n_1} + \frac{\vartheta_Y(1-\vartheta_Y)}{n_1}
+= \vartheta\left(\frac{1}{n_1} + \frac{1}{n_2}\right)\]
+    \[\widehat{\Theta} = \frac{\sum X_i + \sum Y_j}{n_1 + n_2} \dots \text{
+    odhad }\vartheta \implies \widehat{\sigma^2} := \left(\frac{1}{n_1} +
+\frac{1}{n_2}\right) \widehat{\Theta} (1- \widehat{\Theta}) \implies T:=
+\frac{\widehat{\Theta}_X - \widehat{\Theta}_Y}{\widehat{\sigma}}\]
 \end{example}
 
 \subsection{$p$-hacking}
@@ -83,7 +89,7 @@
     \[Q = Z^2_1 + \dots + Z^2_k\]
     se nazývá $\chi$-kvadrát s $k$ stupni volnosti.
     \begin{itemize}
-        \item $\mathcal{E}(Q) = k$
+        \item $\mathbb{E}(Q) = k$
         \item $var(Q) = 2k$
         \item hustota jde napsat vzorcem, lze najít např. na Wikipedii
         \item $Q \dot{=} N(k,2k)$ pro velká $k$ (CLV)
@@ -104,10 +110,10 @@
     \end{itemize}
 \end{definition}
 
-\begin{definition}[Pearsonova $\chi^2$ Statistika]
+\begin{definition}[Pearsonova $\chi^2$ Statistika]\
     \begin{itemize}
         \item $(X_1,\dots,X_k)$ - multinomické rozdělení s parametry $n, (p_1,\dots,p_k)$ jako minule
-        \item $\mathcal{E}_i = \mathcal{E}(X_i) = np_i$
+        \item $\mathbb{E}_i = \mathbb{E}(X_i) = np_i$
         \item Pearsonova $\chi^2$ statisika je funkce
     \end{itemize}
     \[\chi^2 = T:= \sum^k_{i=1} \frac{(X_i - E_i)^2}{E_i}\]
@@ -126,23 +132,25 @@
 
 \subsection{Test dobré shody (goodness of fit)}
 \begin{itemize}
-    \item $(X_1,\dots,X_k)$ - multinomické rozdělení s parametry $n,\varphi = (\varphi_1,\dots,\varphi_k)$ jako minule
+    \item $(X_1,\dots,X_k)$ - multinomické rozdělení s parametry $n,\vartheta =
+        (\vartheta_1,\dots,\vartheta_k)$ jako minule
     \item $n$ známe, $\varphi$ neznáme.
-    \item Hypotéza $H_0: \varphi = \varphi^*$
-    \item $E_i := n\varphi^*_i$ pro všechna $i$
+    \item Hypotéza $H_0: \vartheta = \vartheta^*$
+    \item $E_i := n\vartheta^*_i$ pro všechna $i$
     \item Použijeme statistiku $\chi^2 = T:= \sum^k_{i=1} \frac{(X_i-E_i)^2}{E_i}$
     \item Hyotézu $H_0$ zamítneme, pokud $T > \gamma$
     \item $\gamma := F^{-1}_Q (1-\alpha)$, kde $Q \sim \chi^2_{k-1}$
     \item $P$(chyba prvního druhu)$ = P(T > \gamma; H_0) \rightarrow P(Q>\gamma) = \alpha$
 \end{itemize}
-\begin{example}[Test dobré shody - házíme kostkou]
+\begin{example}[Test dobré shody - házíme kostkou]\
     \begin{itemize}
         \item Házíme opakovaně kostkou. Jednotlivá čísla padla s četností 92,120,88,98,95 a 107.
         \item Je kostka spravedlivá?
     \end{itemize}
     \[ n = 92 + 120 +\dots = 600\]
-    \[\vartheta^* = (\frac{1}{6}, \dots, \frac{1}{6}), E_i = n \frac{1}{6} = 100\]
-    \[T = \sum^6_{i=1} \frac{(X_i - 100)^2}{100} = \dots = \frac{(80^2 + 20^2 + 12^2 + 2^2 + 5^2 + 7^2}{100} = 6.86\]
+    \[\vartheta^* = \left(\frac{1}{6}, \dots, \frac{1}{6}\right),\ E_i = n \frac{1}{6} = 100\]
+    \[T = \sum^6_{i=1} \frac{(X_i - 100)^2}{100} = \dots = \frac{(80^2 + 20^2 +
+    12^2 + 2^2 + 5^2 + 7^2)}{100} = 6.86\]
     \[Q \sim \chi^2_5 \dots F^{-1}_Q (1 - \alpha = 0.95) = 11.1\]
     kdyby nám T vyšlo víc než 11.1, můžeme říct, že kostka je nespravedlivá.
     \[p-\text{hodnota}: 1-F_Q(6.86) \dot{=} 1 - 0.77 = 0.23\]
