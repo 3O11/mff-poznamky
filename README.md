@@ -16,3 +16,5 @@ Tento repozitář původně obsahoval i nějaké poznámky.
 Ty, které stály za zachování jsem vyčlenil do vlastních repozitářů.
 Ostatní jsem smazal, protože nebyly ve stavu, kdy by byly použitelné
 a existují jiné materiály, které jsou praktičtější a hlavně s méně chybami.
+Pokud i přesto máte zájem vidět staré poznámky, stačí checkoutnout poslední
+commit vytvořený před smazáním poznámek.
